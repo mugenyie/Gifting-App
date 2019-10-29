@@ -1,33 +1,42 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
 import {Card} from 'native-base';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
+import mainStyles from '../../common/mainStyles';
 
 const width = Dimensions.get('window').width;
 
 const imageWidth = width * 0.4;
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 // create a component
 class ProductListItem extends Component {
     render() {
         const { product } = this.props;
         return (
-            <Card style={styles.productCard}>
+            <TouchableOpacity activeOpacity={0.8}>
+                <Card style={styles.productCard}>
                 <ImageBackground
                 style={{flex:1}}
                 imageStyle={styles.productBackgroundImage}
                 source={product.imageSource}
                 >
                     <View style={{padding:10, alignItems:'flex-end'}}>
-                        <Image style={{width:20}} resizeMode={'contain'} source={require('../../../assets/heart.png')}/>
+                        <Icon name='heart' size={20} color="#15344e" />
                     </View>
                 </ImageBackground>
+                {/* <View style={{flexDirection:'row',backgroundColor:"red",justifyContent:'space-around',padding:4}}>
+                    <Text style={{color:"#fff",fontWeight:'bold',fontSize:13}}>View item</Text>
+                    <Icon style={{padding:2,alignSelf:'flex-start'}} name='arrow-right' size={13} color="#fff" />
+                </View> */}
                 <View style={{padding:6}}>
-                    <Text style={{fontSize:13,fontWeight:'bold'}}>{product.name}</Text>
-                    <Text>{product.price}</Text>
+                    <Text style={mainStyles.ProductNameText}>{product.name}</Text>
+                    <Text style={mainStyles.ProductPriceText}>{product.price}</Text>
                 </View>
             </Card>
+            </TouchableOpacity>
         );
     }
 }

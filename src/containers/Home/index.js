@@ -10,6 +10,9 @@ import FooterTabs from '../../components/FooterTabs';
 import HomeTopCarousel from '../../components/HomeTopCarousel';
 import HomeGreeting from '../../components/HomeGreeting';
 import DealsForYou from '../../components/DealsForYou';
+import FollowStores from '../../components/FollowStores';
+import MostPopular from '../../components/MostPopular';
+
 import Color from '../../common/Color';
 
 // create a component
@@ -25,6 +28,8 @@ class Home extends Component {
                         <HomeGreeting />
                         <HomeTopCarousel />
                         <DealsForYou />
+                        <FollowStores />
+                        <MostPopular />
                     </ScrollView>
                 </Content>
 
