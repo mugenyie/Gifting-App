@@ -1,13 +1,15 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 
-import {Header, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Container, Content} from 'native-base';
 
 import HomeHeader from '../../components/HomeHeader';
 import FooterTabs from '../../components/FooterTabs';
+import HomeTopCarousel from '../../components/HomeTopCarousel';
+import HomeGreeting from '../../components/HomeGreeting';
+import DealsForYou from '../../components/DealsForYou';
 import Color from '../../common/Color';
 
 // create a component
@@ -15,9 +17,19 @@ class Home extends Component {
     render() {
         return (
             <Container>
+
                 <HomeHeader/>
-                <Content/>
+
+                <Content style={{ flex: 1, flexDirection: 'column'}}>
+                    <ScrollView style={{flex: 1}}>
+                        <HomeGreeting />
+                        <HomeTopCarousel />
+                        <DealsForYou />
+                    </ScrollView>
+                </Content>
+
                 <FooterTabs/>
+
             </Container>
         );
     }
