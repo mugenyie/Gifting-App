@@ -5,12 +5,14 @@ import mainStyles from '../../common/mainStyles';
 
 // create a component
 class SectionTitle extends Component {
+
     render() {
-        const {styles, title,more} = this.props;
+        const {styles, title, subtitle} = this.props;
+        
         return (
-            <View style={{flex:1,flexDirection:'row',padding:20}}>
-                <Text style={[mainStyles.Heading2,styles,{flex:1,textAlign:'left'}]}>{title}</Text>
-                <TouchableOpacity activeOpacity={0.4}><Text style={[mainStyles.TextCaption, {justifyContent:'flex-end',textAlign:'right', paddingTop:4}]}>{more}</Text></TouchableOpacity>
+            <View style={{flex:1,flexDirection:'column',padding:20,alignContent:'flex-start'}}>
+                <Text style={[mainStyles.Heading2,styles]}>{title}</Text>
+                <Text style={[mainStyles.Heading3,styles,{marginTop:10}]}>{subtitle}</Text>
             </View>
         );
     }

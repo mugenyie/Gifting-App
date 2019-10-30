@@ -20,7 +20,11 @@ export default class HomeTopCarousel extends Component {
       },
       {
         source: require('../../../assets/rings.png'),
-        caption: "Rings"
+        caption: "Jewelry"
+      },
+      {
+        source: require('../../../assets/shirt.png'),
+        caption: "Apparel"
       },
     ];
 

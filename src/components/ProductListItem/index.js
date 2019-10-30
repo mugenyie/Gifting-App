@@ -27,10 +27,6 @@ class ProductListItem extends Component {
                         <Icon name='heart' size={20} color="#15344e" />
                     </View>
                 </ImageBackground>
-                {/* <View style={{flexDirection:'row',backgroundColor:"red",justifyContent:'space-around',padding:4}}>
-                    <Text style={{color:"#fff",fontWeight:'bold',fontSize:13}}>View item</Text>
-                    <Icon style={{padding:2,alignSelf:'flex-start'}} name='arrow-right' size={13} color="#fff" />
-                </View> */}
                 <View style={{padding:6}}>
                     <Text style={mainStyles.ProductNameText}>{product.name}</Text>
                     <Text style={mainStyles.ProductPriceText}>{product.price}</Text>
