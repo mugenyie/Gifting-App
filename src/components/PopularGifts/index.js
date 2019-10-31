@@ -9,8 +9,7 @@ import mainStyles from '../../common/mainStyles';
 
 const width = Dimensions.get('window').width;
 
-const imageWidth = width * 0.85;
-const sliderWidth = width;
+const imageWidth = width * 0.7;
 
 // create a component
 class PopularGifts extends Component {
@@ -50,11 +49,12 @@ class PopularGifts extends Component {
         return (
             <View style={styles.container}>
                 <Carousel
-                    layout={'stack'} 
+                    layout={'default'} 
                     data={gifts}
                     renderItem={this._renderMostPopular}
-                    sliderWidth={sliderWidth}
-                    itemWidth={sliderWidth}
+                    sliderWidth={width}
+                    itemWidth={imageWidth}
+                    on
                 />
             </View>
         );

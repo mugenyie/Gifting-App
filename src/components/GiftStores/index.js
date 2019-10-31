@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Card} from 'native-base';
 
@@ -9,42 +9,42 @@ import mainStyles from '../../common/mainStyles';
 
 // create a component
 class GiftStores extends Component {
+    _renderItem({item, index}){
+        return(
+            <Card key={index} style={styles.imageContainer}>
+                <ImageBackground 
+                style={[{flex:1,justifyContent:'center',alignItems:'center'}]}
+                imageStyle={styles.storeBackgroundImage}
+                resizeMode="cover" resizeMethod="scale" source={item.image}>
+                    <TouchableOpacity activeOpacity={0.8} style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                        <View style={{justifyContent:'center',backgroundColor:"#fff",width:100,padding:10,alignContent:'center',opacity:0.8,alignSelf:"center"}}>
+                            <Text style={[mainStyles.Heading3,{textAlign:'center',color:"#000"}]}>{item.name}</Text>
+                        </View>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity activeOpacity={0.9} style={
+                        [item.status == "Follow" ? {backgroundColor:"#fff"} : {backgroundColor:"#15344e"},
+                            { width:150,borderBottomLeftRadius:10,borderBottomRightRadius:10,height:28,justifyContent:'center',alignItems:'center'}]}>
+                        <Text style={[mainStyles.TextCaption, item.status == "Follow" ? "" : {color:"#fff"}]}>{item.status}</Text>
+                    </TouchableOpacity>
+                </ImageBackground>
+            </Card>
+        );
+    }
+
     render() {
         const { stores } = this.props;
 
         if (stores && stores.length) {
         return (
-            <ScrollView
-                horizontal
-                pagingEnabled
-                showsHorizontalScrollIndicator={false}
-            >
-                {stores.map((store, index) => (
-                            // const followStyle = store.status == "follow" ? {} : {};
-                        
-                        <Card key={index} style={styles.imageContainer}>
-                            <ImageBackground 
-                            style={[{flex:1,justifyContent:'center',alignItems:'center'}]}
-                            imageStyle={styles.storeBackgroundImage}
-                            resizeMode="cover" resizeMethod="scale" source={store.image}>
-                                <TouchableOpacity activeOpacity={0.8} style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-                                    <View style={{justifyContent:'center',backgroundColor:"#fff",width:100,padding:10,alignContent:'center',opacity:0.8,alignSelf:"center"}}>
-                                        <Text style={[mainStyles.Heading3,{textAlign:'center',color:"#000"}]}>{store.name}</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                
-                                <TouchableOpacity activeOpacity={0.9} style={
-                                    [store.status == "Follow" ? {backgroundColor:"#fff"} : {backgroundColor:"#15344e"},
-                                        { width:150,borderBottomLeftRadius:10,borderBottomRightRadius:10,height:28,justifyContent:'center',alignItems:'center'}]}>
-                                    <Text style={[mainStyles.TextCaption, store.status == "Follow" ? "" : {color:"#fff"}]}>{store.status}</Text>
-                                </TouchableOpacity>
-                            </ImageBackground>
-                        </Card>
-                        
-                    
-                ))}
-                <ViewMore />
-            </ScrollView>
+            <FlatList 
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={stores}
+            renderItem={this._renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            style={{paddingRight:10,paddingLeft:10}}
+            />
         );
     }
     console.log('Please provide images');

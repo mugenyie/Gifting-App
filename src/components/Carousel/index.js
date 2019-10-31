@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Image, StyleSheet, Text, TouchableOpacity,FlatList } from 'react-native';
 import {Card} from 'native-base';
 
 import mainStyles from '../../common/mainStyles';
 
 export default class Carousel extends Component {
+  _renderItem({item, index}){
+    return(
+      <TouchableOpacity key={index} activeOpacity={0.6}>
+        <Card style={styles.imageContainer}>
+          <Image resizeMode="contain" style={styles.image} source={item.source} />
+          <Text style={mainStyles.TextCaption}>{item.caption}</Text>
+        </Card>
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     const { images } = this.props;
     if (images && images.length) {
       return (
-          <ScrollView
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-          >
-            {images.map((image, index) => (
-              <TouchableOpacity key={index} activeOpacity={0.6}>
-                <Card style={styles.imageContainer}>
-                  <Image resizeMode="contain" style={styles.image} source={image.source} />
-                  <Text style={mainStyles.TextCaption}>{image.caption}</Text>
-                </Card>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+        <FlatList 
+        style={{paddingLeft:10}}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        data={images}
+        renderItem={this._renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        />
       );
     }
     console.log('Please provide images');
@@ -39,7 +44,7 @@ const styles = StyleSheet.create({
     width:120,
     height:120,
     padding:10,
-    borderRadius:20, 
+    borderRadius:10, 
     marginLeft:10,
     marginRight:10, 
     flexDirection: 'column', 

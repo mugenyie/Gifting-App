@@ -50,7 +50,7 @@ class MostPopular extends Component {
                 },
                 name : "Rolex",
                 price: "Ushs. 350,000"
-            }]
+            }
         ];
 
         return (
