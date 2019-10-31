@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Container, Content} from 'native-base';
+import {Container, Content, Button} from 'native-base';
 
 import HomeHeader from '../../components/HomeHeader';
 import FooterTabs from '../../components/FooterTabs';
@@ -13,15 +13,19 @@ import DealsForYou from '../../components/DealsForYou';
 import FollowStores from '../../components/FollowStores';
 import MostPopular from '../../components/MostPopular';
 
-import Color from '../../common/Color';
 
 // create a component
 class Home extends Component {
     render() {
+        const {navigate} = this.props.navigation;
+
         return (
             <Container>
 
-                <HomeHeader/>
+                <HomeHeader 
+                onNavigateToBirthdays={() => navigate("Birthdays")}
+                onNavigateToNotifications={() => navigate("Notifications")}
+                />
 
                 <Content style={{ flex: 1, flexDirection: 'column'}}>
                     <ScrollView style={{flex: 1}}>
@@ -33,12 +37,16 @@ class Home extends Component {
                     </ScrollView>
                 </Content>
 
-                <FooterTabs/>
+                <FooterTabs
+                navigateToGiftBox={() => navigate("GiftBox")}
+                navigateToProfile={() => navigate("Profile")}
+                />
 
             </Container>
         );
     }
 }
+
 
 // define your styles
 const styles = StyleSheet.create({

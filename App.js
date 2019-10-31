@@ -5,44 +5,71 @@
 
 //import liraries
 import React, { Component } from 'react';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
 import SplashScreen from './src/containers/SplashScreen';
 import AppIntroSlide from './src/containers/AppIntroSlide';
+
 import Home from './src/containers/Home';
+import Explore from './src/containers/Explore';
+import Saved from './src/containers/Saved';
+import Profile from './src/containers/Profile';
 
-// create a component
-class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-        timePassed: false,
-        startMainScreen: false
-    };
-  }
+import Birthdays from './src/containers/Birthdays';
+import Notifications from './src/containers/Notifications';
+import GiftBox from './src/containers/GiftBox';
 
-  componentDidMount() {
-      setTimeout( () => {
-          this.setTimePassed();
-      },3500);
-  }
 
-  setTimePassed() {
-      this.setState({timePassed: true});
-  }
-
-  startMainScreen = () => {
-    return <SplashScreen/>;
-  }
-
-  render() {
-    if (!this.state.timePassed) {
-      return <SplashScreen/>;
-    } else {
-      return <Home/>;
-        //return <AppIntroSlide startMainScreen={this.startMainScreen}/>;
+const MainNavigator = createStackNavigator({
+  SplashScreen: {
+    screen: SplashScreen,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  Birthdays: {
+    screen: Birthdays,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  Notifications: {
+    screen: Notifications,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  GiftBox: {
+    screen: GiftBox,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  Explore: { 
+    screen: Explore,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  Saved: {
+    screen: Saved,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      header: null,
     }
   }
-}
+});
 
-//make this component available to the app
-export default App;
+export default createAppContainer(MainNavigator);

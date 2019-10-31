@@ -11,11 +11,13 @@ const fullLogo = require('../../../assets/full_logo_alpha.png');
 // create a component
 class HomeHeader extends Component {
     render() {
+        const {onNavigateToBirthdays, onNavigateToNotifications} = this.props;
+
         return (
             <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
                 <Left>
-                    <Button transparent>
-                        <Icon name="birthday-cake" size={22} color={Color.primaryDark}/>
+                    <Button onPress={onNavigateToBirthdays} transparent>
+                    <Icon color={Color.primaryDark} size={22} name="birthday-cake" />
                     </Button>
                 </Left>
                 <Body>
@@ -26,7 +28,7 @@ class HomeHeader extends Component {
                     />
                 </Body>
                 <Right>
-                    <Button badge transparent>
+                    <Button onPress={onNavigateToNotifications} badge transparent>
                         <Badge style={{ width:12,height:12}}></Badge>
                         <Icon style={{position:'absolute'}} name="bell" size={22} color={Color.primaryDark}/>
                     </Button>

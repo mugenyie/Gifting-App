@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     padding:10,
     borderRadius:10, 
     marginLeft:10,
-    marginRight:10, 
+    marginRight:2, 
     flexDirection: 'column', 
     justifyContent:'space-around',
     alignItems:'center',

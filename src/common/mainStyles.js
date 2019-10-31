@@ -11,7 +11,10 @@ const mainStyles = StyleSheet.create({
     Heading3: {
         fontSize:18, fontFamily:'Montserrat-Regular'
     },
-    Heading3: {
+    Heading3Light: {
+        fontSize:18, fontFamily:'Montserrat-Light'
+    },
+    Heading4: {
         fontSize:16, fontFamily:'Montserrat-Light'
     },
     Heading1Light: {

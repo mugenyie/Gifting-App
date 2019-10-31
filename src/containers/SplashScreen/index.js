@@ -4,27 +4,53 @@ import { View, StyleSheet, Image, Dimensions } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
 
+import Home from '../Home';
+
 
 const Logo = require('../../../assets/logo_bg.png');
 
 // create a component
 class SplashScreen extends Component {
-    render() {
-        return (
+    constructor(props){
+        super(props);
+        this.state = {
+            timePassed: false,
+            startMainScreen: false
+        };
+      }
+    
+      componentDidMount() {
+          setTimeout( () => {
+              this.setTimePassed();
+          },3500);
+      }
+    
+      setTimePassed() {
+          this.setState({timePassed: true});
+      }
+    
+      render() {
+        const {navigate} = this.props.navigation;
+
+        if (!this.state.timePassed) {
+          return (
             <View style={styles.container}>
-                <Animatable.View 
-                animation="pulse" 
-                easing="ease-out" 
-                iterationCount="infinite" 
-                style={{ textAlign: 'center' }}>
-                    <Image 
-                    style={{width:140,height:140}}
-                    resizeMode='contain'
-                    source={Logo}
-                    />
-                </Animatable.View>
+            <Animatable.View 
+            animation="pulse" 
+            easing="ease-out" 
+            iterationCount="infinite" 
+            style={{ textAlign: 'center' }}>
+                <Image 
+                style={{width:140,height:140}}
+                resizeMode='contain'
+                source={Logo}
+                />
+            </Animatable.View>
             </View>
-        );
+          );
+        } else {
+          return navigate("Home");
+        }
     }
 }
 
