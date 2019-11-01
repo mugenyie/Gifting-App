@@ -14,7 +14,8 @@ import AppIntroSlide from './src/containers/AppIntroSlide';
 import Home from './src/containers/Home';
 import Explore from './src/containers/Explore';
 import Saved from './src/containers/Saved';
-import Profile from './src/containers/Profile';
+import Product from './src/containers/Product';
+import Category from './src/containers/Category';
 
 import Birthdays from './src/containers/Birthdays';
 import Notifications from './src/containers/Notifications';
@@ -64,8 +65,14 @@ const MainNavigator = createStackNavigator({
       header: null,
     }
   },
-  Profile: {
-    screen: Profile,
+  Product: {
+    screen: Product,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  Category: {
+    screen: Category,
     navigationOptions: {
       header: null,
     }

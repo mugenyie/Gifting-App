@@ -30,7 +30,7 @@ export default class HomeTopCarousel extends Component {
 
     return (
       <View style={styles.container}>
-        <Carousel images={images} />
+        <Carousel categoryNavigation={this.props.categoryNavigation} images={images} />
       </View>
     );
   }

@@ -11,50 +11,50 @@ const width = Dimensions.get('window').width;
 
 const imageWidth = width * 0.7;
 
+const Item = ({index, imageSource, productName, productPrice, onSelect}) => {
+    return(
+        <TouchableOpacity onPress={() => onSelect(index)} style={styles.container} key={index} activeOpacity={0.8}>
+            <Card style={styles.productCard}>
+                <ImageBackground
+                style={{flex:1}}
+                imageStyle={styles.productBackgroundImage}
+                source={imageSource}
+                >
+                    <View style={{padding:10, alignItems:'flex-end'}}>
+                        <Icon name='heart' size={20} color="#fff" />
+                    </View>
+                </ImageBackground>
+                <View style={{padding:6}}>
+                    <Text style={mainStyles.ProductNameText}>{productName}</Text>
+                    <Text style={mainStyles.ProductPriceText}>{productPrice}</Text>
+                </View>
+            </Card>
+        </TouchableOpacity>
+    );
+}
+
 // create a component
 class PopularGifts extends Component {
-    constructor(props){
-        super(props);
-        this.props = props;
-        this.state = {
-            gifts: this.props
-        }
-    }
-
-    _renderMostPopular({item, index}){
-        return(
-            <TouchableOpacity style={styles.container} key={index} activeOpacity={0.8}>
-                <Card style={styles.productCard}>
-                    <ImageBackground
-                    style={{flex:1}}
-                    imageStyle={styles.productBackgroundImage}
-                    source={item.image}
-                    >
-                        <View style={{padding:10, alignItems:'flex-end'}}>
-                            <Icon name='heart' size={20} color="#fff" />
-                        </View>
-                    </ImageBackground>
-                    <View style={{padding:6}}>
-                        <Text style={mainStyles.ProductNameText}>{item.name}</Text>
-                        <Text style={mainStyles.ProductPriceText}>{item.price}</Text>
-                    </View>
-                </Card>
-            </TouchableOpacity>
-        );
-    }
 
     render() {
-        const {gifts} = this.state.gifts;
+        const {gifts, navigateToProduct} = this.props;
+        const onSelect = (index) => navigateToProduct("Product");
 
         return (
             <View style={styles.container}>
                 <Carousel
                     layout={'default'} 
                     data={gifts}
-                    renderItem={this._renderMostPopular}
+                    renderItem={({item}) => (
+                        <Item 
+                        imageSource={item.image}
+                        productName={item.name}
+                        productPrice={item.price}
+                        onSelect={onSelect}
+                        />
+                    )}
                     sliderWidth={width}
                     itemWidth={imageWidth}
-                    on
                 />
             </View>
         );

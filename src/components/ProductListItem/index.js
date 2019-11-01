@@ -14,9 +14,9 @@ const imageWidth = width * 0.4;
 // create a component
 class ProductListItem extends Component {
     render() {
-        const { product } = this.props;
+        const { product, navigateToProduct } = this.props;
         return (
-            <TouchableOpacity activeOpacity={0.8}>
+            <TouchableOpacity onPress={navigateToProduct} activeOpacity={0.8}>
                 <Card style={styles.productCard}>
                 <ImageBackground
                 style={{flex:1}}

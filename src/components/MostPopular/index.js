@@ -8,6 +8,7 @@ import PopularGifts from '../PopularGifts';
 // create a component
 class MostPopular extends Component {
     render() {
+
         const gifts = [
             {
                 image : {
@@ -57,7 +58,7 @@ class MostPopular extends Component {
             <View style={styles.container}>
                 <SectionTitle title="Most popular" subtitle="Swipe to view popular gift items." />
 
-                <PopularGifts gifts={gifts}/>
+                <PopularGifts navigateToProduct={this.props.productNavigation} gifts={gifts}/>
             </View>
         );
     }

@@ -43,7 +43,7 @@ class GiftStores extends Component {
             data={stores}
             renderItem={this._renderItem}
             keyExtractor={(item, index) => index.toString()}
-            style={{paddingRight:10,paddingLeft:10}}
+            contentContainerStyle={{paddingLeft:10,paddingRight:20}}
             />
         );
     }

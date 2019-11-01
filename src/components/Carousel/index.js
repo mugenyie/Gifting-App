@@ -4,28 +4,37 @@ import {Card} from 'native-base';
 
 import mainStyles from '../../common/mainStyles';
 
+function Item({index, imageSource, caption, onSelect}){
+  return(
+    <TouchableOpacity onPress={() => onSelect(index)} key={index} activeOpacity={0.6}>
+      <Card style={styles.imageContainer}>
+        <Image resizeMode="contain" style={styles.image} source={imageSource} />
+        <Text style={mainStyles.TextCaption}>{caption}</Text>
+      </Card>
+    </TouchableOpacity>
+  );
+}
+
 export default class Carousel extends Component {
-  _renderItem({item, index}){
-    return(
-      <TouchableOpacity key={index} activeOpacity={0.6}>
-        <Card style={styles.imageContainer}>
-          <Image resizeMode="contain" style={styles.image} source={item.source} />
-          <Text style={mainStyles.TextCaption}>{item.caption}</Text>
-        </Card>
-      </TouchableOpacity>
-    );
-  }
 
   render() {
-    const { images } = this.props;
+    const { images, categoryNavigation } = this.props;
+    const onSelect = (index) => categoryNavigation("Category");
+
     if (images && images.length) {
       return (
         <FlatList 
-        style={{paddingLeft:10}}
+        contentContainerStyle={{paddingLeft:10,paddingRight:20}}
         horizontal
         showsHorizontalScrollIndicator={false}
         data={images}
-        renderItem={this._renderItem}
+        renderItem={({ item }) => (
+          <Item
+            imageSource={item.source}
+            caption={item.caption}
+            onSelect={onSelect}
+          />
+        )}
         keyExtractor={(item, index) => index.toString()}
         />
       );

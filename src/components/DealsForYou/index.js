@@ -11,18 +11,19 @@ const imageSource1 = require('../../../assets/teddy.jpg');
 // create a component
 class DealsForYou extends Component {
     render() {
+        const {productNavigation} = this.props;
         return (
             <View style={styles.container}>
-                <SectionTitle title="Giftsery picks for you" subtitle="Top recommendantions for you today." />
+                <SectionTitle title="Giftsery picks for you" subtitle="Top recommendations for you today." />
 
                 <View style={{paddingLeft: 20,paddingRight: 20,}}>
                         <View style={{flexDirection:'row', justifyContent:'space-between',marginBottom:10}}>
-                            <ProductListItem product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}} />
-                            <ProductListItem product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}}/>
+                            <ProductListItem navigateToProduct={() => productNavigation("Product")} product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}} />
+                            <ProductListItem navigateToProduct={() => productNavigation("Product")} product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}}/>
                         </View>
                         <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                            <ProductListItem product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}} />
-                            <ProductListItem product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}}/>
+                            <ProductListItem navigateToProduct={() => productNavigation("Product")} product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}} />
+                            <ProductListItem navigateToProduct={() => productNavigation("Product")} product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}}/>
                         </View>
                 </View>
                 

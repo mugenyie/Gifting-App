@@ -30,10 +30,10 @@ class Home extends Component {
                 <Content style={{ flex: 1, flexDirection: 'column'}}>
                     <ScrollView style={{flex: 1}}>
                         <HomeGreeting />
-                        <HomeTopCarousel />
-                        <DealsForYou />
-                        <FollowStores />
-                        <MostPopular />
+                        <HomeTopCarousel categoryNavigation={navigate}/>
+                        <DealsForYou productNavigation={navigate} />
+                        <FollowStores storesNavigation={navigate}/>
+                        <MostPopular productNavigation={navigate}/>
                     </ScrollView>
                 </Content>
 
