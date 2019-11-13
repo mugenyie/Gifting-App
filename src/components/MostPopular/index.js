@@ -56,7 +56,7 @@ class MostPopular extends Component {
 
         return (
             <View style={styles.container}>
-                <SectionTitle title="Most popular" subtitle="Swipe to view popular gift items." />
+                <SectionTitle title="Most popular" subtitle="Swipe to view popular gift items." seeMore="View all"/>
 
                 <PopularGifts navigateToProduct={this.props.productNavigation} gifts={gifts}/>
             </View>

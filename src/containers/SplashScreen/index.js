@@ -49,7 +49,7 @@ class SplashScreen extends Component {
             </View>
           );
         } else {
-          return navigate("Home");
+            return (this.props.navigation.navigate("Home"));
         }
     }
 }

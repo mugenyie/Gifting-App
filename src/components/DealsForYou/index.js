@@ -1,6 +1,7 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {Button} from 'native-base';
 
 import ProductListItem from '../ProductListItem';
 import SectionTitle from '../SectionTitle';
@@ -26,7 +27,9 @@ class DealsForYou extends Component {
                             <ProductListItem navigateToProduct={() => productNavigation("Product")} product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}}/>
                         </View>
                 </View>
-                
+                <TouchableOpacity style={[{justifyContent:'center', alignItems:'center', alignSelf:'center', borderWidth:0.5,borderRadius:8, borderColor: '#ddd', width:'50%', height:40, margin:10}]}>
+                    <Text style={mainStyles.TextRegular}>Load more</Text>
+                </TouchableOpacity>
             </View>
         );
     }

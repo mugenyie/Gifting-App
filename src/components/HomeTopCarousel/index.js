@@ -7,23 +7,23 @@ export default class HomeTopCarousel extends Component {
   render() {
     const images = [
       {
-        source: require('../../../assets/birthday-cake.png'),
+        source: require('../../../assets/cake_carousel.jpg'),
         caption: "Cake"
       },
       {
-        source: require('../../../assets/flower-bouquet.png'),
+        source: require('../../../assets/flowers_carousel.jpg'),
         caption: "Flowers"
       },
       {
-        source: require('../../../assets/toy.png'),
+        source: require('../../../assets/toys_carousel.jpg'),
         caption: "Toys"
       },
       {
-        source: require('../../../assets/rings.png'),
+        source: require('../../../assets/jewlry_carousel.jpg'),
         caption: "Jewelry"
       },
       {
-        source: require('../../../assets/shirt.png'),
+        source: require('../../../assets/apparel_carousel.jpg'),
         caption: "Apparel"
       },
     ];

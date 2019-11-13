@@ -18,8 +18,11 @@ import Product from './src/containers/Product';
 import Category from './src/containers/Category';
 
 import Birthdays from './src/containers/Birthdays';
+import NewBirthday from './src/containers/NewBirthday';
 import Notifications from './src/containers/Notifications';
 import GiftBox from './src/containers/GiftBox';
+import LiveChat from './src/containers/LiveChat';
+import GiftStores from './src/containers/GiftStores';
 
 
 const MainNavigator = createStackNavigator({
@@ -73,6 +76,24 @@ const MainNavigator = createStackNavigator({
   },
   Category: {
     screen: Category,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  NewBirthday: {
+    screen: NewBirthday,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  LiveChat: {
+    screen: LiveChat,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  GiftStores: {
+    screen: GiftStores,
     navigationOptions: {
       header: null,
     }

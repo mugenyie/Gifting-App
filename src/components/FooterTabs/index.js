@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { StyleSheet,TouchableOpacity } from 'react-native';
+import { StyleSheet,TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Footer, FooterTab, Button, Text, Badge} from 'native-base';
 
@@ -23,9 +23,11 @@ class FooterTabs extends Component {
               <Icon color={Color.primaryDark} size={26} style={styles.footerIcon} name="search1" />
               <Text style={mainStyles.IconText}>EXPLORE</Text>
             </Button>
-            <Button onPress={navigateToGiftBox} badge vertical style={[styles.footerButton]}>
-              <Badge style={{ marginBottom:-16,marginLeft:30, position:'absolute'}}><Text>2</Text></Badge>
-              <Icon color={Color.primaryDark} size={28} style={styles.footerIcon} name="gift" />
+            <Button onPress={navigateToGiftBox} badge vertical style={[styles.footerButton,{flexDirection:'column'}]}>
+              <View style={{flexDirection:'row'}}>
+                <Icon color={Color.primaryDark} size={28} style={styles.footerIcon} name="gift" />
+                <Badge style={{width:18,height:18, position:'absolute',marginLeft:10}}><Text>2</Text></Badge>
+              </View>
               <Text style={mainStyles.IconText}>GIFTBOX</Text>
             </Button>
             <Button vertical style={[styles.footerButton]}>

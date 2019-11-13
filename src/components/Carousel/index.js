@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Image, StyleSheet, Text, TouchableOpacity,FlatList } from 'react-native';
+import { View, ImageBackground, Image, StyleSheet, Text, TouchableOpacity,FlatList } from 'react-native';
 import {Card} from 'native-base';
 
 import mainStyles from '../../common/mainStyles';
@@ -8,8 +8,15 @@ function Item({index, imageSource, caption, onSelect}){
   return(
     <TouchableOpacity onPress={() => onSelect(index)} key={index} activeOpacity={0.6}>
       <Card style={styles.imageContainer}>
-        <Image resizeMode="contain" style={styles.image} source={imageSource} />
-        <Text style={mainStyles.TextCaption}>{caption}</Text>
+        <ImageBackground
+        style={{flex:1, width:'100%'}}
+        resizeMode='cover'
+        imageStyle={{borderTopLeftRadius:16, borderTopRightRadius: 16}}
+        source={imageSource}
+        >
+          
+        </ImageBackground>
+        <Text style={[mainStyles.TextCaption,{padding:8}]}>{caption}</Text>
       </Card>
     </TouchableOpacity>
   );
@@ -45,19 +52,13 @@ export default class Carousel extends Component {
 }
 
 const styles = StyleSheet.create({
-  image: {
-    width: 50,
-    height: 50
-  },
   imageContainer: {
-    width:120,
-    height:120,
-    padding:10,
-    borderRadius:10, 
+    width:140,
+    height:140,
+    borderRadius:16, 
     marginLeft:10,
     marginRight:2, 
     flexDirection: 'column', 
-    justifyContent:'space-around',
     alignItems:'center',
     elevation: 4,
   }

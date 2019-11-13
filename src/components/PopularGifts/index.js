@@ -9,7 +9,7 @@ import mainStyles from '../../common/mainStyles';
 
 const width = Dimensions.get('window').width;
 
-const imageWidth = width * 0.7;
+const imageWidth = width * 0.8;
 
 const Item = ({index, imageSource, productName, productPrice, onSelect}) => {
     return(
@@ -69,10 +69,10 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     productCard: {
-        width:imageWidth,height:350,borderRadius:10, elevation:2
+        width:imageWidth,height:350,borderRadius:8, elevation:2
     },
     productBackgroundImage: {
-        borderTopRightRadius: 10, borderTopLeftRadius: 10,
+        borderTopRightRadius: 8, borderTopLeftRadius: 8,
     }
 });
 

@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
 import {Card} from 'native-base';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Icon from 'react-native-vector-icons/EvilIcons';
 
 import mainStyles from '../../common/mainStyles';
 
 const width = Dimensions.get('window').width;
 
-const imageWidth = width * 0.4;
+const imageWidth = width * 0.42;
 
 
 // create a component
@@ -16,22 +16,24 @@ class ProductListItem extends Component {
     render() {
         const { product, navigateToProduct } = this.props;
         return (
-            <TouchableOpacity onPress={navigateToProduct} activeOpacity={0.8}>
+            <TouchableOpacity style={{paddingBottom:8}} onPress={navigateToProduct} activeOpacity={0.8}>
                 <Card style={styles.productCard}>
                 <ImageBackground
                 style={{flex:1}}
+                resizeMode='cover'
                 imageStyle={styles.productBackgroundImage}
                 source={product.imageSource}
                 >
-                    <View style={{padding:10, alignItems:'flex-end'}}>
-                        <Icon name='heart' size={20} color="#15344e" />
+                    <View style={{top:4,right:4, alignItems:'flex-end'}}>
+                        <Icon name='heart' size={32} color="#15344e" />
                     </View>
                 </ImageBackground>
-                <View style={{padding:6}}>
+               
+            </Card>
+            <View style={{paddingTop:4}}>
                     <Text style={mainStyles.ProductNameText}>{product.name}</Text>
                     <Text style={mainStyles.ProductPriceText}>{product.price}</Text>
                 </View>
-            </Card>
             </TouchableOpacity>
         );
     }
@@ -40,10 +42,10 @@ class ProductListItem extends Component {
 // define your styles
 const styles = StyleSheet.create({
     productCard: {
-        width:imageWidth,height:200,borderRadius:10, elevation:2
+        width:imageWidth,height:200,borderRadius:4, elevation:0
     },
     productBackgroundImage: {
-        borderTopRightRadius: 10, borderTopLeftRadius: 10,
+        borderTopRightRadius: 4, borderTopLeftRadius: 4,
     }
 });
 

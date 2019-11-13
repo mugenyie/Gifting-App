@@ -26,6 +26,9 @@ const mainStyles = StyleSheet.create({
     TextRegular: {
         fontSize:14,fontFamily:'OpenSans-Regular'
     },
+    TextMinor: {
+        fontSize: 13,color:'#999',fontFamily:'OpenSans-Regular'
+    },
     TextCaption: {
         fontSize:13,fontFamily:'OpenSans-Regular',fontWeight:'bold',color:Color.primaryDark
     },
