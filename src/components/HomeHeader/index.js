@@ -16,7 +16,7 @@ class HomeHeader extends Component {
         const {onNavigateToBirthdays, onNavigateToNotifications, onNavigateToGiftStores} = this.props;
 
         return (
-            <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
+            <Header style={{backgroundColor:"#FFF",paddingTop:2,paddingBottom:4,height:50}}>
                 <Left>
                     <Button onPress={onNavigateToBirthdays} transparent>
                     <Icon color={Color.primaryDark} size={20} name="birthday-cake" />

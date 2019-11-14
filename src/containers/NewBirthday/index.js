@@ -60,7 +60,7 @@ class NewBirthday extends Component {
                     modalTransparent={false}
                     animationType={"fade"}
                     androidMode={"default"}
-                    placeHolderText="Select birthdate"
+                    placeHolderText="Select birthday"
                     textStyle={{ color: Color.primaryDark }}
                     placeHolderTextStyle={{ color: "#d3d3d3" }}
                     onDateChange={this.setDate}

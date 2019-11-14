@@ -17,12 +17,12 @@ class SectionTitle extends Component {
         }
         
         return (
-            <View style={{flex:1,flexDirection:'column',padding:20,alignContent:'flex-start'}}>
+            <View style={{flex:1,flexDirection:'column',padding:20,paddingBottom:10,alignContent:'flex-start'}}>
                 <View style={{flexDirection: 'row', alignItems:'baseline'}}>
                     <Text style={[mainStyles.Heading2,styles]}>{title}</Text>
                     {moreButton}
                 </View>
-                <Text style={[mainStyles.Heading3Light,styles,{marginTop:10}]}>{subtitle}</Text>
+                <Text style={[mainStyles.Heading3Light,styles,{marginTop:2}]}>{subtitle}</Text>
             </View>
         );
     }
