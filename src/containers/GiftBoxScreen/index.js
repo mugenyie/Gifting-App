@@ -13,18 +13,10 @@ class GiftBoxScreen extends Component {
 
         return (
             <Container>
-            <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
-                <Left>
-                <Button onPress={() => navigate("Home")} transparent>
-                    <Icon name='close' size={22} color={Color.primaryDark}/>
-                </Button>
-                </Left>
+            <Header style={{backgroundColor:"#fff",paddingLeft:20,paddingBottom:4,paddingTop:2,height:50}}>
                 <Body>
                 <Title style={[{color:Color.primaryDark},mainStyle.Heading2]}>GiftBox</Title>
                 </Body>
-                <Right>
-                    
-                </Right>
             </Header>
             </Container>
         );

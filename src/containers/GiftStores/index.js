@@ -12,13 +12,20 @@ class GiftStores extends Component {
         const {navigate} = this.props.navigation;
 
         return (
-            
             <Container>
-            <View style={{flexDirection:'row', backgroundColor:"transparent",paddingLeft:20,paddingTop:10}}>
-                <Button style={{alignSelf:'flex-start'}} onPress={() => navigate("Home")} transparent>
-                    <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
-                </Button>
-            </View>
+            <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
+                <Left>
+                    <Button onPress={() => navigate("Home")} transparent>
+                        <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
+                    </Button>
+                </Left>
+                <Body>
+                <Title style={[{color:Color.primaryDark},mainStyle.Heading2]}>Gift Stores</Title>
+                </Body>
+                <Right>
+                    
+                </Right>
+            </Header>
             </Container>
         );
     }

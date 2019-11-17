@@ -1,14 +1,21 @@
-//import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
+import { Searchbar } from 'react-native-paper';
 
 // create a component
 class ExploreScreen extends Component {
-    render() {
+    state = {
+        firstQuery: '',
+      };
+    
+      render() {
+        const { firstQuery } = this.state;
         return (
-            <View style={styles.container}>
-                <Text>Explore</Text>
-            </View>
+          <Searchbar
+            placeholder="Search for a gift / shop"
+            onChangeText={query => { this.setState({ firstQuery: query }); }}
+            value={firstQuery}
+          />
         );
     }
 }

@@ -6,7 +6,7 @@
 //import liraries
 import React, { Component } from 'react';
 import {View, Text} from 'react-native';
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -83,7 +83,6 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
   return <IconComponent name={iconName} size={25} color={tintColor} />;
 };
 
-
 const TabNavigator = createBottomTabNavigator(
   {
     Home: { screen: HomeScreen },
@@ -100,23 +99,28 @@ const TabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       showLabel: false,
       activeTintColor: Color.primaryDark,
-      inactiveTintColor: 'gray'
+      inactiveTintColor: 'rgba(21,52,78, 0.7)'
     },
   }
 );
 
+
+const RootNavigator = createSwitchNavigator({
+  Home: TabNavigator,
+  Splash: SplashScreen
+}, {
+  initialRouteName: 'Splash'
+});
+
 const MainNavigator = createStackNavigator({
   SplashScreen: {
-    screen: SplashScreen,
+    screen: RootNavigator,
     navigationOptions: {
       header: null,
     }
   },
-  HomeScreen: {
+  Home: {
     screen: TabNavigator,
-    navigationOptions: {
-      header: null,
-    }
   },
   Birthdays: {
     screen: Birthdays,
