@@ -8,7 +8,7 @@ import mainStyles from '../../common/mainStyles';
 
 const width = Dimensions.get('window').width;
 
-const imageWidth = width * 0.42;
+const imageWidth = width * 0.45;
 
 
 // create a component

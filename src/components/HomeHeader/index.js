@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/AntDesign';
 import Icon3 from 'react-native-vector-icons/FontAwesome5';
-import { Header, Left, Body, Right, Button, Title, Badge } from 'native-base';
+import { Header, Left, Body, Right, Button, Title, Badge, View } from 'native-base';
 
 import Color from '../../common/Color';
 
@@ -30,9 +30,9 @@ class HomeHeader extends Component {
                     />
                 </Body>
                 <Right>
-                    <Button style={{marginRight:8}} onPress={onNavigateToNotifications} badge transparent>
+                    <Button style={{marginRight:8}} onPress={onNavigateToNotifications} transparent>
                         <Icon style={{}} name="bell" size={20} color={Color.primaryDark}/>
-                        <Badge style={{width:12,height:12,padding:0, position: 'absolute', top: 8, right: 12 }}></Badge>
+                        <View style={{width:15,height:15,borderRadius:15/2, alignItems:'center', position:'absolute', top:8, right:9, backgroundColor: 'orange'}}><Text style={{color:'#FFF',fontSize:10, fontWeight: 'bold'}}>2</Text></View>
                     </Button>
                     <Button onPress={onNavigateToGiftStores} badge transparent>
                         <Icon3 style={{position:'absolute'}} name="store" size={20} color={Color.primaryDark}/>

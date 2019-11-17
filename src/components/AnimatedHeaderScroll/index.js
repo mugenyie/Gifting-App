@@ -9,6 +9,8 @@ import {
   RefreshControl,
   Dimensions
 } from 'react-native';
+import Color from '../../common/Color';
+import mainStyles from '../../common/mainStyles';
 
 
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -34,7 +36,13 @@ class AnimatedHeaderScroll extends Component {
 
 
     render() {
-        const {RenderHeader, RenderFooter,ScrollViewContent, TopImage} = this.props;
+        const {RenderHeader, RenderFooter,ScrollViewContent, TopImage, TopText} = this.props;
+        let TopTextView;
+        if(TopText != null){
+            TopTextView = <Text 
+            style={[mainStyles.Heading1, 
+                {top:HEADER_MAX_HEIGHT*0.45,backgroundColor:Color.WhiteOpacity,width:screenWidth*0.5, height:40, textAlign:'center', textAlignVertical:'center'}]}>{TopText}</Text>;
+        }
 
         // Because of content inset the scroll value will be negative on iOS so bring
         // it back to 0.
@@ -94,16 +102,19 @@ class AnimatedHeaderScroll extends Component {
                     { transform: [{ translateY: headerTranslate }] },
                 ]}
                 >
-                    <Animated.Image
-                        style={[
-                        styles.backgroundImage,
-                        {
-                            opacity: imageOpacity,
-                            transform: [{ translateY: imageTranslate }],
-                        },
-                        ]}
-                        source={TopImage}
-                    />
+                    <View style={{alignItems:'center'}}>
+                        <Animated.Image
+                            style={[
+                            styles.backgroundImage,
+                            {
+                                opacity: imageOpacity,
+                                transform: [{ translateY: imageTranslate }],
+                            },
+                            ]}
+                            source={TopImage}
+                        />
+                        {TopTextView}
+                    </View>
                 </Animated.View>
                 <Animated.View
                 style={[

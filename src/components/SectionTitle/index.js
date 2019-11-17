@@ -17,7 +17,7 @@ class SectionTitle extends Component {
         }
         
         return (
-            <View style={{flex:1,flexDirection:'column',padding:20,paddingBottom:10,alignContent:'flex-start'}}>
+            <View style={{flex:1,flexDirection:'column',padding:10,paddingBottom:10,alignContent:'flex-start'}}>
                 <View style={{flexDirection: 'row', alignItems:'baseline'}}>
                     <Text style={[mainStyles.Heading2,styles]}>{title}</Text>
                     {moreButton}

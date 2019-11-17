@@ -24,7 +24,7 @@ const Item = ({index, imageSource, productName, productPrice, onSelect}) => {
                         <Icon name='heart' size={20} color="#fff" />
                     </View>
                 </ImageBackground>
-                <View style={{padding:6}}>
+                <View style={{padding:8}}>
                     <Text style={mainStyles.ProductNameText}>{productName}</Text>
                     <Text style={mainStyles.ProductPriceText}>{productPrice}</Text>
                 </View>

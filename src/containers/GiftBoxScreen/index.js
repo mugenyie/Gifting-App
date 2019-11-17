@@ -7,7 +7,7 @@ import Color from '../../common/Color';
 import mainStyle from '../../common/mainStyles';
 
 // create a component
-class GiftBox extends Component {
+class GiftBoxScreen extends Component {
     render() {
         const {navigate} = this.props.navigation;
 
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default GiftBox;
+export default GiftBoxScreen;

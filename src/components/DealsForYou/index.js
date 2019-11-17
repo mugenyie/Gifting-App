@@ -17,7 +17,7 @@ class DealsForYou extends Component {
             <View style={styles.container}>
                 <SectionTitle title="Giftsery picks for you" subtitle="Top recommendations for you today." />
 
-                <View style={{paddingLeft: 20,paddingRight: 20,}}>
+                <View style={{paddingLeft: 10,paddingRight: 10,}}>
                         <View style={{flexDirection:'row', justifyContent:'space-between',marginBottom:10}}>
                             <ProductListItem navigateToProduct={() => productNavigation("Product")} product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}} />
                             <ProductListItem navigateToProduct={() => productNavigation("Product")} product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}}/>

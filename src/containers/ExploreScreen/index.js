@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 // create a component
-class Explore extends Component {
+class ExploreScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default Explore;
+export default ExploreScreen;

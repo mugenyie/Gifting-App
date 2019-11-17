@@ -31,7 +31,7 @@ export default class Carousel extends Component {
     if (images && images.length) {
       return (
         <FlatList 
-        contentContainerStyle={{paddingLeft:10,paddingRight:20}}
+        contentContainerStyle={{paddingLeft:5,paddingRight:10}}
         horizontal
         showsHorizontalScrollIndicator={false}
         data={images}
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     width:140,
     height:140,
     borderRadius:16, 
-    marginLeft:10,
+    marginLeft:5,
     marginRight:2, 
     flexDirection: 'column', 
     alignItems:'center',

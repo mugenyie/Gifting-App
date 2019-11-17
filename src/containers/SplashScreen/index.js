@@ -4,7 +4,7 @@ import { View, StyleSheet, Image, Dimensions } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
 
-import Home from '../Home';
+import Home from '../HomeScreen';
 
 
 const Logo = require('../../../assets/logo_bg.png');

@@ -8,12 +8,12 @@ import mainStyles from '../../common/mainStyles';
 class HomeGreeting extends Component {
     render() {
         return (
-            <View style={{flexDirection: 'column', marginTop:20,marginBottom:10, paddingLeft: 20}}>
-                <View style={{flexDirection:'row',marginBottom:8 }}>
-                    <Text style={mainStyles.Heading2Light}>Hi, </Text>
+            <View style={{flexDirection: 'column', marginTop:20,marginBottom:5, paddingLeft: 10}}>
+                <View style={{flexDirection:'row',marginBottom:2 }}>
+                    <Text style={[mainStyles.Heading2Light]}>Hi, </Text>
                     <Text style={mainStyles.Heading1}>There</Text>
                 </View>
-                <Text style={mainStyles.TextRegular}>Happy gifting :)</Text>
+                <Text style={[mainStyles.TextRegular, {fontSize:14,letterSpacing:1}]}>Happy gifting :)</Text>
             </View>
         );
     }
