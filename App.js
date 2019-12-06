@@ -27,6 +27,7 @@ import Notifications from './src/containers/Notifications';
 import LiveChat from './src/containers/LiveChat';
 import GiftStores from './src/containers/GiftStores';
 import Color from './src/common/Color';
+import { Col } from 'native-base';
 
 class IconWithBadge extends Component {
   render() {
@@ -87,7 +88,12 @@ const TabNavigator = createBottomTabNavigator(
   {
     Home: { screen: HomeScreen },
     Explore: { screen: ExploreScreen },
-    GiftBox: {screen: GiftBoxScreen},
+    GiftBox: {
+      screen: GiftBoxScreen,
+      navigationOptions: {
+        tabBarVisible: false,
+      }
+    },
     Saved: {screen: SavedScreen},
     Profile: {screen: ProfileScreen}
   },
@@ -99,15 +105,15 @@ const TabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       showLabel: false,
       activeTintColor: Color.primaryDark,
-      inactiveTintColor: 'rgba(21,52,78, 0.7)'
+      inactiveTintColor: 'rgba(21,52,78, 0.7)',
     },
   }
 );
 
 
 const RootNavigator = createSwitchNavigator({
-  Home: TabNavigator,
-  Splash: SplashScreen
+  Splash: SplashScreen,
+  Home: TabNavigator
 }, {
   initialRouteName: 'Splash'
 });
@@ -119,11 +125,14 @@ const MainNavigator = createStackNavigator({
       header: null,
     }
   },
-  Home: {
-    screen: TabNavigator,
-  },
   Birthdays: {
     screen: Birthdays,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  LiveChat: {
+    screen: LiveChat,
     navigationOptions: {
       header: null,
     }

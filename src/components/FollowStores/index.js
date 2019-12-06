@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import SectionTitle from '../SectionTitle';
-import GiftStores from '../GiftStores';
+import GiftStoresSlider from '../GiftStoresSlider';
 
 // create a component
 class FollowStores extends Component {
@@ -44,7 +44,7 @@ class FollowStores extends Component {
             <View>
                 <SectionTitle title="Gift stores" subtitle="Follow gift stores to keep up with their gift collections." seeMore="View all"/>
 
-                <GiftStores stores = {stores}/>
+                <GiftStoresSlider stores = {stores}/>
             </View>
         );
     }

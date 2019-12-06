@@ -8,7 +8,7 @@ import ViewMore from '../ViewMore';
 import mainStyles from '../../common/mainStyles';
 
 // create a component
-class GiftStores extends Component {
+class GiftStoresSlider extends Component {
     _renderItem({item, index}){
         return(
             <Card key={index} style={styles.imageContainer}>
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default GiftStores;
+export default GiftStoresSlider;

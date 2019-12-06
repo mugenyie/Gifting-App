@@ -20,11 +20,7 @@ class HomeScreen extends Component {
 
         return (
             <Container>
-                <HomeHeader 
-                onNavigateToBirthdays={() => navigate("Birthdays")}
-                onNavigateToNotifications={() => navigate("Notifications")}
-                onNavigateToGiftStores={() => navigate("GiftStores")}
-                />
+                <HomeHeader {...this.props}/>
 
                 <Content style={{ flex: 1, flexDirection: 'column'}}>
                     <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
@@ -39,7 +35,6 @@ class HomeScreen extends Component {
         );
     }
 }
-
-
+  
 //make this component available to the app
 export default HomeScreen;

@@ -10,10 +10,14 @@ class SectionTitle extends Component {
         const {styles, title, subtitle, seeMore} = this.props;
 
         let moreButton;
+        let subtitleText;
         if(seeMore){
             moreButton = <TouchableOpacity style={{marginLeft:'auto'}}>
                             <Text style={[mainStyles.TextRegular, {color:'#6496c6', fontWeight:'bold'}]}>{seeMore}</Text>
                         </TouchableOpacity>;
+        }
+        if(subtitle){
+            subtitleText = <Text style={[mainStyles.Heading3Light,styles,{marginTop:2}]}>{subtitle}</Text>;
         }
         
         return (
@@ -22,7 +26,7 @@ class SectionTitle extends Component {
                     <Text style={[mainStyles.Heading2,styles]}>{title}</Text>
                     {moreButton}
                 </View>
-                <Text style={[mainStyles.Heading3Light,styles,{marginTop:2}]}>{subtitle}</Text>
+                {subtitleText}
             </View>
         );
     }

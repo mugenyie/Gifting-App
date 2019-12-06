@@ -37,7 +37,7 @@ class Product extends Component {
                             <Text style={[mainStyles.ProductPriceText,{fontSize:16, color:Color.primaryDark}]}>UGX 19,500</Text>
                             <Text style={[mainStyles.IconText,{fontSize:8,textAlignVertical:'center',letterSpacing:2}]}>Happy gifting <Icon color={Color.primaryDark} size={10} style={styles.footerIcon} name="gift" /></Text>
                             </Button>
-                            <Button onPress={() => alert("Thank you!")} style={{borderRadius: 4, backgroundColor:Color.primaryDark, justifyContent:'center', alignItems: 'center', marginRight: 20}}>
+                            <Button onPress={() => this.props.navigation.navigate("GiftBox")} style={{borderRadius: 4, backgroundColor:Color.primaryDark, justifyContent:'center', alignItems: 'center', marginRight: 20}}>
                                 <Text style={[mainStyles.Heading3,{color:"#FFF", textAlign:'center', fontSize: 15}]}>Add to Giftbox</Text>
                             </Button>
                         </FooterTab>
