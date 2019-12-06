@@ -22,10 +22,9 @@ class HomeHeader extends Component {
         return (
             <Header style={{backgroundColor:"#FFF",paddingTop:2,paddingBottom:4,height:50}}>
                 <Left>
-                    <Button onPress={() => navigate('Birthdays')} transparent>
+                    <Button onPress={() => this.props.goToBirthday()} transparent>
                         <Icon color={Color.primaryDark} size={20} name="birthday-cake" />
                     </Button>
-                    
                 </Left>
                 <Body style={{justifyContent:'center',alignItems:'center', paddingLeft:screenWidth * 0.15}}>
                         <Image 
@@ -40,7 +39,7 @@ class HomeHeader extends Component {
                     </Button>
 
                     <Button transparent>
-                        <Icon2 onPress={() => navigate('LiveChat')} name="message1" size={22} color={Color.primaryDark}/>
+                        <Icon2 onPress={() => this.props.goToLiveChat()}  name="message1" size={22} color={Color.primaryDark}/>
                     </Button>
                     
                 </Right>

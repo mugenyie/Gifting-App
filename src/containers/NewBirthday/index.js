@@ -25,7 +25,7 @@ class NewBirthday extends Component {
             <Container>
             <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
                 <Left>
-                <Button onPress={() => navigate("Birthdays")} transparent>
+                <Button onPress={() => navigate("Home")} transparent>
                     <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
                 </Button>
                 </Left>
