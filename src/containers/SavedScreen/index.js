@@ -1,8 +1,9 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Title} from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Title, Content} from 'native-base';
 
+import HomeFooter from '../../components/HomeFooter';
 import Color from '../../common/Color';
 import mainStyle from '../../common/mainStyles';
 
@@ -16,6 +17,8 @@ class SavedScreen extends Component {
                 <Title style={[{color:Color.primaryDark},mainStyle.Heading2]}>Saved</Title>
                 </Body>
             </Header>
+            <Content />
+            <HomeFooter RouteName={"Saved"} {...this.props}/> 
             </Container>
         );
     }

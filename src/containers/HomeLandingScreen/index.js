@@ -8,6 +8,7 @@ import HomeGreeting from '../../components/HomeGreeting';
 import DealsForYou from '../../components/DealsForYou';
 import FollowStores from '../../components/FollowStores';
 import MostPopular from '../../components/MostPopular';
+import HomeFooter from '../../components/HomeFooter';
 
 // create a component
 class HomeLandingScreen extends Component {
@@ -25,6 +26,8 @@ class HomeLandingScreen extends Component {
                     <FollowStores storesNavigation={navigate}/>
                     <MostPopular productNavigation={navigate}/>
                 </ScrollView>
+
+                <HomeFooter RouteName={"Home"} {...this.props}/>
             </View>
         );
     }
