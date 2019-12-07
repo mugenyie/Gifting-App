@@ -36,7 +36,8 @@ export default class LiveChat extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container 
+      style={{paddingBottom:10}}>
             <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
                 <Left>
                 <Button onPress={() => this.props.goToHome()} transparent>

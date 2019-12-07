@@ -7,7 +7,7 @@ import Icon3 from 'react-native-vector-icons/Entypo';
 import Icon4 from 'react-native-vector-icons/Feather';
 import { Header, Left, Body, Right, Button, Title, Badge, View } from 'native-base';
 
-
+import IconWithBadge from '../IconWithBadge';
 import Color from '../../common/Color';
 
 const fullLogo = require('../../../assets/header_image.png');
@@ -38,8 +38,8 @@ class HomeHeader extends Component {
                         <Icon4 name="shopping-bag" size={22} color={Color.primaryDark}/>
                     </Button>
 
-                    <Button transparent>
-                        <Icon2 onPress={() => this.props.goToLiveChat()}  name="message1" size={22} color={Color.primaryDark}/>
+                    <Button onPress={() => this.props.goToLiveChat()} transparent>
+                        <IconWithBadge badgeCount={1}  name="message1" size={22} color={Color.primaryDark}/>
                     </Button>
                     
                 </Right>

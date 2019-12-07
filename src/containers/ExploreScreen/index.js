@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import { Searchbar } from 'react-native-paper';
+import { Container, Header, Left, Body, Right, Button, Title, Content} from 'native-base';
+
+import HomeFooter from '../../components/HomeFooter';
 
 // create a component
 class ExploreScreen extends Component {
@@ -11,24 +14,18 @@ class ExploreScreen extends Component {
       render() {
         const { firstQuery } = this.state;
         return (
-          <Searchbar
+          <Container>
+            <Searchbar
             placeholder="Search for a gift / shop"
             onChangeText={query => { this.setState({ firstQuery: query }); }}
             value={firstQuery}
-          />
+            />
+            <Content />
+            <HomeFooter RouteName={"Explore"} {...this.props}/> 
+          </Container>
         );
     }
 }
-
-// define your styles
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#2c3e50',
-    },
-});
 
 //make this component available to the app
 export default ExploreScreen;
