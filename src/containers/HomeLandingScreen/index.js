@@ -20,11 +20,17 @@ class HomeLandingScreen extends Component {
                 <HomeHeader {...this.props}/>
 
                 <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
-                    <HomeGreeting/>
+                    <View style={{paddingTop:30}} />
+                    <HomeGreeting {...this.props}/>
+                    <View style={{paddingTop:20}} />
                     <HomeTopCarousel categoryNavigation={navigate}/>
+                    <View style={{paddingTop:20}} />
                     <DealsForYou productNavigation={navigate} />
+                    <View style={{paddingTop:20}} />
                     <FollowStores storesNavigation={navigate}/>
+                    <View style={{paddingTop:20}} />
                     <MostPopular productNavigation={navigate}/>
+                    <View style={{paddingBottom:20}} />
                 </ScrollView>
 
                 <HomeFooter RouteName={"Home"} {...this.props}/>

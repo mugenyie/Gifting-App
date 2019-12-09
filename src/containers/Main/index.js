@@ -1,15 +1,34 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
-
+import { View, Text, StyleSheet, Image, ScrollView, Button } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
+
+import { GetUserData } from '../../services/UserAuthManager';
 import HomeInitialScreen from '../HomeLandingScreen';
 import Birthdays from '../Birthdays';
-import LiveChat from '../LiveChat';
-
+import OrderHistory from '../OrderHistory';
 
 // create a component
-class HomeScreen extends Component {
+class Main extends Component {
+
+    state = { email: '', fullName: '', firstName: '', userInfo: null, errorMessage: null }
+
+    async componentDidMount(){
+        await GetUserData()
+        .then(userInfo => {
+            if(userInfo){
+                this.setState({fullName: userInfo.user.name, email: userInfo.user.email, firstName: userInfo.user.familyName})
+            }else{
+                this.setState({firstName:"There"})
+            }
+        })
+        .catch(error => {
+            alert(error);
+            this.props.navigation.navigate("Loading");
+        });
+    }
+
+
     render() {
         return (
             <ViewPager 
@@ -22,13 +41,14 @@ class HomeScreen extends Component {
                 </View>
                 <View key="2">
                     <HomeInitialScreen 
+                    customerName={this.state.firstName}
                     goToBirthday={()=>this.viewPager.setPage(0)} 
                     goToLiveChat={()=>this.viewPager.setPage(2)}
                     {...this.props}
                     />
                 </View>
                 <View key="3">
-                    <LiveChat goToHome={()=>this.viewPager.setPage(1)} {...this.props}/>
+                    <OrderHistory goToHome={()=>this.viewPager.setPage(1)} {...this.props}/>
                 </View>
             </ViewPager>
         );
@@ -41,4 +61,4 @@ const styles = StyleSheet.create({
     },
   });
 //make this component available to the app
-export default HomeScreen;
+export default Main;

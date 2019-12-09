@@ -43,7 +43,7 @@ class FollowStores extends Component {
         return (
             <View>
                 <SectionTitle title="Gift stores" subtitle="Follow gift stores to keep up with their gift collections." seeMore="View all"/>
-
+                <View style={{padding:10}} />
                 <GiftStoresSlider stores = {stores}/>
             </View>
         );

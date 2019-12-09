@@ -26,16 +26,13 @@ class GiftBoxScreen extends Component {
 
                 </Right>
             </Header>
-            <Content style={{flex:1}}>
-                <ScrollView style={{flex:1}}>
-                    <View style={{justifyContent:'center', alignItems: 'center', alignContent:'center', marginTop: '50%', marginBottom:'10%'}}>
-                    <Text style={[mainStyles.Heading4,{padding:10}]}>Your GiftBox is empty</Text>
-                        <Button onPress={() => this.props.navigation.navigate('Home')} style={{borderRadius: 4, backgroundColor:Color.primaryDark, justifyContent:'center',width:'50%',height:50}}>
-                            <Text style={[{color:'#FFF'},mainStyles.Heading3,{fontSize:15}]}>Return to shopping</Text>
-                        </Button>
-                    </View>
-                </ScrollView>
-            </Content>
+            <View style={{flex:1,flexDirection:"column",justifyContent:'center',alignItems:'center'}}>
+                <Text style={mainStyles.Heading3}>Your GiftBox is empty</Text>
+                <Button onPress={() => navigate("Home")} transparent style={{marginTop:20, width:150,justifyContent:"center",alignContent:"center", flexDirection:"row",borderColor:Color.primaryDark,borderWidth:0.5,borderRadius:2,padding:4}}>
+                    <Icon name='gift' size={18} color={Color.primaryDark}/>
+                    <Text style={[mainStyles.TextRegular,{paddingLeft:8}]}>Start shopping</Text>
+                </Button>
+            </View>
             <Footer style={{height:90}}>
                 <FooterTab style={{backgroundColor:'#FFF'}}>
                     {/* <Text style={[mainStyles.ProductPriceText,{fontSize:16, color:Color.primaryDark, flex:1, flexDirection:'column'}]}>Total: UGX 19,500</Text> */}

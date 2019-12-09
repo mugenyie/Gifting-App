@@ -35,11 +35,11 @@ class HomeHeader extends Component {
                 </Body>
                 <Right>
                     <Button onPress={() => navigate('GiftStores')} transparent>
-                        <Icon4 name="shopping-bag" size={22} color={Color.primaryDark}/>
+                        <Icon2 name="isv" size={20} color={Color.primaryDark}/>
                     </Button>
 
                     <Button onPress={() => this.props.goToLiveChat()} transparent>
-                        <IconWithBadge badgeCount={1}  name="message1" size={22} color={Color.primaryDark}/>
+                        <IconWithBadge badgeCount={1}  name="book" size={22} color={Color.primaryDark}/>
                     </Button>
                     
                 </Right>

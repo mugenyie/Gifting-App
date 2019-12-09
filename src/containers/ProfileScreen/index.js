@@ -7,8 +7,16 @@ import HomeFooter from '../../components/HomeFooter';
 import Color from '../../common/Color';
 import mainStyle from '../../common/mainStyles';
 
+import { SignOutUser } from '../../services/UserAuthManager';
+
 // create a component
 class ProfileScreen extends Component {
+
+    async SignOut(){
+        await SignOutUser();
+        this.props.navigation.navigate('Login');
+    }
+
     render() {
         return (
             <Container>
@@ -17,7 +25,9 @@ class ProfileScreen extends Component {
                     <Title style={[{color:Color.primaryDark},mainStyle.Heading2]}>Profile</Title>
                     </Body>
                 </Header>
-                <Content />
+                <Content>
+                    <Button title={"SignOut"} onPress={() => this.SignOut()}/>
+                </Content>
                 <HomeFooter RouteName={"Profile"} {...this.props}/> 
             </Container>
         );

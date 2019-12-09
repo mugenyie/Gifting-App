@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "746561284495",
+    "firebase_url": "https://giftsery-login.firebaseio.com",
+    "project_id": "giftsery-login",
+    "storage_bucket": "giftsery-login.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746561284495:android:44291c31a06c965aaf03fa",
+        "android_client_info": {
+          "package_name": "com.giftsery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746561284495-e5j0v19t530ur4u28b5odo9k8uv3pvtm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.giftsery",
+            "certificate_hash": "6d45a33ff71d898a1fe207f0809ef80adeb0d815"
+          }
+        },
+        {
+          "client_id": "746561284495-1pner5on4rfvsi04udtme4anfis7g8qr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.giftsery",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "746561284495-trbma841hh9obhisj12vq9ut5ksmhq16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv4j5VSUi-OHEp3kNTcEyoUGxPWNiaW-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746561284495-trbma841hh9obhisj12vq9ut5ksmhq16.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -55,22 +55,14 @@ class MostPopular extends Component {
         ];
 
         return (
-            <View style={styles.container}>
+            <View>
                 <SectionTitle title="Most popular" subtitle="Swipe to view popular gift items." seeMore="View all"/>
-
+                <View style={{padding:10}}/>
                 <PopularGifts navigateToProduct={this.props.productNavigation} gifts={gifts}/>
             </View>
         );
     }
 }
-
-// define your styles
-const styles = StyleSheet.create({
-    container: {
-        paddingTop: 10,
-        paddingBottom:20
-      }
-});
 
 //make this component available to the app
 export default MostPopular;

@@ -9,7 +9,7 @@ import mainStyles from '../../common/mainStyles';
 
 const width = Dimensions.get('window').width;
 
-const imageWidth = width * 0.8;
+const imageWidth = width * 0.85;
 
 const Item = ({index, imageSource, productName, productPrice, onSelect}) => {
     return(

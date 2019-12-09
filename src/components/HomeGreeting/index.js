@@ -8,21 +8,16 @@ import mainStyles from '../../common/mainStyles';
 class HomeGreeting extends Component {
     render() {
         return (
-            <View style={{flexDirection: 'column', marginTop:20,marginBottom:5, paddingLeft: 10}}>
-                <View style={{flexDirection:'row',marginBottom:2 }}>
-                    <Text style={[mainStyles.Heading2Light]}>Hi, </Text>
-                    <Text style={mainStyles.Heading1}>There</Text>
+            <View style={{flexDirection: 'column',marginBottom:5, paddingLeft: 10}}>
+                <View style={{flexDirection:'row',marginBottom:2, alignSelf:"baseline"}}>
+                    <Text style={[mainStyles.Heading2Light, {fontSize:18}]}>Hi, </Text>
+                    <Text style={[mainStyles.Heading2,{letterSpacing:4}]}>{this.props.customerName}</Text>
                 </View>
-                <Text style={[mainStyles.TextRegular, {fontSize:14,letterSpacing:1}]}>Happy gifting :)</Text>
+                <Text style={[mainStyles.TextRegular, {fontSize:14,letterSpacing:1, paddingTop:2}]}>Happy gifting :)</Text>
             </View>
         );
     }
 }
-
-// define your styles
-const styles = StyleSheet.create({
-    
-});
 
 //make this component available to the app
 export default HomeGreeting;

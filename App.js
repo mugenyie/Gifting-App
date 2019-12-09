@@ -8,9 +8,12 @@ import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import { fadeOut } from 'react-navigation-transitions';
 
-import SplashScreen from './src/containers/SplashScreen';
+import Loading from './src/containers/Loading';
+import SignUp from './src/containers/SignUp';
+import Login from './src/containers/Login';
+import Main from './src/containers/Main';
 
-import HomeScreen from './src/containers/HomeScreen';
+import HomeScreen from './src/containers/Main';
 import ExploreScreen from './src/containers/ExploreScreen';
 import GiftBoxScreen from './src/containers/GiftBoxScreen';
 import SavedScreen from './src/containers/SavedScreen';
@@ -21,13 +24,17 @@ import Category from './src/containers/Category';
 import NewBirthday from './src/containers/NewBirthday';
 import GiftStores from './src/containers/GiftStores';
 
-
-const RootNavigator = createSwitchNavigator({
-  Splash: SplashScreen,
-  Home: HomeScreen
-}, {
-  initialRouteName: 'Splash'
-});
+const RootNavigator = createSwitchNavigator(
+  {
+    Loading,
+    SignUp,
+    Login,
+    Main
+  },
+  {
+    initialRouteName: 'Loading'
+  }
+);
 
 const HomeWithBottomNavigation = createStackNavigator({
   Home: { 

@@ -29,18 +29,9 @@ export default class HomeTopCarousel extends Component {
     ];
 
     return (
-      <View style={styles.container}>
+      <View>
         <Carousel categoryNavigation={this.props.categoryNavigation} images={images} />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 10,
-  }
-});

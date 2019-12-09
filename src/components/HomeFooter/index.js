@@ -14,7 +14,7 @@ class HomeFooter extends Component {
         if(ActiveRoute == ButtonName){
             return Color.primaryDark;
         }else{
-            return 'rgba(21,52,78, 0.65)';
+            return '#5a6c40';
         }
     };
     

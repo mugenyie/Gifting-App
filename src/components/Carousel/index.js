@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     width:140,
     height:140,
     borderRadius:16, 
-    marginLeft:5,
+    marginLeft:10,
     marginRight:2, 
     flexDirection: 'column', 
     alignItems:'center',
