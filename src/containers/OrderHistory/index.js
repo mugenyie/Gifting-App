@@ -14,7 +14,7 @@ class OrderHistory extends Component {
             <Container>
             <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
                 <Left>
-                    <Button onPress={() => this.props.goToHome()} transparent>
+                    <Button onPress={() => this.props.navigation.navigate("Home")} transparent>
                         <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
                     </Button>
                 </Left>
@@ -28,7 +28,7 @@ class OrderHistory extends Component {
 
                 <View style={{flex:1,flexDirection:"column",justifyContent:'center',alignItems:'center'}}>
                     <Text style={mainStyle.Heading3}>No orders</Text>
-                    <Button onPress={() => this.props.goToHome()} transparent style={{marginTop:20, width:150,justifyContent:"center",alignContent:"center", flexDirection:"row",borderColor:Color.primaryDark,borderWidth:0.5,borderRadius:2,padding:4}}>
+                    <Button onPress={() => this.props.navigation.navigate("Home")} transparent style={{marginTop:20, width:150,justifyContent:"center",alignContent:"center", flexDirection:"row",borderColor:Color.primaryDark,borderWidth:0.5,borderRadius:2,padding:4}}>
                         <Icon name='gift' size={18} color={Color.primaryDark}/>
                         <Text style={[mainStyle.TextRegular,{paddingLeft:8}]}>Start shopping</Text>
                     </Button>

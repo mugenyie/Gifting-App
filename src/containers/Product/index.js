@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, ScrollView, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
+
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
-import Icon3 from 'react-native-vector-icons/EvilIcons';
 import { Container, Header, Left, Body, Right, Button, Title, Text, Footer, FooterTab } from 'native-base';
 
 import Color from '../../common/Color';
-import mainStyle from '../../common/mainStyles';
 import mainStyles from '../../common/mainStyles';
 import ProductListItem from '../../components/ProductListItem';
 import AnimatedHeaderScroll from '../../components/AnimatedHeaderScroll';
 
+import ProductSlider from '../../components/ProductsSlider';
 
-const productImage = require('../../../assets/teddy.jpg');
+import {productDetail} from '../../Data';
 
+const productImage = "";
 // create a component
 class Product extends Component {
+
+    componentDidMount(){
+        let productId = this.props.navigation.getParam("productId");
+        //console.log(productDetail);
+    }
 
       _renderHeader = (<View style={{flexDirection:'row',alignItems:'stretch', backgroundColor:"transparent"}}>
                             <Left style={{paddingLeft:10}}>
@@ -32,12 +39,23 @@ class Product extends Component {
                         </View>);
     
       _renderFooter =(<Footer style={{height:80}}>
-                        <FooterTab style={{backgroundColor:'#FFF'}}>
+                        <FooterTab style={{backgroundColor:'#FFF',borderTopColor:"#CCC",borderTopWidth:0.3,elevation:4}}>
                             <Button transparent>
-                            <Text style={[mainStyles.ProductPriceText,{fontSize:16, color:Color.primaryDark}]}>UGX 19,500</Text>
+      <Text style={[mainStyles.ProductPriceText,{fontSize:16, color:Color.primaryDark}]}>UGX {productDetail.price}</Text>
                             <Text style={[mainStyles.IconText,{fontSize:8,textAlignVertical:'center',letterSpacing:2}]}>Happy gifting <Icon color={Color.primaryDark} size={10} style={styles.footerIcon} name="gift" /></Text>
                             </Button>
-                            <Button onPress={() => this.props.navigation.navigate("GiftBox")} style={{borderRadius: 4, backgroundColor:Color.primaryDark, justifyContent:'center', alignItems: 'center', marginRight: 20}}>
+                            <Button 
+                            onPress={() => {
+                                this.props.addItemToCart({
+                                    id:productDetail.id,
+                                    name:productDetail.name,
+                                    imageUrl:productDetail.imageUrl,
+                                    price:productDetail.price,
+                                    vendor:{id:productDetail.vendor.id, name:productDetail.vendor.name}
+                            }); 
+                            this.props.navigation.navigate("GiftBox");} } 
+                            style={{borderRadius: 4, backgroundColor:Color.primaryDark, justifyContent:'center', alignItems: 'center', marginRight: 20}}
+                            >
                                 <Text style={[mainStyles.Heading3,{color:"#FFF", textAlign:'center', fontSize: 15}]}>Add to Giftbox</Text>
                             </Button>
                         </FooterTab>
@@ -46,15 +64,15 @@ class Product extends Component {
 _renderScrollViewContent = (<View style={styles.scrollViewContent}>
                                     <View style={{paddingLeft:20,paddingRight:20, flexDirection: 'row'}}>
                                         <View style={{flexDirection:'column'}}>
-                                            <Text style={[mainStyles.Heading2,{paddingBottom:4}]}>Woolen Teddy Bear</Text>
-                                            <Text style={[mainStyles.ProductPriceText,{fontSize:16, paddingBottom:4}]}>UGX 14,500</Text>
+                                            <Text style={[mainStyles.Heading2,{paddingBottom:4}]}>{productDetail.name}</Text>
+<Text style={[mainStyles.ProductPriceText,{fontSize:16, paddingBottom:4}]}>UGX {productDetail.price}</Text>
                                         </View>
-                                        <View style={{flexDirection:'column', right:20,top:0, position:'absolute', alignItems:'center'}}>
+                                        {/* <View style={{flexDirection:'column', right:20,top:0, position:'absolute', alignItems:'center'}}>
                                             <TouchableOpacity><Icon3 name='heart' size={38} color={Color.primaryDark}/></TouchableOpacity>
                                             <Text style={mainStyles.TextMinor}>200</Text>
-                                        </View>
+                                        </View> */}
                                     </View>
-                                    <View style={{marginLeft: 20, marginRight: 20}}>
+                                    <View style={{marginLeft: 10, marginRight: 10}}>
 
                                         <View
                                         style={{
@@ -64,7 +82,9 @@ _renderScrollViewContent = (<View style={styles.scrollViewContent}>
                                             marginTop:20,
                                         }}
                                         />
-                                        <TouchableOpacity><Text style={mainStyles.TextMinor}>Supplied by City Gift Shop</Text></TouchableOpacity>
+                                        <TouchableOpacity>
+                                            <Text style={mainStyles.TextMinor}>Supplied by {productDetail.vendor.name}</Text>
+                                        </TouchableOpacity>
                                         <View
                                         style={{
                                             borderBottomColor: '#ddd',
@@ -75,7 +95,7 @@ _renderScrollViewContent = (<View style={styles.scrollViewContent}>
                                         />
                                         <Text style={[mainStyles.Heading3,{marginBottom:4}]}>Product detail</Text>
                                         <Text style={mainStyles.TextRegular}>
-                                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                        {productDetail.description}
                                         </Text>
                                         <View
                                         style={{
@@ -85,38 +105,11 @@ _renderScrollViewContent = (<View style={styles.scrollViewContent}>
                                             marginTop:20,
                                         }}
                                         />
-                                        <Text style={[mainStyles.Heading3,{marginBottom:4}]}>Delivery options</Text>
-                                        <View style={{flexDirection:'row'}}>
-                                            <Text style={mainStyles.Heading4}>
-                                                Delivery Fee: 
-                                            </Text>
-                                            <Text> </Text>
-                                            <Text style={[mainStyles.TextRegular,{textAlignVertical:'bottom'}]}>
-                                                UGX 5,000
-                                            </Text>
-                                        </View>
-                                        <View
-                                        style={{
-                                            borderBottomColor: '#ddd',
-                                            borderBottomWidth: 0.5,
-                                            marginBottom:20,
-                                            marginTop:20,
-                                        }}
-                                        />
+
                                         <Text style={[mainStyles.Heading3,{marginBottom:10}]}>You may also like</Text>
-                                        <ScrollView 
-                                        style={{marginLeft:-20,marginRight:-20}}
-                                        horizontal
-                                        showsHorizontalScrollIndicator={false}
-                                        >
-                                        <ProductListItem product={{name:"Woolen Teddy Baer",imageSource:productImage,price:"Ushs. 16,500"}} />
-                                        <ProductListItem product={{name:"Woolen Teddy Baer",imageSource:productImage,price:"Ushs. 16,500"}} />
-                                        <ProductListItem product={{name:"Woolen Teddy Baer",imageSource:productImage,price:"Ushs. 16,500"}} />
-                                        <ProductListItem product={{name:"Woolen Teddy Baer",imageSource:productImage,price:"Ushs. 16,500"}} />
-                                        <ProductListItem product={{name:"Woolen Teddy Baer",imageSource:productImage,price:"Ushs. 16,500"}} />
-                                        <ProductListItem product={{name:"Woolen Teddy Baer",imageSource:productImage,price:"Ushs. 16,500"}} />
-                                        </ScrollView>
                                     </View>
+
+                                    <ProductSlider {...this.props} products={productDetail.relatedProducts} />
                                     <View style={{padding:10}}/>
       </View>);
 
@@ -128,7 +121,7 @@ _renderScrollViewContent = (<View style={styles.scrollViewContent}>
                     RenderHeader = {this._renderHeader}
                     RenderFooter = {this._renderFooter}
                     ScrollViewContent = {this._renderScrollViewContent}
-                    TopImage = {productImage}
+                    TopImage = {productDetail.imageUrl}
                 />
             </View>
 
@@ -148,5 +141,14 @@ const styles = StyleSheet.create({
     }
 });
 
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        addItemToCart:(product) => dispatch({
+            type:'ADD_TO_CART',
+            payload: product
+        })
+    }
+}
+
 //make this component available to the app
-export default Product;
+export default connect(null,mapDispatchToProps)(Product);

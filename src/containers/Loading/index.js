@@ -28,7 +28,7 @@ class Loading extends Component {
         await GoogleAuthClient._getCurrentUser()
         .then(userInfo => {
             StoreUserData(userInfo);
-            this.props.navigation.navigate(userInfo ? 'Main' : 'Login')
+            this.props.navigation.navigate(userInfo ? 'Home' : 'Login')
           })
           .catch(error =>{
               //alert(error);

@@ -1,31 +1,28 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ImageBackground, TouchableOpacity, Dimensions, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Card} from 'native-base';
 
-import ViewMore from '../ViewMore';
 import mainStyles from '../../common/mainStyles';
+const width = Dimensions.get('window').width;
+
+const imageWidth = (width * 0.4);
+
 
 // create a component
 class GiftStoresSlider extends Component {
-    _renderItem({item, index}){
+    _renderItem({item}){
         return(
-            <Card key={index} style={styles.imageContainer}>
+            <Card key={item.id} style={styles.imageContainer}>
                 <ImageBackground 
                 style={[{flex:1,justifyContent:'center',alignItems:'center'}]}
                 imageStyle={styles.storeBackgroundImage}
-                resizeMode="cover" resizeMethod="scale" source={item.image}>
-                    <TouchableOpacity activeOpacity={0.8} style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                resizeMode="cover" resizeMethod="scale" source={{uri:item.imageUrl}}>
+                    <TouchableOpacity onPress={()=>alert("hey")} activeOpacity={0.8} style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                         <View style={{justifyContent:'center',backgroundColor:"#fff",width:100,padding:10,alignContent:'center',opacity:0.8,alignSelf:"center"}}>
                             <Text style={[mainStyles.Heading3,{textAlign:'center',color:"#000"}]}>{item.name}</Text>
                         </View>
-                    </TouchableOpacity>
-                    
-                    <TouchableOpacity activeOpacity={0.9} style={
-                        [item.status == "Follow" ? {backgroundColor:"#fff"} : {backgroundColor:"#15344e"},
-                            { width:150,borderBottomLeftRadius:10,borderBottomRightRadius:10,height:28,justifyContent:'center',alignItems:'center'}]}>
-                        <Text style={[mainStyles.TextCaption, item.status == "Follow" ? "" : {color:"#fff"}]}>{item.status}</Text>
                     </TouchableOpacity>
                 </ImageBackground>
             </Card>
@@ -37,14 +34,16 @@ class GiftStoresSlider extends Component {
 
         if (stores && stores.length) {
         return (
-            <FlatList 
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={stores}
-            renderItem={this._renderItem}
-            keyExtractor={(item, index) => index.toString()}
-            contentContainerStyle={{paddingLeft:10,paddingRight:20}}
-            />
+            <SafeAreaView style={{flex: 1}}>
+                <FlatList 
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                data={stores}
+                renderItem={this._renderItem}
+                keyExtractor={(item) => item.id}
+                contentContainerStyle={{paddingLeft:10,paddingRight:10}}
+                />
+            </SafeAreaView>
         );
     }
     console.log('Please provide images');
@@ -55,11 +54,10 @@ class GiftStoresSlider extends Component {
 // define your styles
 const styles = StyleSheet.create({
       imageContainer: {
-        width:150,
+        width:imageWidth,
         height:200,
         borderRadius:10, 
-        marginLeft:5,
-        marginRight:1, 
+        marginRight:10, 
         flexDirection: 'column', 
         elevation: 2,
       },

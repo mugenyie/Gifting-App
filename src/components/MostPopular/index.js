@@ -4,61 +4,16 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import SectionTitle from '../SectionTitle';
 import PopularGifts from '../PopularGifts';
+import {mostPopularProducts} from '../../Data';
 
 // create a component
 class MostPopular extends Component {
     render() {
-
-        const gifts = [
-            {
-                image : {
-                    uri : "https://m.rolex.com/content/dam/rolex-58/homepage/roller-collection/baselworld/all-watches/homepage_classic_watches_datejust_0001_675x825.jpg"
-                },
-                name : "Rolex",
-                price: "Ushs. 350,000"
-            },
-            {
-                image : {
-                    uri : "https://m.rolex.com/content/dam/rolex-58/homepage/roller-collection/baselworld/all-watches/homepage_classic_watches_datejust_0001_675x825.jpg"
-                },
-                name : "Rolex",
-                price: "Ushs. 350,000"
-            },
-            {
-                image : {
-                    uri : "https://m.rolex.com/content/dam/rolex-58/homepage/roller-collection/baselworld/all-watches/homepage_classic_watches_datejust_0001_675x825.jpg"
-                },
-                name : "Rolex",
-                price: "Ushs. 350,000"
-            },
-            {
-                image : {
-                    uri : "https://m.rolex.com/content/dam/rolex-58/homepage/roller-collection/baselworld/all-watches/homepage_classic_watches_datejust_0001_675x825.jpg"
-                },
-                name : "Rolex",
-                price: "Ushs. 350,000"
-            },
-            {
-                image : {
-                    uri : "https://m.rolex.com/content/dam/rolex-58/homepage/roller-collection/baselworld/all-watches/homepage_classic_watches_datejust_0001_675x825.jpg"
-                },
-                name : "Rolex",
-                price: "Ushs. 350,000"
-            },
-            {
-                image : {
-                    uri : "https://m.rolex.com/content/dam/rolex-58/homepage/roller-collection/baselworld/all-watches/homepage_classic_watches_datejust_0001_675x825.jpg"
-                },
-                name : "Rolex",
-                price: "Ushs. 350,000"
-            }
-        ];
-
         return (
             <View>
                 <SectionTitle title="Most popular" subtitle="Swipe to view popular gift items." seeMore="View all"/>
                 <View style={{padding:10}}/>
-                <PopularGifts navigateToProduct={this.props.productNavigation} gifts={gifts}/>
+                <PopularGifts navigateToProduct={this.props.productNavigation} gifts={mostPopularProducts}/>
             </View>
         );
     }

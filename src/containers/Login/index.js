@@ -26,7 +26,7 @@ class Login extends Component {
     _signIn = () => {
         this.setState({isSigninInProgress:true}, () => {
             SignInUser().then(userInfo => {
-                this.props.navigation.navigate('Main');
+                this.props.navigation.navigate('Home');
             }).catch(error => {
                 this.setState({isSigninInProgress:false});
                 alert(error);
@@ -38,7 +38,7 @@ class Login extends Component {
     _ContinueAnonymous = () => {
         this.setState({isSigninInProgress:true}, () => {
             setTimeout(() => {
-                this.props.navigation.navigate('Main');
+                this.props.navigation.navigate('Home');
             }, 500)
         });
     }

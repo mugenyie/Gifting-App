@@ -2,37 +2,38 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
 import {Card} from 'native-base';
-import Icon from 'react-native-vector-icons/EvilIcons';
 
 import mainStyles from '../../common/mainStyles';
 
 const width = Dimensions.get('window').width;
 
-const imageWidth = width * 0.45;
+const imageWidth = (width / 2) - 15;
 
 
 // create a component
 class ProductListItem extends Component {
     render() {
-        const { product, navigateToProduct } = this.props;
+        const { product, productNavigation } = this.props;
         return (
-            <TouchableOpacity style={{paddingBottom:8}} onPress={navigateToProduct} activeOpacity={0.8}>
+            <TouchableOpacity 
+            onPress={()=> productNavigation("Product",{productId:product.id})}
+            style={[{paddingBottom:15, width:imageWidth, marginRight:10}]} activeOpacity={0.8}>
                 <Card style={styles.productCard}>
-                <ImageBackground
-                style={{flex:1}}
-                resizeMode='cover'
-                imageStyle={styles.productBackgroundImage}
-                source={product.imageSource}
-                >
-                    <View style={{top:4,right:4, alignItems:'flex-end'}}>
-                        <Icon name='heart' size={32} color="#15344e" />
-                    </View>
-                </ImageBackground>
+                    <ImageBackground
+                    style={{flex:1}}
+                    resizeMode='cover'
+                    imageStyle={styles.productBackgroundImage}
+                    source={product.imageSource}
+                    >
+                        {/* <View style={{top:4,right:4, alignItems:'flex-end'}}>
+                            <Icon name='heart' size={32} color="#15344e" />
+                        </View> */}
+                    </ImageBackground>
                
-            </Card>
-            <View style={{paddingTop:4}}>
-                    <Text style={mainStyles.ProductNameText}>{product.name}</Text>
-                    <Text style={mainStyles.ProductPriceText}>{product.price}</Text>
+                </Card>
+                <View style={{paddingTop:4}}>
+                    <Text style={[mainStyles.ProductNameText,{fontWeight:'bold'}]}>{product.name}</Text>
+                    <Text style={mainStyles.ProductPriceText}>Ushs. {product.price}</Text>
                 </View>
             </TouchableOpacity>
         );

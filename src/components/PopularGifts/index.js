@@ -18,15 +18,15 @@ const Item = ({index, imageSource, productName, productPrice, onSelect}) => {
                 <ImageBackground
                 style={{flex:1}}
                 imageStyle={styles.productBackgroundImage}
-                source={imageSource}
+                source={{uri:imageSource}}
                 >
-                    <View style={{padding:10, alignItems:'flex-end'}}>
+                    {/* <View style={{padding:10, alignItems:'flex-end'}}>
                         <Icon name='heart' size={20} color="#fff" />
-                    </View>
+                    </View> */}
                 </ImageBackground>
                 <View style={{padding:8}}>
-                    <Text style={mainStyles.ProductNameText}>{productName}</Text>
-                    <Text style={mainStyles.ProductPriceText}>{productPrice}</Text>
+                    <Text style={[mainStyles.ProductNameText,{fontWeight:'bold'}]}>{productName}</Text>
+                    <Text style={mainStyles.ProductPriceText}>Ushs. {productPrice}</Text>
                 </View>
             </Card>
         </TouchableOpacity>
@@ -47,7 +47,7 @@ class PopularGifts extends Component {
                     data={gifts}
                     renderItem={({item}) => (
                         <Item 
-                        imageSource={item.image}
+                        imageSource={item.imageUrl}
                         productName={item.name}
                         productPrice={item.price}
                         onSelect={onSelect}

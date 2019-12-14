@@ -3,8 +3,6 @@ import {StyleSheet, View} from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import { Container, Header, Left, Body, Right, Button, Title, Content} from 'native-base';
 
-import HomeFooter from '../../components/HomeFooter';
-
 // create a component
 class ExploreScreen extends Component {
     state = {
@@ -21,7 +19,6 @@ class ExploreScreen extends Component {
             value={firstQuery}
             />
             <Content />
-            <HomeFooter RouteName={"Explore"} {...this.props}/> 
           </Container>
         );
     }

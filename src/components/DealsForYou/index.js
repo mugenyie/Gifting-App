@@ -1,47 +1,46 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import {Button} from 'native-base';
+import { SafeAreaView, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import {Button, View} from 'native-base';
 
 import ProductListItem from '../ProductListItem';
 import SectionTitle from '../SectionTitle';
 
-import mainStyles from '../../common/mainStyles';
-import Color from '../../common/Color';
+import {featuredProducts} from '../../Data';
 
-const imageSource1 = require('../../../assets/teddy.jpg');
+
+
+function Item({Item, onSelect}){
+    return(
+        <ProductListItem 
+        productNavigation={onSelect}
+        product={{id:Item.id,name:Item.name,imageSource:{uri:Item.imageUrl},price:Item.price}} 
+        />
+    );
+  }
+
 // create a component
 class DealsForYou extends Component {
     render() {
-        const {productNavigation} = this.props;
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={{flex: 1}}>
                 <SectionTitle title="Giftsery picks for you" subtitle="Top recommendations for you today." />
-
-                <View style={{paddingLeft: 10,paddingRight: 10,paddingTop:10}}>
-                        <View style={{flexDirection:'row', justifyContent:'space-between',marginBottom:10}}>
-                            <ProductListItem navigateToProduct={() => productNavigation("Product")} product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}} />
-                            <ProductListItem navigateToProduct={() => productNavigation("Product")} product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}}/>
-                        </View>
-                        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                            <ProductListItem navigateToProduct={() => productNavigation("Product")} product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}} />
-                            <ProductListItem navigateToProduct={() => productNavigation("Product")} product={{name:"Woolen Teddy Baer",imageSource:imageSource1,price:"Ushs. 16,500"}}/>
-                        </View>
-                </View>
-                <Button transparent style={[{flex:1,flexDirection:'row',alignSelf:'center',height:40,marginTop:20, justifyContent:"center",alignContent:"center", flexDirection:"row",borderColor:Color.primaryDark,borderWidth:0.5,borderRadius:2,padding:4, width:'50%'}]}>
-                    <Text style={mainStyles.TextRegular}>Load more</Text>
-                </Button>
-            </View>
+                <FlatList 
+                numColumns={2}
+                contentContainerStyle={{padding:10}}
+                data={featuredProducts.sort((a, b) => a.displayOrder - b.displayOrder)}
+                renderItem={({ item }) => (
+                    <Item
+                    onSelect={this.props.productNavigation}
+                    Item={item}
+                    />
+                )}
+                keyExtractor={(item) => item.id.toString()}
+                />
+            </SafeAreaView>
         );
     }
 }
-
-// define your styles
-const styles = StyleSheet.create({
-    container: {
-        flexDirection:'column'
-    },
-});
 
 //make this component available to the app
 export default DealsForYou;

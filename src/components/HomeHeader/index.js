@@ -17,12 +17,11 @@ const screenWidth = Dimensions.get('window').width;
 // create a component
 class HomeHeader extends Component {
     render() {
-        const {navigate} = this.props.navigation;
 
         return (
             <Header style={{backgroundColor:"#FFF",paddingTop:2,paddingBottom:4,height:50}}>
                 <Left>
-                    <Button onPress={() => this.props.goToBirthday()} transparent>
+                    <Button onPress={() => this.props.navigation.navigate("Birthdays")} transparent>
                         <Icon color={Color.primaryDark} size={20} name="birthday-cake" />
                     </Button>
                 </Left>
@@ -34,11 +33,11 @@ class HomeHeader extends Component {
                         />
                 </Body>
                 <Right>
-                    <Button onPress={() => navigate('GiftStores')} transparent>
+                    <Button onPress={() => this.props.navigation.navigate("GiftStores")} transparent>
                         <Icon2 name="isv" size={20} color={Color.primaryDark}/>
                     </Button>
 
-                    <Button onPress={() => this.props.goToLiveChat()} transparent>
+                    <Button onPress={() => this.props.navigation.navigate("OrderHistory")} transparent>
                         <IconWithBadge badgeCount={1}  name="book" size={22} color={Color.primaryDark}/>
                     </Button>
                     

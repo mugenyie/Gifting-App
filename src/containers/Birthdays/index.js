@@ -14,16 +14,16 @@ class Birthdays extends Component {
         return (
             <Container>
             <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
-                {/* <Left>
-                
-                </Left> */}
+                <Left>
+                    <Button onPress={() => this.props.navigation.navigate("Home")} transparent>
+                        <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
+                    </Button>
+                </Left>
                 <Body style={{paddingLeft:10}}>
                 <Title style={[{color:Color.primaryDark},mainStyle.Heading2]}>Birthdays</Title>
                 </Body>
                 <Right>
-                <Button onPress={() => this.props.goToHome()} transparent>
-                    <Icon name='arrowright' size={22} color={Color.primaryDark}/>
-                </Button>
+                
                 </Right>
             </Header>
             <View style={{flex:1,flexDirection:"column",justifyContent:'center',alignItems:'center'}}>

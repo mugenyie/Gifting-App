@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title, Content} from 'native-base';
 
-import HomeFooter from '../../components/HomeFooter';
 import Color from '../../common/Color';
 import mainStyle from '../../common/mainStyles';
 
@@ -28,7 +27,6 @@ class ProfileScreen extends Component {
                 <Content>
                     <Button title={"SignOut"} onPress={() => this.SignOut()}/>
                 </Content>
-                <HomeFooter RouteName={"Profile"} {...this.props}/> 
             </Container>
         );
     }

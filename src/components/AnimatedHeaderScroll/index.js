@@ -111,7 +111,7 @@ class AnimatedHeaderScroll extends Component {
                                 transform: [{ translateY: imageTranslate }],
                             },
                             ]}
-                            source={TopImage}
+                            source={{uri:TopImage}}
                         />
                         {TopTextView}
                     </View>

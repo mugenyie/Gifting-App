@@ -9,8 +9,8 @@ import mainStyle from '../../common/mainStyles';
 import AnimatedHeaderScroll from '../../components/AnimatedHeaderScroll';
 import ProductListItem from '../../components/ProductListItem';
 
-const topImage = require('../../../assets/black_man.jpg');
-const productImage = require('../../../assets/teddy.jpg');
+const topImage = "";
+const productImage = "";
 
 // create a component
 class Category extends Component {

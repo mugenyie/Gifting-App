@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { Container, Footer, FooterTab, Button } from 'native-base';
 
 import Color from '../../common/Color';
-
+import GiftBoxIcon from '../GiftBoxIcon';
 import IconWithBadge from '../IconWithBadge';
 
 
@@ -28,9 +28,7 @@ class HomeFooter extends Component {
             <Button onPress={() => {this.props.navigation.navigate("Explore")}}>
                 <Icon name={"search1"} size={25} color={this.ActiveColor(this.props.RouteName, "Explore")} />
             </Button>
-            <Button onPress={() => {this.props.navigation.navigate("GiftBox")}}>
-                <IconWithBadge color={this.ActiveColor(this.props.RouteName, "GiftBox")} name={"gift"} size={25} badgeCount={3} />
-            </Button>
+            <GiftBoxIcon {...this.props} ActiveColor={this.ActiveColor(this.props.RouteName, "GiftBox")} />
             <Button onPress={() => {this.props.navigation.navigate("Saved")}}>
                 <Icon name={"heart"} size={25} color={this.ActiveColor(this.props.RouteName, "Saved")} />
             </Button>
