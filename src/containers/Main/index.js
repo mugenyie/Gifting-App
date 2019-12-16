@@ -8,13 +8,15 @@ import HomeInitialScreen from '../HomeLandingScreen';
 // create a component
 class Main extends Component {
 
-    state = { email: '', fullName: '', firstName: '', userInfo: null, errorMessage: null }
+    state = { firstName: '', email: '', displayName: '', phone: '', userId: null }
 
     async componentDidMount(){
         await GetUserData()
         .then(userInfo => {
             if(userInfo){
-                this.setState({fullName: userInfo.user.name, email: userInfo.user.email, firstName: userInfo.user.familyName})
+                var fullName = userInfo.displayName; 
+                var Names = fullName.split(" ");
+                this.setState({firstName:Names[0], displayName: userInfo.displayName, email: userInfo.email, phone: userInfo.phone})
             }else{
                 this.setState({firstName:"There"})
             }

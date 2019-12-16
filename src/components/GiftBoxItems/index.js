@@ -20,7 +20,7 @@ class GiftBoxItems extends Component {
     renderProducts = (products) => {
         return products.map((item, index) => {
             return (
-                <View style={{flexDirection:'row'}}>
+                <View key={index} style={{flexDirection:'row'}}>
                     <ProductListItem 
                     productNavigation={this.props.navigation.navigate}
                     product={{id:item.id,name:item.name,imageSource:{uri:item.imageUrl},price:item.price}} 

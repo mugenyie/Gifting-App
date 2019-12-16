@@ -11,8 +11,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 import Loading from './src/containers/Loading';
-import SignUp from './src/containers/SignUp';
-import Login from './src/containers/Login';
+import PhoneAuthScreen from './src/containers/PhoneAuthScreen';
 import Main from './src/containers/Main';
 
 import ExploreScreen from './src/containers/ExploreScreen';
@@ -95,8 +94,7 @@ const TabNavigator = createBottomTabNavigator(
 const RootNavigator = createSwitchNavigator(
   {
     Loading,
-    SignUp,
-    Login,
+    PhoneAuthScreen,
     Main: {screen: TabNavigator}
   },
   {

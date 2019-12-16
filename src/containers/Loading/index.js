@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Dimensions, Text } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-import { StoreUserData, GetUserData } from '../../services/UserAuthManager';
-import GoogleAuth from '../../services/GoogleAuth';
+import { GetUserData } from '../../services/UserAuthManager';
 
 const width = Dimensions.get('window').width;
 
@@ -13,7 +12,6 @@ const SplashIconWidth = width * 0.18;
 const Logo = require('../../../assets/icon.png');
 const SPLASH_SECONDS = 3000;
 
-const GoogleAuthClient = new GoogleAuth();
 
 // create a component
 class Loading extends Component {
@@ -25,15 +23,17 @@ class Loading extends Component {
     }
     
     _checkLoginStatus = async () =>{
-        await GoogleAuthClient._getCurrentUser()
-        .then(userInfo => {
-            StoreUserData(userInfo);
-            this.props.navigation.navigate(userInfo ? 'Home' : 'Login')
-          })
-          .catch(error =>{
-              //alert(error);
-              this.props.navigation.navigate('Login');
-          });
+        await GetUserData()
+        .then(userDate => {
+            if(userDate.profileComplete){
+                this.props.navigation.navigate("Home")
+            }else{
+                this.props.navigation.navigate("PhoneAuthScreen")
+            }
+        })
+        .catch(error =>{
+            this.props.navigation.navigate("PhoneAuthScreen")
+        })
     }
 
       render() {

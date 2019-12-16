@@ -40,7 +40,7 @@ class GiftStoresSlider extends Component {
                 showsHorizontalScrollIndicator={false}
                 data={stores}
                 renderItem={this._renderItem}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={{paddingLeft:10,paddingRight:10}}
                 />
             </SafeAreaView>

@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import GoogleAuth from './GoogleAuth';
-const GoogleAuthClient = new GoogleAuth();
+import { firebase } from '@react-native-firebase/auth';
 
 //Store data
 export const StoreUserData = async (user) => {
@@ -26,12 +25,8 @@ export const GetUserData = async () => {
     return;
 }
 
-export const SignInUser = async () => {
-    await GoogleAuthClient._signIn().then(user => StoreUserData(user)).catch(error => alert(error));
-}
-
 export const SignOutUser = async () => {
-    await GoogleAuthClient._signOut();
+    await firebase.auth().signOut();
     await AsyncStorage.removeItem('userData');
     return;
 }

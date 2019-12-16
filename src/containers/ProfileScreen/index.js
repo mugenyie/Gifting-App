@@ -11,9 +11,13 @@ import { SignOutUser } from '../../services/UserAuthManager';
 // create a component
 class ProfileScreen extends Component {
 
-    async SignOut(){
-        await SignOutUser();
-        this.props.navigation.navigate('Login');
+    SignOut = () => {
+        SignOutUser()
+        .then(() => {
+            this.props.navigation.navigate('PhoneAuthScreen');
+        }).catch(error => {
+
+        })
     }
 
     render() {
