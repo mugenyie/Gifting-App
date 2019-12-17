@@ -19,6 +19,7 @@ import GiftBoxScreen from './src/containers/GiftBoxScreen';
 import SavedScreen from './src/containers/SavedScreen';
 import ProfileScreen from './src/containers/ProfileScreen';
 
+import GiftingDetailScreen from './src/containers/GiftingDetailScreen';
 import Birthdays from './src/containers/Birthdays';
 import OrderHistory from './src/containers/OrderHistory';
 import Checkout from './src/containers/Checkout';
@@ -26,6 +27,8 @@ import Product from './src/containers/Product';
 import Category from './src/containers/Category';
 import NewBirthday from './src/containers/NewBirthday';
 import GiftStores from './src/containers/GiftStores';
+import TestScreen from './src/containers/TestScreen';
+import Checkout2 from './src/containers/Checkout/Checkout2';
 
 import GiftBoxIcon from './src/components/GiftBoxIcon';
 import Color from './src/common/Color';
@@ -133,6 +136,12 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
         header: null,
       }
     },
+    GiftingDetail: {
+      screen: GiftingDetailScreen,
+      navigationOptions: {
+        header: null,
+      }
+    },
     GiftStores: {
       screen: GiftStores,
       navigationOptions: {
@@ -150,5 +159,17 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       navigationOptions: {
         header: null,
       }
+    },
+    TestScreen: {
+      screen: TestScreen,
+      navigationOptions: {
+        header: null,
+      }      
+    },
+    Checkout2: {
+      screen: Checkout2,
+      navigationOptions: {
+        header: null,
+      }      
     }
   }));

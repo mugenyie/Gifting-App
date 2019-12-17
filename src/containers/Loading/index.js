@@ -17,8 +17,8 @@ const SPLASH_SECONDS = 3000;
 class Loading extends Component {
 
     async componentDidMount() {
-        setTimeout(() => {
-            this._checkLoginStatus();
+        setTimeout(async () => {
+            await this._checkLoginStatus();
         }, SPLASH_SECONDS);
     }
     

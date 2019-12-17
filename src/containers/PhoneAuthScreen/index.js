@@ -38,8 +38,8 @@ class PhoneAuthScreen extends Component {
   }
   
 
-  componentDidMount(){
-    this.checkIsLoggedIn();
+  async componentDidMount(){
+    await this.checkIsLoggedIn();
   }
 
   validatePhoneNumber = () => {
@@ -121,9 +121,9 @@ class PhoneAuthScreen extends Component {
     }
   }
 
-  checkIsLoggedIn = () => {
+  checkIsLoggedIn = async () => {
     this.setState({isSigninInProgress:true});
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged(async (user) => {
       if (user && user.uid) {
         this.setState({
           isLoggedIn: true, 
@@ -136,18 +136,13 @@ class PhoneAuthScreen extends Component {
         this.setState({profileComplete:this.checkProfileComplete()});
 
         //update user storage
-        StoreUserData({
+        await StoreUserData({
           phone: this.state.phone,
           email: this.state.email,
           displayName: this.state.displayName,
           userId: this.state.userId,
           profileComplete: this.state.profileComplete
-        })
-        .then(() => {
-          
-        }).catch(error => {
-
-        })
+        });
         
         this.setState({isSigninInProgress:false});
 

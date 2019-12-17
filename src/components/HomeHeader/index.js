@@ -25,7 +25,7 @@ class HomeHeader extends Component {
                         <Icon color={Color.primaryDark} size={20} name="birthday-cake" />
                     </Button>
                 </Left>
-                <Body style={{justifyContent:'center',alignItems:'center', paddingLeft:screenWidth * 0.15}}>
+                <Body style={{justifyContent:'center',alignItems:'center', paddingLeft:screenWidth * 0.2}}>
                         <Image 
                         source = {fullLogo}
                         resizeMode = 'contain'
@@ -33,13 +33,16 @@ class HomeHeader extends Component {
                         />
                 </Body>
                 <Right>
-                    <Button onPress={() => this.props.navigation.navigate("GiftStores")} transparent>
+                    {/* <Button onPress={() => this.props.navigation.navigate("GiftStores")} transparent>
                         <Icon2 name="isv" size={20} color={Color.primaryDark}/>
-                    </Button>
+                    </Button> 
 
                     <Button onPress={() => this.props.navigation.navigate("OrderHistory")} transparent>
-                        <IconWithBadge badgeCount={1}  name="book" size={22} color={Color.primaryDark}/>
-                    </Button>
+                        <IconWithBadge badgeCount={0}  name="profile" size={20} color={Color.primaryDark}/>
+                    </Button>*/}
+                    <Button onPress={() => this.props.navigation.navigate("OrderHistory")} transparent>
+                        <Icon3 name="list" size={22} color={Color.primaryDark}/>
+                    </Button> 
                     
                 </Right>
             </Header>

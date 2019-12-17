@@ -38,10 +38,5 @@ class Main extends Component {
     }
 }
   
-const styles = StyleSheet.create({
-    viewPager: {
-      flex: 1,
-    },
-  });
 //make this component available to the app
 export default Main;
