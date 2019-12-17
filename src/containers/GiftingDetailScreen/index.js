@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { connect } from 'react-redux';
 import { Container, Header, Left, Body, Right, Button, Title, Footer, FooterTab, Content } from 'native-base';
 
-import {RaveWebView} from '../../containers/Checkout/RaveWebView';
+import {RaveWebView} from '../../components/RaveCheckout';
 import { GetUserData } from '../../services/UserAuthManager';
 import Config from '../../common/Config';
 import Color from '../../common/Color';
