@@ -25,7 +25,7 @@ class GiftBoxScreen extends Component {
         return (
             <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                 <Text style={mainStyles.Heading3}>Your GiftBox is empty</Text>
-                <Button onPress={() => this.props.navigation.navigate("Home")} transparent 
+                <Button onPress={() => this.props.navigation.goBack()} transparent 
                 style={{marginTop:20, width:150,justifyContent:"center",alignContent:"center", 
                 flexDirection:"row",borderColor:Color.primaryDark,borderWidth:0.5,borderRadius:2,padding:4}}>
                     <Icon name='gift' size={18} color={Color.primaryDark}/>

@@ -98,7 +98,7 @@ class GiftingDetailScreen extends Component {
             <View style={{flex:1}}>
                 <Header style={{backgroundColor:"#fff",paddingBottom:4,paddingTop:2,height:50}}>
                 <Left>
-                    <Button onPress={() => this.props.navigation.navigate("GiftBox")} transparent>
+                    <Button onPress={() => this.props.navigation.goBack()} transparent>
                         <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
                     </Button>
                 </Left>
@@ -117,7 +117,7 @@ class GiftingDetailScreen extends Component {
                 >
                 <View style={{marginLeft:10,marginRight:10, marginTop:20, marginBottom:50}}>
 
-                    <Text style={[styles.inputlabel,{marginBottom:5,fontSize:20}]}>Gift Customisation Instructions</Text>
+                    <Text style={[styles.inputlabel,{marginBottom:5,fontSize:20}]}>Gift Customisation Instruction</Text>
                     <TextInput
                     style={{borderWidth:1,borderColor:"#CCC", borderRadius:4,fontSize:16,
                     color:'#555'}}

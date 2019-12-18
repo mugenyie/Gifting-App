@@ -15,7 +15,7 @@ class Birthdays extends Component {
             <Container>
             <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
                 <Left>
-                    <Button onPress={() => this.props.navigation.navigate("Home")} transparent>
+                    <Button onPress={() => this.props.navigation.goBack()} transparent>
                         <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
                     </Button>
                 </Left>
@@ -28,7 +28,7 @@ class Birthdays extends Component {
             </Header>
             <View style={{flex:1,flexDirection:"column",justifyContent:'center',alignItems:'center'}}>
                 <Text style={mainStyle.Heading3}>No Birthdays yet</Text>
-                <Text style={mainStyle.TextRegular}>Add them to get notified when the day comes</Text>
+                <Text style={[mainStyle.TextRegular,{textAlign:'center',marginTop:10}]}>Add friends birthdays to get notified when the day comes</Text>
                 <Button onPress={() => this.props.navigation.navigate("NewBirthday")} transparent style={{marginTop:20, width:100, height:40,justifyContent:"center",alignContent:"center", flexDirection:"row",borderColor:Color.primaryDark,borderWidth:0.5,borderRadius:2,padding:4}}>
                     <Icon name='plus' size={18} color={Color.primaryDark}/>
                     <Text style={[mainStyle.TextRegular,{paddingLeft:10}]}>Add</Text>

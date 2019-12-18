@@ -26,7 +26,7 @@ class Product extends Component {
 
       _renderHeader = (<View style={{flexDirection:'row',alignItems:'stretch', backgroundColor:"transparent"}}>
                             <Left style={{paddingLeft:10}}>
-                                <Button onPress={() => this.props.navigation.navigate("Home")} style={styles.headerIcon}>
+                                <Button onPress={() => this.props.navigation.goBack()} style={styles.headerIcon}>
                                     <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
                                 </Button>
                             </Left>

@@ -26,6 +26,7 @@ import Product from './src/containers/Product';
 import Category from './src/containers/Category';
 import NewBirthday from './src/containers/NewBirthday';
 import GiftStores from './src/containers/GiftStores';
+import EditProfile from './src/containers/EditProfile';
 
 import GiftBoxIcon from './src/components/GiftBoxIcon';
 import Color from './src/common/Color';
@@ -147,6 +148,12 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
     },
     OrderHistory:{
       screen: OrderHistory,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    EditProfile: {
+      screen: EditProfile,
       navigationOptions: {
         header: null,
       }

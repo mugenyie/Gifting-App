@@ -14,7 +14,7 @@ class OrderHistory extends Component {
             <Container>
             <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
                 <Left>
-                    <Button onPress={() => this.props.navigation.navigate("Home")} transparent>
+                    <Button onPress={() => this.props.navigation.goBack()} transparent>
                         <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
                     </Button>
                 </Left>

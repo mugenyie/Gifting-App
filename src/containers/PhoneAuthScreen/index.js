@@ -85,7 +85,7 @@ class PhoneAuthScreen extends Component {
         email: this.state.email,
         displayName: this.state.displayName,
         userId: this.state.userId,
-        profileComplete: this.state.profileComplete
+        profileComplete: this.state.profileComplete,
       })
       .then(() => {
         this.setState({isSigninInProgress:false});
@@ -132,7 +132,7 @@ class PhoneAuthScreen extends Component {
           email: user.email, 
           displayName: user.displayName
         });
-
+        console.log(user);
         this.setState({profileComplete:this.checkProfileComplete()});
 
         //update user storage
@@ -141,7 +141,9 @@ class PhoneAuthScreen extends Component {
           email: this.state.email,
           displayName: this.state.displayName,
           userId: this.state.userId,
-          profileComplete: this.state.profileComplete
+          profileComplete: this.state.profileComplete,
+          creationTime: user.metadata.creationTime,
+          lastSignInTime: user.metadata.lastSignInTime
         });
         
         this.setState({isSigninInProgress:false});
@@ -268,6 +270,7 @@ class PhoneAuthScreen extends Component {
             this.setState({ displayName })
           }}
         />
+
         <View style={{paddingTop:20}}/>
         <Button style={{backgroundColor:Color.primaryDark, padding:8, alignItems:'center',justifyContent:'center'}} onPress={() => this.updateUser()}>
           <Text style={[mainStyles.Heading3, {color:'#FFF'}]}>Update Details</Text>
