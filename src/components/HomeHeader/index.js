@@ -21,7 +21,7 @@ class HomeHeader extends Component {
         return (
             <Header style={{backgroundColor:"#FFF",paddingTop:2,paddingBottom:4,height:50}}>
                 <Left>
-                    <Button onPress={() => this.props.navigation.navigate("Birthdays")} transparent>
+                    <Button onPress={() => this.props.navigation.navigate("Anniversaries")} transparent>
                         <Icon color={Color.primaryDark} size={20} name="birthday-cake" />
                     </Button>
                 </Left>

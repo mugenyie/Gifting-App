@@ -1,6 +1,5 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 
 import { GetUserData } from '../../services/UserAuthManager';
 import HomeInitialScreen from '../HomeLandingScreen';

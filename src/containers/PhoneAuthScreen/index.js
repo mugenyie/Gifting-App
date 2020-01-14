@@ -13,12 +13,9 @@ import {
 } from 'react-native'
 import { firebase } from '@react-native-firebase/auth';
 import {Button} from 'native-base';
-import Icon from 'react-native-vector-icons/AntDesign';
-
 import { StoreUserData } from '../../services/UserAuthManager';
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
-
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 const SplashIconWidth = width * 0.2;

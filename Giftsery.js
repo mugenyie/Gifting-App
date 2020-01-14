@@ -20,16 +20,16 @@ import SavedScreen from './src/containers/SavedScreen';
 import ProfileScreen from './src/containers/ProfileScreen';
 
 import GiftingDetailScreen from './src/containers/GiftingDetailScreen';
-import Birthdays from './src/containers/Birthdays';
+import Anniversaries from './src/containers/Anniversaries';
 import OrderHistory from './src/containers/OrderHistory';
 import Product from './src/containers/Product';
 import Category from './src/containers/Category';
-import NewBirthday from './src/containers/NewBirthday';
 import GiftStores from './src/containers/GiftStores';
 import EditProfile from './src/containers/EditProfile';
 
 import GiftBoxIcon from './src/components/GiftBoxIcon';
 import Color from './src/common/Color';
+import NewAnniversary from './src/containers/NewAnniversary';
 
 
 class Giftsery extends Component {
@@ -122,8 +122,8 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
         header: null,
       }
     },
-    NewBirthday: {
-      screen: NewBirthday,
+    NewAnniversary: {
+      screen: NewAnniversary,
       navigationOptions: {
         header: null,
       }
@@ -140,8 +140,8 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
         header: null,
       }
     },
-    Birthdays:{
-      screen: Birthdays,
+    Anniversaries:{
+      screen: Anniversaries,
       navigationOptions: {
         header: null,
       }

@@ -8,7 +8,7 @@ import mainStyle from '../../common/mainStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // create a component
-class NewBirthday extends Component {
+class NewAnniversary extends Component {
     constructor(props) {
         super(props);
         this.state = { chosenDate: new Date() };
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default NewBirthday;
+export default NewAnniversary;

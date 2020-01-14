@@ -6,8 +6,7 @@ import {Button, View} from 'native-base';
 import ProductListItem from '../ProductListItem';
 import SectionTitle from '../SectionTitle';
 
-import {featuredProducts} from '../../Data';
-
+import ProductAPI from '../../services/ProductAPI';
 
 
 function Item({Item, onSelect}){
@@ -21,6 +20,19 @@ function Item({Item, onSelect}){
 
 // create a component
 class DealsForYou extends Component {
+    state = {
+        featuredProducts: []
+    }
+    
+    componentDidMount(){
+        ProductAPI.GetFeatured()
+        .then(data => {
+            const featuredProducts = data.body;
+            this.setState({featuredProducts})
+        })
+        .catch(error => alert(error))
+    }
+
     render() {
         return (
             <SafeAreaView style={{flex: 1}}>
@@ -28,7 +40,7 @@ class DealsForYou extends Component {
                 <FlatList 
                 numColumns={2}
                 contentContainerStyle={{padding:10}}
-                data={featuredProducts.sort((a, b) => a.displayOrder - b.displayOrder)}
+                data={this.state.featuredProducts.sort((a, b) => a.displayOrder - b.displayOrder)}
                 renderItem={({ item }) => (
                     <Item
                     onSelect={this.props.productNavigation}

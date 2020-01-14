@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, ScrollView, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, ScrollView, TouchableOpacity, FlatList} from 'react-native';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {connect} from 'react-redux';
 
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import { Container, Header, Left, Body, Right, Button, Title, Text, Footer, FooterTab } from 'native-base';
 
+import ProductAPI from '../../services/ProductAPI';
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
 import ProductListItem from '../../components/ProductListItem';
@@ -13,18 +15,43 @@ import AnimatedHeaderScroll from '../../components/AnimatedHeaderScroll';
 
 import ProductSlider from '../../components/ProductsSlider';
 
-import {productDetail} from '../../Data';
-
-const productImage = "";
 // create a component
 class Product extends Component {
-
+    state = {
+        productDetail: null,
+        radio_props: []
+    }
+    
+    
     componentDidMount(){
         let productId = this.props.navigation.getParam("productId");
-        //console.log(productDetail);
+
+        ProductAPI.GetDetail(productId)
+        .then(data => {
+            const productDetail = data.body;
+
+            this.setState({
+                radio_props: [{label: productDetail.name + `- ${productDetail.price}`, value: productDetail.price}],
+            });
+
+            var optionsList = productDetail.productOptions;
+            
+            if(optionsList.length > 0){
+                var newOptionsList = [];
+
+                optionsList.forEach(option => {
+                    newOptionsList.push({label: option.name + ` - ${option.price}`, value: option.price})
+                });
+                
+                this.setState({radio_props:newOptionsList})
+            }
+
+            this.setState({productDetail})
+        })
+        .catch(error => alert(error))
     }
 
-      _renderHeader = (<View style={{flexDirection:'row',alignItems:'stretch', backgroundColor:"transparent"}}>
+      _renderHeader = () => (<View style={{flexDirection:'row',alignItems:'stretch', backgroundColor:"transparent"}}>
                             <Left style={{paddingLeft:10}}>
                                 <Button onPress={() => this.props.navigation.goBack()} style={styles.headerIcon}>
                                     <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
@@ -38,7 +65,7 @@ class Product extends Component {
                             </Right>
                         </View>);
     
-      _renderFooter =(<Footer style={{height:80}}>
+      _renderFooter  = (productDetail) =>(<Footer style={{height:80}}>
                         <FooterTab style={{backgroundColor:'#FFF',borderTopColor:"#CCC",borderTopWidth:0.3,elevation:4}}>
                             <Button transparent>
       <Text style={[mainStyles.ProductPriceText,{fontSize:16, color:Color.primaryDark}]}>UGX {productDetail.price}</Text>
@@ -61,16 +88,12 @@ class Product extends Component {
                         </FooterTab>
                     </Footer>);
 
-_renderScrollViewContent = (<View style={styles.scrollViewContent}>
+_renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewContent}>
                                     <View style={{paddingLeft:20,paddingRight:20, flexDirection: 'row'}}>
                                         <View style={{flexDirection:'column'}}>
                                             <Text style={[mainStyles.Heading2,{paddingBottom:4}]}>{productDetail.name}</Text>
 <Text style={[mainStyles.ProductPriceText,{fontSize:16, paddingBottom:4}]}>UGX {productDetail.price}</Text>
                                         </View>
-                                        {/* <View style={{flexDirection:'column', right:20,top:0, position:'absolute', alignItems:'center'}}>
-                                            <TouchableOpacity><Icon3 name='heart' size={38} color={Color.primaryDark}/></TouchableOpacity>
-                                            <Text style={mainStyles.TextMinor}>200</Text>
-                                        </View> */}
                                     </View>
                                     <View style={{marginLeft: 10, marginRight: 10}}>
 
@@ -93,9 +116,42 @@ _renderScrollViewContent = (<View style={styles.scrollViewContent}>
                                             marginTop:20,
                                         }}
                                         />
-                                        <Text style={[mainStyles.Heading3,{marginBottom:4}]}>Product detail</Text>
+                                        <Text style={[mainStyles.Heading3,{marginBottom:4}]}>Product Description</Text>
                                         <Text style={mainStyles.TextRegular}>
                                         {productDetail.description}
+                                        </Text>
+                                        <View
+                                        style={{
+                                            borderBottomColor: '#ddd',
+                                            borderBottomWidth: 0.5,
+                                            marginBottom:20,
+                                            marginTop:20,
+                                        }}
+                                        />
+                                        <Text style={[mainStyles.Heading3,{marginBottom:20}]}>Product Options</Text>
+
+                                        <RadioForm
+                                        labelStyle={[mainStyles.TextRegular,{fontSize:15,fontWeight:'bold'}]}
+                                        radio_props={this.state.radio_props}
+                                        initial={0}
+                                        onPress={(value) => {this.setState({
+                                            productDetail: {
+                                                ...productDetail,
+                                                price:value,
+                                            }
+                                        })}}
+                                        />
+                                        <View
+                                        style={{
+                                            borderBottomColor: '#ddd',
+                                            borderBottomWidth: 0.5,
+                                            marginBottom:20,
+                                            marginTop:20,
+                                        }}
+                                        />
+                                        <Text style={[mainStyles.Heading3,{marginBottom:4}]}>Delivery Detail</Text>
+                                        <Text style={mainStyles.TextRegular}>
+                                        {productDetail.delivery}
                                         </Text>
                                         <View
                                         style={{
@@ -114,18 +170,24 @@ _renderScrollViewContent = (<View style={styles.scrollViewContent}>
       </View>);
 
     render() {
-        return (
+        const {productDetail} = this.state;
+        
+        if(productDetail == null){
+            return <View><Text>Nothing</Text></View>;
+        }else{
+            return (
             
-            <View style={{flex:1, flexDirection: "column"}}>
-                <AnimatedHeaderScroll 
-                    RenderHeader = {this._renderHeader}
-                    RenderFooter = {this._renderFooter}
-                    ScrollViewContent = {this._renderScrollViewContent}
-                    TopImage = {productDetail.imageUrl}
-                />
-            </View>
-
-        );
+                <View style={{flex:1, flexDirection: "column"}}>
+                    <AnimatedHeaderScroll 
+                        RenderHeader = {this._renderHeader()}
+                        RenderFooter = {this._renderFooter(productDetail)}
+                        ScrollViewContent = {this._renderScrollViewContent(productDetail)}
+                        TopImage = {productDetail.imageUrl}
+                    />
+                </View>
+    
+            );
+        }
     }
 }
 
