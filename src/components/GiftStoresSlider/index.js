@@ -12,14 +12,15 @@ const imageWidth = (width * 0.4);
 
 // create a component
 class GiftStoresSlider extends Component {
-    _renderItem({item}){
+    _renderItem = (item, onSelect) => 
+    {
         return(
             <Card key={item.id} style={styles.imageContainer}>
                 <ImageBackground 
                 style={[{flex:1,justifyContent:'center',alignItems:'center'}]}
                 imageStyle={styles.storeBackgroundImage}
                 resizeMode="cover" resizeMethod="scale" source={{uri:item.imageUrl}}>
-                    <TouchableOpacity onPress={()=>alert("hey")} activeOpacity={0.8} style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                    <TouchableOpacity onPress={()=>onSelect("Category", {vendorId:item.id})} activeOpacity={0.8} style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                         <View style={{justifyContent:'center',backgroundColor:"#fff",width:100,padding:10,alignContent:'center',opacity:0.8,alignSelf:"center"}}>
                             <Text style={[mainStyles.Heading3,{textAlign:'center',color:"#000"}]}>{item.name}</Text>
                         </View>
@@ -31,6 +32,7 @@ class GiftStoresSlider extends Component {
 
     render() {
         const { stores } = this.props;
+        const onSelect = this.props.navigation.navigate;
 
         if (stores && stores.length) {
         return (
@@ -39,14 +41,13 @@ class GiftStoresSlider extends Component {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={stores}
-                renderItem={this._renderItem}
+                renderItem = {({item}) => this._renderItem(item, onSelect)}
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={{paddingLeft:10,paddingRight:10}}
                 />
             </SafeAreaView>
         );
     }
-    console.log('Please provide images');
     return null;        
     }
 }

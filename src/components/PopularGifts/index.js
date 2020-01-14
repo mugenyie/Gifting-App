@@ -38,7 +38,7 @@ class PopularGifts extends Component {
 
     render() {
         const {gifts, navigateToProduct} = this.props;
-        const onSelect = (index) => navigateToProduct("Product");
+        const onSelect = (index) => navigateToProduct("Product",{productId:index});
 
         return (
             <View style={styles.container}>
@@ -47,6 +47,7 @@ class PopularGifts extends Component {
                     data={gifts}
                     renderItem={({item}) => (
                         <Item 
+                        index={item.id}
                         imageSource={item.imageUrl}
                         productName={item.name}
                         productPrice={item.price}

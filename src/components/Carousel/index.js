@@ -4,9 +4,9 @@ import {Card} from 'native-base';
 
 import mainStyles from '../../common/mainStyles';
 
-function Item({index, imageSource, caption, onSelect}){
+function Item({categoryId, imageSource, caption, onSelect}){
   return(
-    <TouchableOpacity style={{marginRight:10}} onPress={() => onSelect(index)} key={index} activeOpacity={0.6}>
+    <TouchableOpacity style={{marginRight:10}} onPress={() => onSelect(categoryId)} key={categoryId} activeOpacity={0.6}>
       <Card style={styles.imageContainer}>
         <ImageBackground
         style={{flex:1, width:'100%'}}
@@ -26,7 +26,7 @@ export default class Carousel extends Component {
 
   render() {
     const { categories, categoryNavigation } = this.props;
-    const onSelect = (index) => categoryNavigation("Category");
+    const onSelect = (categoryId) => categoryNavigation("Category",{categoryId: categoryId});
 
     if (categories && categories.length) {
       return (
@@ -41,6 +41,7 @@ export default class Carousel extends Component {
               imageSource={{uri:item.imageUrl}}
               caption={item.name}
               onSelect={onSelect}
+              categoryId={item.id}
             />
           )}
           keyExtractor={(item) => item.id.toString()}

@@ -1,7 +1,9 @@
 //import liraries
 import React, { Component } from 'react';
-import { SafeAreaView, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import {Button, View} from 'native-base';
+import { SafeAreaView, Text, StyleSheet, View, FlatList, Dimensions } from 'react-native';
+
+import {ThreeDots} from '../../components/ServerLoader';
+const width = Dimensions.get('window').width;
 
 import ProductListItem from '../ProductListItem';
 import SectionTitle from '../SectionTitle';
@@ -34,23 +36,34 @@ class DealsForYou extends Component {
     }
 
     render() {
-        return (
-            <SafeAreaView style={{flex: 1}}>
-                <SectionTitle title="Giftsery picks for you" subtitle="Top recommendations for you today." />
-                <FlatList 
-                numColumns={2}
-                contentContainerStyle={{padding:10}}
-                data={this.state.featuredProducts.sort((a, b) => a.displayOrder - b.displayOrder)}
-                renderItem={({ item }) => (
-                    <Item
-                    onSelect={this.props.productNavigation}
-                    Item={item}
+        if(this.state.featuredProducts.length < 1){
+            return (
+                <SafeAreaView style={{flex: 1}}>
+                    <SectionTitle title="Giftsery picks for you" subtitle="Top recommendations for you today." />
+                    <View style={{marginTop:-40,marginBottom:10}}>
+                     <ThreeDots width={width} height={100} />
+                    </View>
+                </SafeAreaView>
+            );
+        }else{
+            return (
+                <SafeAreaView style={{flex: 1}}>
+                    <SectionTitle title="Giftsery picks for you" subtitle="Top recommendations for you today." />
+                    <FlatList 
+                    numColumns={2}
+                    contentContainerStyle={{padding:10}}
+                    data={this.state.featuredProducts.sort((a, b) => a.displayOrder - b.displayOrder)}
+                    renderItem={({ item }) => (
+                        <Item
+                        onSelect={this.props.productNavigation}
+                        Item={item}
+                        />
+                    )}
+                    keyExtractor={(item) => item.id.toString()}
                     />
-                )}
-                keyExtractor={(item) => item.id.toString()}
-                />
-            </SafeAreaView>
-        );
+                </SafeAreaView>
+            );
+        }
     }
 }
 

@@ -1,6 +1,9 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
+
+import {ThreeDots} from '../../components/ServerLoader';
+const width = Dimensions.get('window').width;
 
 import SectionTitle from '../SectionTitle';
 import GiftStoresSlider from '../GiftStoresSlider';
@@ -23,20 +26,27 @@ class FeaturedGiftStores extends Component {
     }
 
     render() {
-        return (
-            <View>
-                <SectionTitle title="Gift stores" subtitle="Follow gift stores to keep up with their gift collections." seeMore="View all"/>
-                <View style={{padding:10}} />
-                <GiftStoresSlider {...this.props} stores = {this.state.featuredVendors}/>
-            </View>
-        );
+        if(this.state.featuredVendors.length < 1){
+            return (
+                <View>
+                    <SectionTitle title="Gift stores" subtitle="Selected gift stores."/>
+                    <View style={{marginTop:-40,marginBottom:10}}>
+                     <ThreeDots width={width} height={100} />
+                    </View>
+                </View>
+            );
+        }else{
+            return (
+                <View>
+                    <SectionTitle title="Gift stores" subtitle="Selected gift stores." seeMore="View all"/>
+                    <View style={{padding:10}} />
+                    <GiftStoresSlider {...this.props} stores = {this.state.featuredVendors}/>
+                </View>
+            );
+        }
     }
 }
 
-// define your styles
-const styles = StyleSheet.create({
-
-});
 
 //make this component available to the app
 export default FeaturedGiftStores;

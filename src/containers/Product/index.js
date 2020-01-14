@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, ScrollView, TouchableOpacity, FlatList} from 'react-native';
+import {StyleSheet, View, ScrollView, TouchableOpacity, FlatList, Dimensions} from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {connect} from 'react-redux';
 
@@ -10,8 +10,11 @@ import { Container, Header, Left, Body, Right, Button, Title, Text, Footer, Foot
 import ProductAPI from '../../services/ProductAPI';
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
-import ProductListItem from '../../components/ProductListItem';
+import {BlogItem} from '../../components/ServerLoader';
 import AnimatedHeaderScroll from '../../components/AnimatedHeaderScroll';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 import ProductSlider from '../../components/ProductsSlider';
 
@@ -173,7 +176,11 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
         const {productDetail} = this.state;
         
         if(productDetail == null){
-            return <View><Text>Nothing</Text></View>;
+            return (
+                <View style={{flex:1, padding:20}}>
+                    <BlogItem width={width} height={600} speed={2}/>
+                </View>
+            );
         }else{
             return (
             

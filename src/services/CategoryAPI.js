@@ -7,7 +7,9 @@ const CategoryAPI = {
     GetFeatured: async () => {
         return await API.get(`/v1/Category/Featured`);
     },
-    GetDetail: ""
+    GetDetail: async (categoryId) => {
+        return await API.get(`/v1/Category/${categoryId}`);
+    }
 }
 
 //make this component available to the app

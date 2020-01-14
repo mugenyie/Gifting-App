@@ -1,43 +1,84 @@
 import React, { Component } from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import { Container, Header, Left, Body, Right, Button, Title, Text } from 'native-base';
 
+import CategoryAPI from '../../services/CategoryAPI';
+import VendorAPI from '../../services/VendorAPI';
 import Color from '../../common/Color';
-import mainStyle from '../../common/mainStyles';
 import AnimatedHeaderScroll from '../../components/AnimatedHeaderScroll';
 import ProductListItem from '../../components/ProductListItem';
 
-const topImage = "";
-const productImage = "";
+let topImage;
+let topText;
+
+function Item({Item, onSelect}){
+    return(
+        <ProductListItem 
+        productNavigation={onSelect}
+        product={{id:Item.id,name:Item.name,imageSource:{uri:Item.imageUrl},price:Item.price}} 
+        />
+    );
+  }
+
 
 // create a component
 class Category extends Component {
-    _renderHeader = (<View style={{flexDirection:'row',alignItems:'stretch', backgroundColor:"transparent"}}>
-                            <Left style={{paddingLeft:10}}>
-                                <Button onPress={() => this.props.navigation.goBack()} style={styles.headerIcon}>
-                                    <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
-                                </Button>
-                            </Left>
+    state = {
+        categoryDetail: null,
+        categoryProducts: []
+    }
+    
+    
+    componentDidMount(){
+        let categoryId = this.props.navigation.getParam("categoryId");
+        let vendorId = this.props.navigation.getParam("vendorId");
 
-                            <Right style={{paddingRight:10}}>
-                                <Button onPress={() => alert("you clicked me")} style={styles.headerIcon}>
-                                    <Icon2 name='ellipsis-v' size={16} color={Color.primaryDark}/>
-                                </Button>
-                            </Right>
-                        </View>);
+        if(categoryId){
+            CategoryAPI.GetDetail(categoryId)
+            .then(data => {
 
-    _renderScrollViewContent = (
-    <View style={{paddingLeft: 10,paddingRight: 10,}}>
-        <View style={{flexDirection:'row', justifyContent:'space-between',marginBottom:10}}>
-            <ProductListItem navigateToProduct={() => this.props.navigation.navigate("Product")} product={{name:"Woolen Teddy Baer",imageSource:productImage,price:"Ushs. 16,500"}} />
-            <ProductListItem navigateToProduct={() => this.props.navigation.navigate("Product")} product={{name:"Woolen Teddy Baer",imageSource:productImage,price:"Ushs. 16,500"}}/>
-        </View>
-        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-            <ProductListItem navigateToProduct={() => this.props.navigation.navigate("Product")} product={{name:"Woolen Teddy Baer",imageSource:productImage,price:"Ushs. 16,500"}} />
-            <ProductListItem navigateToProduct={() => this.props.navigation.navigate("Product")} product={{name:"Woolen Teddy Baer",imageSource:productImage,price:"Ushs. 16,500"}}/>
-        </View>
+                const categoryDetail = data.body;
+
+                const categoryProducts = categoryDetail.products;
+                console.log(categoryProducts);
+                topImage = categoryDetail.imageUrl;
+                topText = categoryDetail.name;
+
+                this.setState({categoryDetail, categoryProducts});
+            })
+            .catch(error => alert(error))
+        }else{
+            VendorAPI.GetDetail(vendorId)
+            .then(data => {
+
+                const categoryDetail = data.body;
+
+                const categoryProducts = categoryDetail.products;
+                console.log(categoryProducts);
+                topImage = categoryDetail.imageUrl;
+                topText = categoryDetail.name;
+
+                this.setState({categoryDetail, categoryProducts});
+            })
+            .catch(error => alert(error))
+        }
+    }
+
+
+    _renderHeader = () => (<View style={{flexDirection:'row',alignItems:'stretch', backgroundColor:"transparent"}}>
+        <Left style={{paddingLeft:10}}>
+            <Button onPress={() => this.props.navigation.goBack()} style={styles.headerIcon}>
+                <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
+            </Button>
+        </Left>
+
+        <Right style={{paddingRight:10}}>
+            <Button onPress={() => alert("you clicked me")} style={styles.headerIcon}>
+                <Icon2 name='ellipsis-v' size={16} color={Color.primaryDark}/>
+            </Button>
+        </Right>
     </View>);
 
     render() {
@@ -45,10 +86,23 @@ class Category extends Component {
             
             <View style={{flex:1, flexDirection: "column"}}>
                 <AnimatedHeaderScroll 
-                    RenderHeader = {this._renderHeader}
+                    RenderHeader = {this._renderHeader()}
                     TopImage = {topImage}
-                    TopText="For Him"
-                    ScrollViewContent = {this._renderScrollViewContent}
+                    TopText= {topText}
+                    ScrollViewContent = {
+                    <FlatList 
+                    numColumns={2}
+                    contentContainerStyle={{padding:5}}
+                    data={this.state.categoryProducts.sort((a, b) => a.displayOrder - b.displayOrder)}
+                    renderItem={({ item }) => (
+                        <Item
+                        onSelect={this.props.navigation.navigate}
+                        Item={item}
+                        />
+                    )}
+                    keyExtractor={(item) => item.id.toString()}
+                    />
+                    }
                 />
             </View>
         );

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Dimensions } from 'react-native';
 
 import Carousel from '../Carousel';
 import CategoryAPI from '../../services/CategoryAPI';
 
-
+import {CatalogHorizontal} from '../../components/ServerLoader';
+const width = Dimensions.get('window').width;
 export default class HomeTopCarousel extends Component {
 
   state = {
@@ -21,10 +22,16 @@ export default class HomeTopCarousel extends Component {
   }
 
   render() {
-    return (
-      <View>
-        <Carousel categoryNavigation={this.props.categoryNavigation} categories={this.state.featuredCategories} />
-      </View>
-    );
+    const {featuredCategories} = this.state;
+    
+    if(featuredCategories.length < 1){
+      return <CatalogHorizontal width={width} height={100} /> ;
+    }else{
+      return (
+        <View>
+          <Carousel categoryNavigation={this.props.categoryNavigation} categories={featuredCategories} />
+        </View>
+      );
+    }
   }
 }
