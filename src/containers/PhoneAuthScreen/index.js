@@ -143,11 +143,12 @@ class PhoneAuthScreen extends Component {
           lastSignInTime: user.metadata.lastSignInTime
         });
         
-        this.setState({isSigninInProgress:false});
-
         if(this.state.profileComplete){
           this.props.navigation.navigate("Home");
         }
+
+        this.setState({isSigninInProgress:false});
+
       }else{
         this.setState({isLoggedIn: false})
         this.setState({isSigninInProgress:false});

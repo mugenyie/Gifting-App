@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, ImageBackground, Image, Dimensions, TouchableOp
 import {Card, Container} from 'native-base';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Carousel from 'react-native-snap-carousel';
-
+import {priceFormat} from '../../helpers';
 import mainStyles from '../../common/mainStyles';
 
 const width = Dimensions.get('window').width;
@@ -26,7 +26,7 @@ const Item = ({index, imageSource, productName, productPrice, onSelect}) => {
                 </ImageBackground>
                 <View style={{padding:8}}>
                     <Text style={[mainStyles.ProductNameText,{fontWeight:'bold'}]}>{productName}</Text>
-                    <Text style={mainStyles.ProductPriceText}>Ushs. {productPrice}</Text>
+                    <Text style={mainStyles.ProductPriceText}>{priceFormat(productPrice)}</Text>
                 </View>
             </Card>
         </TouchableOpacity>

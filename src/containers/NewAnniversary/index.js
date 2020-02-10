@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Picker} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { Container, Header, Left, Body, Right, Button, Title, Content, Form, Item, Input, DatePicker} from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Title, Content, Form, Item, Input} from 'native-base';
 
 import Color from '../../common/Color';
 import mainStyle from '../../common/mainStyles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
+const days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
 
 // create a component
 class NewAnniversary extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { chosenDate: new Date() };
-        this.setDate = this.setDate.bind(this);
-      }
-      setDate(newDate) {
-        this.setState({ chosenDate: newDate });
-      }
+
+    state= {
+        AnniversaryTitle: "",
+        AnniversaryMonth: 0,
+        AnniversaryDay: 0
+    }
+
+    RenderDays = day => {
+        return(
+            <Picker.Item label={day.toString()} value={day} />
+        );
+    }
+
 
     render() {
 
@@ -29,51 +35,65 @@ class NewAnniversary extends Component {
                 </Button>
                 </Left>
                 <Body>
-                <Title style={[{color:Color.primaryDark},mainStyle.Heading2]}>New Birthday</Title>
+                <Title style={[{color:Color.primaryDark},mainStyle.Heading2]}>New Anniversary</Title>
                 </Body>
                 <Right>
-                <Button transparent>
-                    
-                </Button>
+
                 </Right>
             </Header>
             <Content style={{padding:20}}>
-                <Form>
-                <Item>
-                    <Icon style={{paddingRight:10}} name='user' size={22} color={Color.primaryDark}/>
-                    <Input placeholder='Name'/>
-                </Item>
 
-                <Item style={{marginTop:20}}>
-                    <Icon style={{paddingRight:10}} name='phone' size={22} color={Color.primaryDark}/>
-                    <Input placeholder='Tel.'/>
-                    <Icon name='contacts' size={22} color={Color.primaryDark}/>
-                </Item>
+            <Text style={[styles.inputlabel,mainStyle.Heading1,{marginBottom:5,fontSize:20}]}>Title</Text>
+            <TextInput
+            style={{borderRadius:8,fontSize:16,color:'#555',elevation:1}}
+            value={this.state.AnniversaryTitle}
+            onChangeText={AnniversaryTitle => {
+                this.setState({ AnniversaryTitle })
+            }}/>
 
-                <Item style={{marginTop:20}}>
-                    <DatePicker
-                    defaultDate={Date.now()}
-                    minimumDate={new Date(1900, 1, 1)}
-                    locale={"en"}
-                    timeZoneOffsetInMinutes={undefined}
-                    modalTransparent={false}
-                    animationType={"fade"}
-                    androidMode={"default"}
-                    placeHolderText="Select birthday"
-                    textStyle={{ color: Color.primaryDark }}
-                    placeHolderTextStyle={{ color: "#d3d3d3" }}
-                    onDateChange={this.setDate}
-                    disabled={false}
-                    />
-                    <Text>
-                    Date: {this.state.chosenDate.toString().substr(4, 12)}
-                    </Text>
-                </Item>
+            <View style={{flex:1,flexDirection:'row', marginTop:20, marginBottom:40}}>
+                <View style={{flex:0.5,borderBottomWidth:1,borderBottomColor:'#ccc', marginRight:10}}>
+                    <Picker
+                    selectedValue={this.state.AnniversaryMonth}
+                    style={{height: 50}}
+                    onValueChange={(AnniversaryMonth, itemIndex) =>
+                        this.setState({AnniversaryMonth})
+                    }>
+                        <Picker.Item label="Month" value={0} />
+                        <Picker.Item label="JANUARY" value={1} />
+                        <Picker.Item label="FEBRUARY" value={2} />
+                        <Picker.Item label="MARCH" value={3} />
+                        <Picker.Item label="APRIL" value={4} />
+                        <Picker.Item label="MAY" value={5} />
+                        <Picker.Item label="JUNE" value={6} />
+                        <Picker.Item label="JULY" value={7} />
+                        <Picker.Item label="AUGUST" value={8} />
+                        <Picker.Item label="SEPTEMBER" value={9} />
+                        <Picker.Item label="OCTOBER" value={10} />
+                        <Picker.Item label="NOVEMBER" value={11} />
+                        <Picker.Item label="DECEMBER" value={12} />
+                    </Picker> 
+                </View>  
 
-                <Button onPress={() => alert("Added")} style={{backgroundColor:Color.YellowBackground,justifyContent:'center',marginTop:20,borderRadius:2,borderColor:"#ccc",borderWidth:0.3}}>
-                    <Text style={mainStyle.Heading3}>Add</Text>
-                </Button>
-                </Form>
+                <View style={{flex:0.5,borderBottomWidth:1,borderBottomColor:'#ccc'}}>
+                    <Picker
+                    selectedValue={this.state.AnniversaryDay}
+                    style={{height: 50}}
+                    onValueChange={(AnniversaryDay, itemIndex) =>
+                        this.setState({AnniversaryDay})
+                    }>
+                        <Picker.Item label="Day" value={0} />
+                        {days.map(this.RenderDays)}
+                    </Picker>
+                </View>
+            </View>
+
+            <Button
+            style={{backgroundColor:Color.primaryDark,elevation:2,alignContent:'center',justifyContent:'center'}}
+            >
+                <Text style={[mainStyle.Heading2,{fontSize:18,color:'#fff',textAlign:'center'}]}>SAVE DATE</Text>
+            </Button>
+
             </Content>
             </Container>
         );

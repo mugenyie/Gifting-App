@@ -1,9 +1,11 @@
 import ApiClient from './ApiClient';
 
-const Url = "/v1/Orders";
+var API = new ApiClient();
 
 const OrdersAPI = {
-    Create: "",
+    Create: async (orderPayload) => {
+        return await API.post('/v1/Orders',orderPayload);
+    },
     OrderHistory: "",
     GetDetail: ""
 }

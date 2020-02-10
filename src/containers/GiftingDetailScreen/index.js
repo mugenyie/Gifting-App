@@ -4,9 +4,13 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { connect } from 'react-redux';
 import { Container, Header, Left, Body, Right, Button, Title, Footer, FooterTab, Content } from 'native-base';
 
+import {priceFormat} from '../../helpers';
+import Config from '../../common/Config';
+import ConstantsAPI from '../../services/ConstantsAPI';
+import OrdersAPI from '../../services/OrdersAPI';
+
 import {RaveWebView} from '../../components/RaveCheckout';
 import { GetUserData } from '../../services/UserAuthManager';
-import Config from '../../common/Config';
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
 
@@ -15,14 +19,16 @@ import mainStyles from '../../common/mainStyles';
 class GiftingDetailScreen extends Component {
     
     state = {
+        ravePublicKey: "",
         amount: 0,
+        productIds:[],
         user: null,
         displayName: "",
         email: "",
         phone: "",
         giftBox: null,
         giftBoxMeta: "",
-        productCustomisation: "",
+        additionalInstruction: "",
         giftMessage: "",
         fromName: "",
         recipientName: "",
@@ -39,24 +45,32 @@ class GiftingDetailScreen extends Component {
                 // Lock out the user
             }
         })
-        .catch(error => {
-            alert(error);
-        });
+        .catch(error => alert(error));
+
+        ConstantsAPI.GetConstant(Config.RavePublicKey)
+        .then(data => {
+            const ravePublicKey = data.body;
+            this.setState({ravePublicKey});
+        })
+        .catch(error => console.log(error))
 
         this.setState({
             giftBox: this.props.giftBoxItems,
-            giftBoxMeta: this._getProduct(this.props.giftBoxItems),
+            giftBoxMeta: "-"+this._getProductIds(this.props.giftBoxItems).toString()+"-",
+            productIds: this._getProductIds(this.props.giftBoxItems),
             amount: this._sumTotal(this.props.giftBoxItems)
         })
-        
     }
 
-
-    onSuccess(data) {
-    alert("Payment Success");
-    // You get the complete response returned from FlutterWave,
-    // just incase you need more than the reference number
-
+    createOrder = (OrderPayLoad) =>{
+        OrdersAPI.Create(OrderPayLoad)
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => console.log(error))
+        this.state = null;
+        this.props.clearCart;
+        this.props.navigation.navigate("OrderSuccess");
     }
 
     onCancel() {
@@ -84,13 +98,13 @@ class GiftingDetailScreen extends Component {
         return sum;
     }
 
-    _getProduct = (items) => {
-        let productString = "";
+    _getProductIds = (items) => {
+        let productIds = [];
         for(var i =0; i < this.props.giftBoxItems.length; i++) {
             var item = items[i];
-            productString = productString + item.id + " , ";
+            productIds.push(item.id);
         }
-        return productString;
+        return productIds;
     }
 
     render() {
@@ -117,19 +131,12 @@ class GiftingDetailScreen extends Component {
                 >
                 <View style={{marginLeft:10,marginRight:10, marginTop:20, marginBottom:50}}>
 
-                    <Text style={[styles.inputlabel,{marginBottom:5,fontSize:20}]}>Gift Customisation Instruction</Text>
-                    <TextInput
-                    style={{borderWidth:1,borderColor:"#CCC", borderRadius:4,fontSize:16,
-                    color:'#555'}}
-                    multiline={true}
-                    numberOfLines={2}
-                    value={this.state.productCustomisation}
-                    onChangeText={productCustomisation => {
-                        this.setState({ productCustomisation })
-                    }}/>
-
-
-                    <Text style={[styles.inputlabel,{marginBottom:5,fontSize:20}]}>Gift Message</Text>
+                    <Text style={[styles.inputlabel,{marginBottom:5,fontSize:20}]}>
+                        <Text>Gift Message </Text>
+                        <Text style={[mainStyles.TextRegular,{fontSize:14,marginBottom:10,marginTop:5}]}>
+                            {"\n"}(Gift note to the recipient)
+                        </Text>
+                    </Text>
                     <TextInput
                     style={{borderWidth:1,borderColor:"#CCC", borderRadius:4,fontSize:16,
                     color:'#555'}}
@@ -139,9 +146,18 @@ class GiftingDetailScreen extends Component {
                     onChangeText={giftMessage => {
                         this.setState({ giftMessage })
                     }}/>
-                    <Text style={[mainStyles.TextRegular,{fontSize:14,marginBottom:10,marginTop:5}]}>
-                        The message will be written on the gift note to the recipient
-                    </Text>
+                    
+
+                    <Text style={[styles.inputlabel,{marginBottom:5,fontSize:20}]}>Any Additional Instruction</Text>
+                    <TextInput
+                    style={{borderWidth:1,borderColor:"#CCC", borderRadius:4,fontSize:16,
+                    color:'#555'}}
+                    multiline={true}
+                    numberOfLines={2}
+                    value={this.state.additionalInstruction}
+                    onChangeText={additionalInstruction => {
+                        this.setState({ additionalInstruction })
+                    }}/>
 
                     <Text style={styles.inputlabel}>
                         <Text>From </Text>
@@ -199,18 +215,18 @@ class GiftingDetailScreen extends Component {
                         <View style={{flex:1,flexDirection:'row', paddingTop:10,marginBottom:10}}>
                             <Text>
                                 <Text style={[mainStyles.Heading2Light,{fontSize:16}]}>Total: </Text>
-                                <Text style={[mainStyles.Heading2Light,{fontSize:16}]}> UShs. {this.state.amount}</Text>
+                                <Text style={[mainStyles.Heading2Light,{fontSize:16}]}>{priceFormat(this.state.amount)}</Text>
                             </Text>
                         </View>
                         <View style={{flex:1,flexDirection:'row'}}>
                             <RaveWebView
                             buttonText="SECURE CHECKOUT"
-                            raveKey={Config.RavePublicKey}
+                            raveKey={this.state.ravePublicKey}
                             amount={this.state.amount}
                             customerEmail={this.state.email}
                             customerPhone={this.state.phone}
                             giftBoxMeta={this.state.giftBoxMeta}
-                            productCustomisation = {this.state.productCustomisation}
+                            additionalInstruction = {this.state.additionalInstruction}
                             giftMessage = {this.state.giftMessage}
                             fromName = {this.state.displayName}
                             recipientName = {this.state.recipientName}
@@ -218,7 +234,18 @@ class GiftingDetailScreen extends Component {
                             recipientAddress = {this.state.recipientAddress}
                             ActivityIndicatorColor={Color.primaryDark}
                             onCancel={this.onCancel}
-                            onSuccess={this.onSuccess}
+                            onSuccess={() => this.createOrder({
+                                productIds: this.state.productIds,
+                                customerId: 1,
+                                amountPaid: this.state.amount,
+                                giftMessage: this.state.giftMessage,
+                                additionalInstruction: this.state.additionalInstruction,
+                                senderName: this.state.fromName,
+                                recipientName: this.state.recipientName,
+                                recipientContact: this.state.recipientContact,
+                                recipientDeliveryAddress: this.state.recipientAddress,
+                                orderMetaData: ""
+                            })}
                             onError={() => { alert('something went wrong') }}
                             btnStyles={{backgroundColor:Color.primaryDark,width:'100%', height:45,borderRadius:4,elevation:4}}
                             textStyles={[mainStyles.Heading3,{color:'#FFF', textAlign:'center', fontSize: 15,padding:15}]}
@@ -261,5 +288,11 @@ const mapStateToProps = (state) => {
     }
 }
 
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        clearCart: () => dispatch({type:'CLEAR_CART'})
+    }
+}
+
 //make this component available to the app
-export default connect(mapStateToProps)(GiftingDetailScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(GiftingDetailScreen);

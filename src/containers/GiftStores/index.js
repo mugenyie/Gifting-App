@@ -8,8 +8,6 @@ import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
 import SectionTitle from '../../components/SectionTitle';
 
-import {featuredVendors} from '../../Data';
-
 // create a component
 class GiftStores extends Component {
     render() {

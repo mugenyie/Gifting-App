@@ -1,5 +1,5 @@
 import {createStore} from 'redux';
-import giftBoxitems from '../reducers/giftBoxItems';
+import giftBoxItems from '../reducers/giftBoxItems';
 
 
-export default store = createStore(giftBoxitems);
+export default store = createStore(giftBoxItems);

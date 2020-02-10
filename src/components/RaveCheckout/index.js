@@ -41,8 +41,8 @@ export const RaveWebView = props => {
                       metavalue: "${props.giftBoxMeta}",
                     },
                     {
-                      metaname: "productCustomisation",
-                      metavalue: "${props.productCustomisation}",
+                      metaname: "additionalInstruction",
+                      metavalue: "${props.additionalInstruction}",
                     },
                     {
                       metaname: "giftMessage",

@@ -19,6 +19,7 @@ import GiftBoxScreen from './src/containers/GiftBoxScreen';
 import SavedScreen from './src/containers/SavedScreen';
 import ProfileScreen from './src/containers/ProfileScreen';
 
+import OrderSuccess from './src/containers/OrderSuccess';
 import GiftingDetailScreen from './src/containers/GiftingDetailScreen';
 import Anniversaries from './src/containers/Anniversaries';
 import OrderHistory from './src/containers/OrderHistory';
@@ -157,5 +158,8 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       navigationOptions: {
         header: null,
       }
+    },
+    OrderSuccess:{
+      screen: OrderSuccess
     }
   }));

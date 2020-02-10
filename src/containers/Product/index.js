@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import { Container, Header, Left, Body, Right, Button, Title, Text, Footer, FooterTab } from 'native-base';
 
+import {priceFormat} from '../../helpers';
 import ProductAPI from '../../services/ProductAPI';
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
@@ -34,7 +35,7 @@ class Product extends Component {
             const productDetail = data.body;
 
             this.setState({
-                radio_props: [{label: productDetail.name + `- ${productDetail.price}`, value: productDetail.price}],
+                radio_props: [{label: productDetail.name + ` - ${priceFormat(productDetail.price)}`, value: productDetail.price}],
             });
 
             var optionsList = productDetail.productOptions;
@@ -43,7 +44,7 @@ class Product extends Component {
                 var newOptionsList = [];
 
                 optionsList.forEach(option => {
-                    newOptionsList.push({label: option.name + ` - ${option.price}`, value: option.price})
+                    newOptionsList.push({label: option.name + ` - ${priceFormat(option.price)}`, value: option.price})
                 });
                 
                 this.setState({radio_props:newOptionsList})
@@ -71,7 +72,7 @@ class Product extends Component {
       _renderFooter  = (productDetail) =>(<Footer style={{height:80}}>
                         <FooterTab style={{backgroundColor:'#FFF',borderTopColor:"#CCC",borderTopWidth:0.3,elevation:4}}>
                             <Button transparent>
-      <Text style={[mainStyles.ProductPriceText,{fontSize:16, color:Color.primaryDark}]}>UGX {productDetail.price}</Text>
+      <Text style={[mainStyles.ProductPriceText,{fontSize:16, color:Color.primaryDark}]}>{priceFormat(productDetail.price)}</Text>
                             <Text style={[mainStyles.IconText,{fontSize:8,textAlignVertical:'center',letterSpacing:2}]}>Happy gifting <Icon color={Color.primaryDark} size={10} style={styles.footerIcon} name="gift" /></Text>
                             </Button>
                             <Button 
@@ -95,7 +96,7 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
                                     <View style={{paddingLeft:20,paddingRight:20, flexDirection: 'row'}}>
                                         <View style={{flexDirection:'column'}}>
                                             <Text style={[mainStyles.Heading2,{paddingBottom:4}]}>{productDetail.name}</Text>
-<Text style={[mainStyles.ProductPriceText,{fontSize:16, paddingBottom:4}]}>UGX {productDetail.price}</Text>
+                                            <Text style={[mainStyles.ProductPriceText,{fontSize:16, paddingBottom:4}]}>{priceFormat(productDetail.price)}</Text>
                                         </View>
                                     </View>
                                     <View style={{marginLeft: 10, marginRight: 10}}>
@@ -164,7 +165,7 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
                                             marginTop:20,
                                         }}
                                         />
-
+                                        
                                         <Text style={[mainStyles.Heading3,{marginBottom:10}]}>You may also like</Text>
                                     </View>
 

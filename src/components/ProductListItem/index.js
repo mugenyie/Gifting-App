@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
 import {Card} from 'native-base';
+import {priceFormat} from '../../helpers';
 
 import mainStyles from '../../common/mainStyles';
 
@@ -33,7 +34,7 @@ class ProductListItem extends Component {
                 </Card>
                 <View style={{paddingTop:4}}>
                     <Text style={[mainStyles.ProductNameText,{fontWeight:'bold'}]}>{product.name}</Text>
-                    <Text style={mainStyles.ProductPriceText}>Ushs. {product.price}</Text>
+                    <Text style={mainStyles.ProductPriceText}>{priceFormat(product.price)}</Text>
                 </View>
             </TouchableOpacity>
         );

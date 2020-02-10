@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Entypo';
 import { Container, Header, Left, Body, Right, Button, Title, Footer, FooterTab, Content } from 'native-base';
 
+import {priceFormat} from '../../helpers';
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
 import { connect } from 'react-redux';
@@ -92,7 +93,7 @@ class GiftBoxScreen extends Component {
                                 <View style={{flex:1,flexDirection:'row', paddingTop:10,marginBottom:10}}>
                                     <Text>
                                         <Text style={[mainStyles.Heading2Light,{fontSize:16}]}>Total: </Text>
-                                        <Text style={[mainStyles.Heading2Light,{fontSize:16}]}> UShs. {this._sumTotal(this.props.giftBoxItems)}</Text>
+                                        <Text style={[mainStyles.Heading2Light,{fontSize:16}]}>{priceFormat(this._sumTotal(this.props.giftBoxItems))}</Text>
                                     </Text>
                                 </View>
                                 <View style={{flex:1,flexDirection:'row'}}>

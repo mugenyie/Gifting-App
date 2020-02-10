@@ -38,7 +38,6 @@ class Loading extends Component {
 
       render() {
         return (
-            // <SignInWithGoogle />
             <View style={styles.container}>
             <Animatable.View 
                 animation="pulse" 

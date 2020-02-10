@@ -1,6 +1,5 @@
 //import liraries
 import React, { Component } from 'react';
-
 import { GetUserData } from '../../services/UserAuthManager';
 import HomeInitialScreen from '../HomeLandingScreen';
 
