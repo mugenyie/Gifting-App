@@ -238,7 +238,7 @@ class PhoneAuthScreen extends Component {
 
   renderLoggedInView = () => {
     return (
-      <View style={{marginLeft:10,marginRight:10}}>
+      <View style={{paddingLeft:10,paddingRight:10}}>
         <Text style={[mainStyles.Heading2Light,{textAlign:'center'}]}>
           Your account is almost set up, a few more details to get you started
         </Text>

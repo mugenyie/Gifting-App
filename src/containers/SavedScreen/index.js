@@ -11,11 +11,6 @@ class SavedScreen extends Component {
     render() {
         return (
             <Container>
-            <Header style={{backgroundColor:"#fff",paddingLeft:20,paddingBottom:4,paddingTop:2,height:50}}>
-                <Body>
-                <Title style={[{color:Color.primaryDark},mainStyle.Heading2]}>Saved</Title>
-                </Body>
-            </Header>
             <Content />
             </Container>
         );

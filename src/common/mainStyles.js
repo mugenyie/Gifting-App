@@ -3,7 +3,7 @@ import Color from './Color';
 
 const mainStyles = StyleSheet.create({
     Heading1:{
-        fontSize:22, fontFamily:'Montserrat-Regular'
+        fontSize:22, fontFamily:'Montserrat-Regular',
     },
     Heading2: {
         fontSize:20, fontFamily:'Montserrat-Regular',
