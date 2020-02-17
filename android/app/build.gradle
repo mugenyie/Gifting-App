@@ -137,8 +137,8 @@ android {
         applicationId "com.giftsery"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
-        versionName "1.1.1-beta"
+        versionCode 7
+        versionName "1.1.4-beta"
     }
     splits {
         abi {
@@ -156,12 +156,10 @@ android {
             keyPassword 'android'
         }
         release {
-            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
-                storeFile file(MYAPP_UPLOAD_STORE_FILE)
-                storePassword MYAPP_UPLOAD_STORE_PASSWORD
-                keyAlias MYAPP_UPLOAD_KEY_ALIAS
-                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
-            }
+            storeFile file('my-upload-key.keystore')
+            storePassword 'Giftsery1*'
+            keyAlias 'my-key-alias'
+            keyPassword 'Giftsery1!'
         }
     }
     buildTypes {
@@ -195,6 +193,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:0.20.1"  // From node_modules
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
     implementation 'com.google.firebase:firebase-core:17.2.1'
