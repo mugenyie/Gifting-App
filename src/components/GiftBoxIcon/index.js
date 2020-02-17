@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 class GiftBoxIcon extends Component {
     render() {
         return (
-            <IconWithBadge color={"#5a6c40"} name={"gift"} size={25} badgeCount={this.props.giftBoxItems.length} />
+            <IconWithBadge color={"#b7b7b7"} name={"gift"} size={25} badgeCount={this.props.giftBoxItems.length} />
         );
     }
 }

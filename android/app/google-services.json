@@ -15,19 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "746561284495-e5j0v19t530ur4u28b5odo9k8uv3pvtm.apps.googleusercontent.com",
+          "client_id": "746561284495-si9j3rop0u14oqh365po2sbj4j9afhpd.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.giftsery",
             "certificate_hash": "6d45a33ff71d898a1fe207f0809ef80adeb0d815"
-          }
-        },
-        {
-          "client_id": "746561284495-1pner5on4rfvsi04udtme4anfis7g8qr.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.giftsery",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
           }
         },
         {
@@ -44,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "746561284495-trbma841hh9obhisj12vq9ut5ksmhq16.apps.googleusercontent.com",
+              "client_id": "746561284495-9n9eealusr6j7624dj0uab9ti3ts7i0l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
