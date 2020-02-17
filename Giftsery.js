@@ -30,7 +30,6 @@ import EditProfile from './src/containers/EditProfile';
 
 import GiftBoxIcon from './src/components/GiftBoxIcon';
 import Color from './src/common/Color';
-import MainStyles from './src/common/mainStyles';
 import NewAnniversary from './src/containers/NewAnniversary';
 
 
@@ -65,25 +64,20 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
     iconName = 'user';
   }
 
-  return <IconComponent name={iconName} size={26} color={tintColor} />;
+  return <IconComponent name={iconName} size={25} color={tintColor} />;
 };
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Home: Main,
-    Explore: ExploreScreen,
+    Home: { screen: Main },
+    Explore: { screen: ExploreScreen },
     GiftBox: {
       screen: GiftBoxScreen,
       navigationOptions: {
         tabBarVisible: false,
       }
     },
-    Saved: {
-      screen: SavedScreen,
-      navigationOptions:{
-        title:"Saved"
-      }
-    },
+    Saved: {screen: SavedScreen},
     Profile: {screen: ProfileScreen}
   },
   {
@@ -92,28 +86,17 @@ const TabNavigator = createBottomTabNavigator(
         getTabBarIcon(navigation, focused, tintColor),
     }),
     tabBarOptions: {
-      showLabel: true,
-      labelStyle: {textTransform:'uppercase',fontFamily:'OpenSans-Regular', fontWeight:'bold',fontSize:10},
+      showLabel: false,
       activeTintColor: Color.primaryDark,
-      inactiveTintColor: Color.Grey,
+      inactiveTintColor: '#5a6c40',
     },
   }
 );
 
 const RootNavigator = createSwitchNavigator(
   {
-    Loading : {
-      screen:Loading,
-      navigationOptions:{
-        headerShown:false
-      }
-    },
-    PhoneAuthScreen : {
-      screen:Loading,
-      navigationOptions:{
-        headerShown:false
-      }
-    },
+    Loading,
+    PhoneAuthScreen,
     Main: {screen: TabNavigator}
   },
   {
@@ -121,64 +104,62 @@ const RootNavigator = createSwitchNavigator(
   }
 );
 
-const StackNavigator = createStackNavigator({
-  AppEntry: {
-    screen: RootNavigator,
-    navigationOptions: {
-      headerShown: false
+const AppStackNavigator = createAppContainer(createStackNavigator({
+    AppEntry: {
+      screen: RootNavigator,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    Product: {
+      screen: Product,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    Category: {
+      screen: Category,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    NewAnniversary: {
+      screen: NewAnniversary,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    GiftingDetail: {
+      screen: GiftingDetailScreen,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    GiftStores: {
+      screen: GiftStores,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    Anniversaries:{
+      screen: Anniversaries,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    OrderHistory:{
+      screen: OrderHistory,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    EditProfile: {
+      screen: EditProfile,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    OrderSuccess:{
+      screen: OrderSuccess
     }
-  },
-  Product: {
-    screen: Product,
-    navigationOptions: {
-      headerShown: false
-    }
-  },
-  Category: {
-    screen: Category,
-    navigationOptions: {
-      headerShown: false
-    }
-  },
-  NewAnniversary: {
-    screen: NewAnniversary,
-    navigationOptions: {
-      header: false,
-    }
-  },
-  GiftingDetail: {
-    screen: GiftingDetailScreen,
-    navigationOptions: {
-      headerShown: false
-    }
-  },
-  GiftStores: {
-    screen: GiftStores,
-    navigationOptions: {
-      headerShown: false
-    }
-  },
-  Anniversaries:{
-    screen: Anniversaries,
-    navigationOptions: {
-      headerShown: false
-    }
-  },
-  OrderHistory:{
-    screen: OrderHistory,
-    navigationOptions: {
-      headerShown: false
-    }
-  },
-  EditProfile: {
-    screen: EditProfile,
-    navigationOptions: {
-      headerShown: false
-    }
-  },
-  OrderSuccess:{
-    screen: OrderSuccess
-  }
-});
-
-const AppStackNavigator = createAppContainer(StackNavigator);
+  }));

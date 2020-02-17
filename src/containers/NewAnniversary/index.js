@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, Picker} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Container, Header, Left, Body, Right, Button, Title, Content, Form, Item, Input} from 'native-base';
-import AnniversaryAPI from '../../services/AnniversaryAPI';
 
 import Color from '../../common/Color';
 import mainStyle from '../../common/mainStyles';
@@ -16,10 +15,6 @@ class NewAnniversary extends Component {
         AnniversaryTitle: "",
         AnniversaryMonth: 0,
         AnniversaryDay: 0
-    }
-
-    componentDidMount(){
-        
     }
 
     RenderDays = day => {

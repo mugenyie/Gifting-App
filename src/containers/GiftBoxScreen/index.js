@@ -55,6 +55,19 @@ class GiftBoxScreen extends Component {
         const {giftBoxItems, giftBoxEmpty} = this.props;
         return (
             <Container style={{flex:1}}>
+            <Header style={{backgroundColor:"#fff",paddingBottom:4,paddingTop:2,height:50}}>
+                <Left>
+                    <Button onPress={() => this.props.navigation.navigate("Home")} transparent>
+                        <Icon name='close' size={22} color={Color.primaryDark}/>
+                    </Button>
+                </Left>
+                <Body>
+                    <Title style={[{color:Color.primaryDark},mainStyles.Heading2]}>GiftBox</Title>
+                </Body>
+                <Right>
+
+                </Right>
+            </Header>
 
 
             {

@@ -1,6 +1,6 @@
 export default {
-  primaryDark: "#b55758",
-  LightRose: "#c98586",
-  Grey: "#a7a7a7",
+  primaryDark: "#15344e",
+  YellowBackground:"#fff226",
+  YellowText:"#b8ad00",
   WhiteOpacity:'rgba(255,255,255, 0.6)'
 }

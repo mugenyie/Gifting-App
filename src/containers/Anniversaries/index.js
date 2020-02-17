@@ -2,40 +2,39 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, SafeAreaView, SectionList, ScrollView, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Container, Header, Left, Body, Right, Button, Title} from 'native-base';
-import AnniversaryAPI from '../../services/AnniversaryAPI';
 
 import Color from '../../common/Color';
 import mainStyle from '../../common/mainStyles';
 
+const DATA = [
+    {
+      Month: 'JANUARY',
+      data: [{id: 1,title:"Mary's birthday",day:25},{id: 2,title:"Mary's birthday",day:25}]
+    },
+    {
+        Month: 'FEBRUARY',
+        data: [{id: 1,title:"Mary's birthday",day:25},{id: 2,title:"Mary's birthday",day:25}]
+    },
+    {
+        Month: 'MARH',
+        data: [{id: 1,title:"Mary's birthday",day:25},{id: 2,title:"Mary's birthday",day:25}]
+    },
+    {
+        Month: 'APRIL',
+        data: [{id: 1,title:"Mary's birthday",day:25},{id: 2,title:"Mary's birthday",day:25}]
+    },
+  ];
+
   function Item({ title, day }) {
     return (
       <TouchableOpacity style={[styles.item,{flexDirection:'row',flex:1}]}>
-            <View style={{flex:0.8,paddingRight:20}}>
-                <Text style={[mainStyle.Heading1Light,styles.title]}>{title}</Text>
-            </View>
-            <Text style={[mainStyle.TextRegular,styles.day,{flex:0.2,alignContent:'flex-end'}]}>{day}</Text>
+            <Text style={[mainStyle.Heading1Light,styles.title,{flex:0.8}]}>{title}</Text>
+            <Text style={[mainStyle.TextRegular,styles.day,{flex:0.2}]}>{day}</Text>
       </TouchableOpacity>
     );
   }
 // create a component
 class Anniversaries extends Component {
-
-    state = {
-        AnniversaryData : []
-    }
-
-    componentDidMount(){
-        let customerid = 1;
-
-        AnniversaryAPI.GetByCustomer(customerid)
-        .then(data => {
-            const AnniversaryData = data.body;
-            console.log(AnniversaryData);
-            this.setState({AnniversaryData});
-        })
-        .catch(err => alert(err))
-    }
-
     _renderNoAnniversary = () => {
         return(
             <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
@@ -49,7 +48,7 @@ class Anniversaries extends Component {
         );
     }
 
-    _renderAnniversaries = (AnniversaryData) => {
+    _renderAnniversaries = () => {
         return (
             <ScrollView 
             showsVerticalScrollIndicator={false}
@@ -61,11 +60,11 @@ class Anniversaries extends Component {
             }}>
                 <SectionList
                 showsVerticalScrollIndicator={false}
-                sections={AnniversaryData}
+                sections={DATA}
                 keyExtractor={(item, index) => item + index}
                 renderItem={({ item }) => <Item title={item.title} day={item.day} />}
-                renderSectionHeader={({ section: { month } }) => (
-                    <Text style={[styles.header,mainStyle.Heading1]}>{month}</Text>
+                renderSectionHeader={({ section: { Month } }) => (
+                    <Text style={[styles.header,mainStyle.Heading1]}>{Month}</Text>
                 )}
                 />
             </ScrollView>
@@ -73,7 +72,6 @@ class Anniversaries extends Component {
     }
 
     render() {
-        const {AnniversaryData} = this.state;
 
         return (
             <Container
@@ -92,9 +90,8 @@ class Anniversaries extends Component {
                 
                 </Right>
             </Header>
-            {
-                AnniversaryData.length == 0 ? this._renderNoAnniversary() : this._renderAnniversaries(AnniversaryData)
-            }
+            
+            {this._renderAnniversaries()}
             </Container>
         );
     }

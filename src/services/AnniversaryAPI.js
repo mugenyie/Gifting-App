@@ -1,19 +1,14 @@
 import ApiClient from './ApiClient';
 
-var API = new ApiClient();
+
+const url = "​/v1​/Anniversary";
 
 const AnniversaryAPI = {
-    Create: async (anniversaryPayload) => {
-        return await API.post('/v1/Anniversary',anniversaryPayload);
-    },
+    Create: "",
     Update: "",
-    GetByCustomer: async (customerId) => {
-        return await API.get(`/v1/Anniversary/${customerId}`);
-    },
+    GetByCustomer: "",
     Delete: "",
-    GetDetail: async () => {
-        return await API.get();
-    }
+    GetDetail: ""
 }
 
 //make this component available to the app
