@@ -1,5 +1,5 @@
 //import liraries
-import {Image, Text, Dimensions} from 'react-native';
+import {Image, Text, Dimensions, TouchableOpacity, Platform} from 'react-native';
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/AntDesign';
@@ -19,31 +19,26 @@ class HomeHeader extends Component {
     render() {
 
         return (
-            <Header style={{backgroundColor:"#FFF",paddingTop:2,paddingBottom:4,height:50}}>
+            <Header 
+            androidStatusBarColor={Color.PrimaryDark} 
+            iosBarStyle="dark-content" 
+            style={{backgroundColor:Platform.OS=="android"?"#FFF":""}}>
                 <Left>
-                    <Button onPress={() => this.props.navigation.navigate("Anniversaries")} transparent>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate("Anniversaries")}>
                         <Icon color={Color.primaryDark} size={20} name="birthday-cake" />
-                    </Button>
+                    </TouchableOpacity>
                 </Left>
-                <Body style={{justifyContent:'center',alignItems:'center', paddingLeft:screenWidth * 0.2}}>
-                        <Image 
-                        source = {fullLogo}
-                        resizeMode = 'contain'
-                        style = {{height:24}}
-                        />
+                <Body>
+                    <Image 
+                    source = {fullLogo}
+                    resizeMode = 'contain'
+                    style = {{width:screenWidth*0.25,right:Platform.OS=="android"?-60:0}}
+                    />
                 </Body>
                 <Right>
-                    {/* <Button onPress={() => this.props.navigation.navigate("GiftStores")} transparent>
-                        <Icon2 name="isv" size={20} color={Color.primaryDark}/>
-                    </Button> 
-
-                    <Button onPress={() => this.props.navigation.navigate("OrderHistory")} transparent>
-                        <IconWithBadge badgeCount={0}  name="profile" size={20} color={Color.primaryDark}/>
-                    </Button>*/}
-                    <Button onPress={() => this.props.navigation.navigate("OrderHistory")} transparent>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate("OrderHistory")}>
                         <Icon3 name="list" size={22} color={Color.primaryDark}/>
-                    </Button> 
-                    
+                    </TouchableOpacity> 
                 </Right>
             </Header>
         );

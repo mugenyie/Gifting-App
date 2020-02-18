@@ -28,19 +28,6 @@ class NewAnniversary extends Component {
 
         return (
             <Container>
-            <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
-                <Left>
-                <Button onPress={() => this.props.navigation.goBack()} transparent>
-                    <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
-                </Button>
-                </Left>
-                <Body>
-                <Title style={[{color:Color.primaryDark},mainStyle.Heading2]}>New Anniversary</Title>
-                </Body>
-                <Right>
-
-                </Right>
-            </Header>
             <Content style={{padding:20}}>
 
             <Text style={[styles.inputlabel,mainStyle.Heading1,{marginBottom:5,fontSize:20}]}>Title</Text>

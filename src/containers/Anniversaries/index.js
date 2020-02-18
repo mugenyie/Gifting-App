@@ -77,20 +77,6 @@ class Anniversaries extends Component {
             <Container
             style={styles.container}
             >
-            <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
-                <Left>
-                    <Button onPress={() => this.props.navigation.goBack()} transparent>
-                        <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
-                    </Button>
-                </Left>
-                <Body style={{paddingLeft:10}}>
-                <Title style={[{color:Color.primaryDark},mainStyle.Heading2]}>Anniversaries</Title>
-                </Body>
-                <Right>
-                
-                </Right>
-            </Header>
-            
             {this._renderAnniversaries()}
             </Container>
         );

@@ -26,14 +26,11 @@ class ProductListItem extends Component {
                     imageStyle={styles.productBackgroundImage}
                     source={product.imageSource}
                     >
-                        {/* <View style={{top:4,right:4, alignItems:'flex-end'}}>
-                            <Icon name='heart' size={32} color="#15344e" />
-                        </View> */}
                     </ImageBackground>
                
                 </Card>
                 <View style={{paddingTop:4}}>
-                    <Text style={[mainStyles.ProductNameText,{fontWeight:'bold'}]}>{product.name}</Text>
+                    <Text style={[mainStyles.ProductNameText]}>{product.name}</Text>
                     <Text style={mainStyles.ProductPriceText}>{priceFormat(product.price)}</Text>
                 </View>
             </TouchableOpacity>

@@ -18,7 +18,7 @@ export default class IconWithBadge extends Component {
                 position: 'absolute',
                 right: -6,
                 top: -3,
-                backgroundColor: 'orange',
+                backgroundColor: Color.PrimaryDark,
                 borderRadius: 6,
                 width: 12,
                 height: 12,

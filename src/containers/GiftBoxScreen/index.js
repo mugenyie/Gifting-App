@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, ScrollView, TextInput} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, TextInput, TouchableOpacity} from 'react-native';
+import Icon1 from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Entypo';
 import { Container, Header, Left, Body, Right, Button, Title, Footer, FooterTab, Content } from 'native-base';
 
+import ButtonOutline from '../../components/ButtonOutline';
 import {priceFormat} from '../../helpers';
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
 import { connect } from 'react-redux';
-
+import SimpleHeader from '../../components/SimpleHeader';
 import GiftBoxItems from '../../components/GiftBoxItems';
 
 // create a component
@@ -26,12 +28,7 @@ class GiftBoxScreen extends Component {
         return (
             <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                 <Text style={mainStyles.Heading3}>Your GiftBox is empty</Text>
-                <Button onPress={() => this.props.navigation.goBack()} transparent 
-                style={{marginTop:20, width:150,justifyContent:"center",alignContent:"center", 
-                flexDirection:"row",borderColor:Color.primaryDark,borderWidth:0.5,borderRadius:2,padding:4}}>
-                    <Icon name='gift' size={18} color={Color.primaryDark}/>
-                    <Text style={[mainStyles.TextRegular,{paddingLeft:8}]}>Start shopping</Text>
-                </Button>
+                <ButtonOutline marginTop={20} title="Start Shopping" iconName="gift" onPress={()=>this.props.navigation.navigate("Home")} />
             </View>
         )
     }
@@ -55,21 +52,7 @@ class GiftBoxScreen extends Component {
         const {giftBoxItems, giftBoxEmpty} = this.props;
         return (
             <Container style={{flex:1}}>
-            <Header style={{backgroundColor:"#fff",paddingBottom:4,paddingTop:2,height:50}}>
-                <Left>
-                    <Button onPress={() => this.props.navigation.navigate("Home")} transparent>
-                        <Icon name='close' size={22} color={Color.primaryDark}/>
-                    </Button>
-                </Left>
-                <Body>
-                    <Title style={[{color:Color.primaryDark},mainStyles.Heading2]}>GiftBox</Title>
-                </Body>
-                <Right>
-
-                </Right>
-            </Header>
-
-
+            <SimpleHeader {...this.props} headerTitle="GiftBox"/>
             {
                 giftBoxItems.length > 0 ?
                 <ScrollView
@@ -103,7 +86,7 @@ class GiftBoxScreen extends Component {
                                     </Button>
 
                                     <Button onPress={() => this.props.navigation.navigate("GiftingDetail")} 
-                                    style={{backgroundColor:Color.primaryDark,paddingLeft:8,paddingRight:8,width:'50%',marginLeft:'2%', height:40}}>
+                                    style={{backgroundColor:Color.PrimaryDark,paddingLeft:8,paddingRight:8,width:'50%',marginLeft:'2%', height:40}}>
                                         <Text style={[mainStyles.Heading3,{color:'#FFF', textAlign:'center', fontSize: 14}]}>
                                             <Text>GIFTING DETAIL </Text>
                                             <Icon name="arrowright" size={16} color="#FFF" />

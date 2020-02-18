@@ -4,7 +4,7 @@ import { GetUserData } from '../../services/UserAuthManager';
 import HomeInitialScreen from '../HomeLandingScreen';
 
 // create a component
-class Main extends Component {
+class HomeScreen extends Component {
 
     state = { firstName: '', email: '', displayName: '', phone: '', userId: null }
 
@@ -37,4 +37,4 @@ class Main extends Component {
 }
   
 //make this component available to the app
-export default Main;
+export default HomeScreen;

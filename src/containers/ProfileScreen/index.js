@@ -59,10 +59,12 @@ class ProfileScreen extends Component {
         return (
             <Container style={{flex:1}}>
                 <Header style={{backgroundColor:"#fff",paddingLeft:20,paddingBottom:4,paddingTop:2,height:100}}>
-                    <Body>
-                        <Text style={mainStyles.Heading1}>{this.state.displayName}</Text>
-                        <Text style={[mainStyles.Heading3Light,{marginTop:5}]}>Joined in {this.state.creationTime}</Text>
-                    </Body>
+                    <Left>
+                        <Text style={{textAlign:"left"}}>
+                            <Text style={mainStyles.Heading1}>{this.state.displayName}</Text>
+                            <Text style={[mainStyles.Heading3Light,{marginTop:5}]}>Joined in {this.state.creationTime}</Text>
+                        </Text>
+                    </Left>
                 </Header>
 
                 <View style={styles.container}>

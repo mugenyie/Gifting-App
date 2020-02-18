@@ -109,20 +109,7 @@ class GiftingDetailScreen extends Component {
 
     render() {
         return (
-            <View style={{flex:1}}>
-                <Header style={{backgroundColor:"#fff",paddingBottom:4,paddingTop:2,height:50}}>
-                <Left>
-                    <Button onPress={() => this.props.navigation.goBack()} transparent>
-                        <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
-                    </Button>
-                </Left>
-                <Body>
-                    <Title style={[{color:Color.primaryDark},mainStyles.Heading2]}>Gifting Detail</Title>
-                </Body>
-                <Right>
-
-                </Right>
-            </Header>
+            <Container>
 
             <Content>
                 <ScrollView
@@ -232,7 +219,7 @@ class GiftingDetailScreen extends Component {
                             recipientName = {this.state.recipientName}
                             recipientContact = {this.state.recipientContact}
                             recipientAddress = {this.state.recipientAddress}
-                            ActivityIndicatorColor={Color.primaryDark}
+                            ActivityIndicatorColor={Color.PrimaryDark}
                             onCancel={this.onCancel}
                             onSuccess={() => this.createOrder({
                                 productIds: this.state.productIds,
@@ -247,7 +234,7 @@ class GiftingDetailScreen extends Component {
                                 orderMetaData: ""
                             })}
                             onError={() => { alert('something went wrong') }}
-                            btnStyles={{backgroundColor:Color.primaryDark,width:'100%', height:45,borderRadius:4,elevation:4}}
+                            btnStyles={{backgroundColor:Color.PrimaryDark,width:'100%', height:45,borderRadius:4}}
                             textStyles={[mainStyles.Heading3,{color:'#FFF', textAlign:'center', fontSize: 15,padding:15}]}
                             txref={this.uuidv4()}
                             />
@@ -255,7 +242,7 @@ class GiftingDetailScreen extends Component {
                     </View>
                 </FooterTab>
             </Footer>
-            </View>
+            </Container>
         );
     }
 }
@@ -276,7 +263,7 @@ const styles = StyleSheet.create({
     },
     inputlabel: {
         fontSize:15,
-        fontFamily:'OpenSans-Regular',
+        fontFamily:'Roboto-Regular',
         marginTop:20,
         color:'#333'
     }

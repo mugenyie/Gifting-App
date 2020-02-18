@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 import Loading from './src/containers/Loading';
 import PhoneAuthScreen from './src/containers/PhoneAuthScreen';
-import Main from './src/containers/Main';
+import HomeScreen from './src/containers/HomeScreen';
 
 import ExploreScreen from './src/containers/ExploreScreen';
 import GiftBoxScreen from './src/containers/GiftBoxScreen';
@@ -69,16 +69,16 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Home: { screen: Main },
-    Explore: { screen: ExploreScreen },
+    Home: HomeScreen,
+    Explore: ExploreScreen,
     GiftBox: {
       screen: GiftBoxScreen,
       navigationOptions: {
         tabBarVisible: false,
       }
     },
-    Saved: {screen: SavedScreen},
-    Profile: {screen: ProfileScreen}
+    Saved: SavedScreen,
+    Profile: ProfileScreen
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -86,29 +86,30 @@ const TabNavigator = createBottomTabNavigator(
         getTabBarIcon(navigation, focused, tintColor),
     }),
     tabBarOptions: {
-      showLabel: false,
-      activeTintColor: Color.primaryDark,
-      inactiveTintColor: '#5a6c40',
+      showLabel: true,
+      labelStyle:{textTransform:'uppercase',fontFamily:'Roboto-Regular',fontWeight:'bold',fontSize:10},
+      activeTintColor: Color.PrimaryDark,
+      inactiveTintColor: Color.Grey
     },
   }
 );
 
 const RootNavigator = createSwitchNavigator(
   {
-    Loading,
-    PhoneAuthScreen,
+    // Loading,
+    // PhoneAuthScreen,
     Main: {screen: TabNavigator}
   },
-  {
-    initialRouteName: 'Loading'
-  }
+  // {
+  //   initialRouteName: 'Loading'
+  // }
 );
 
 const AppStackNavigator = createAppContainer(createStackNavigator({
     AppEntry: {
       screen: RootNavigator,
       navigationOptions: {
-        header: null,
+        headerShown:false
       }
     },
     Product: {
@@ -126,13 +127,13 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
     NewAnniversary: {
       screen: NewAnniversary,
       navigationOptions: {
-        header: null,
+        title:"New Anniversary"
       }
     },
     GiftingDetail: {
       screen: GiftingDetailScreen,
       navigationOptions: {
-        header: null,
+        title:"Gifting Detail"
       }
     },
     GiftStores: {
@@ -144,13 +145,13 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
     Anniversaries:{
       screen: Anniversaries,
       navigationOptions: {
-        header: null,
+        title:"Anniversaries"
       }
     },
     OrderHistory:{
       screen: OrderHistory,
       navigationOptions: {
-        header: null,
+        title:"Order History"
       }
     },
     EditProfile: {
