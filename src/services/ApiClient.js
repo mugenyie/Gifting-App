@@ -50,11 +50,11 @@ class ApiClient {
               resolve({ statusCode: response.status, body });
             })
             .catch((error) => {
-              reject("Can not connect to server.");
+              //reject("Can not connect to server.");
             });
         })
         .catch((error) => {
-          reject("Can not connect to server.");
+          //reject("Can not connect to server.");
         });
     });
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View} from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import SearchBar from '../../components/SearchBar';
 import { Container, Header, Left, Body, Right, Button, Title, Content} from 'native-base';
 
 // create a component
@@ -13,11 +13,7 @@ class ExploreScreen extends Component {
         const { firstQuery } = this.state;
         return (
           <Container>
-            <Searchbar
-            placeholder="Search for a gift / shop"
-            onChangeText={query => { this.setState({ firstQuery: query }); }}
-            value={firstQuery}
-            />
+            <SearchBar />
             <Content />
           </Container>
         );

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {StyleSheet, View, ScrollView, TouchableOpacity, FlatList, Dimensions} from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {connect} from 'react-redux';
-
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import { Container, Header, Left, Body, Right, Button, Title, Text, Footer, FooterTab } from 'native-base';
 
@@ -58,22 +58,16 @@ class Product extends Component {
       _renderHeader = () => (<View style={{flexDirection:'row',alignItems:'stretch', backgroundColor:"transparent"}}>
                             <Left style={{paddingLeft:10}}>
                                 <Button onPress={() => this.props.navigation.goBack()} style={styles.headerIcon}>
-                                    <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
+                                    <Icon1 name='arrowleft' size={22}/>
                                 </Button>
                             </Left>
-
-                            <Right style={{paddingRight:10}}>
-                                <Button onPress={() => alert("you clicked me")} style={styles.headerIcon}>
-                                    <Icon2 name='ellipsis-v' size={16} color={Color.primaryDark}/>
-                                </Button>
-                            </Right>
                         </View>);
     
       _renderFooter  = (productDetail) =>(<Footer style={{height:80}}>
                         <FooterTab style={{backgroundColor:'#FFF',borderTopColor:"#CCC",borderTopWidth:0.3,elevation:4}}>
                             <Button transparent>
       <Text style={[mainStyles.ProductPriceText,{fontSize:16, color:Color.primaryDark}]}>{priceFormat(productDetail.price)}</Text>
-                            <Text style={[mainStyles.IconText,{fontSize:8,textAlignVertical:'center',letterSpacing:2}]}>Happy gifting <Icon color={Color.primaryDark} size={10} style={styles.footerIcon} name="gift" /></Text>
+                            <Text style={[mainStyles.IconText,{fontSize:8,textAlignVertical:'center',letterSpacing:2}]}>Happy gifting <Icon1 color={Color.PrimaryDark} size={10} style={styles.footerIcon} name="gift" /></Text>
                             </Button>
                             <Button 
                             onPress={() => {
@@ -85,7 +79,7 @@ class Product extends Component {
                                     vendor:{id:productDetail.vendor.id, name:productDetail.vendor.name}
                             }); 
                             this.props.navigation.navigate("GiftBox");} } 
-                            style={{borderRadius: 4, backgroundColor:Color.primaryDark, justifyContent:'center', alignItems: 'center', marginRight: 20}}
+                            style={{borderRadius: 4, backgroundColor:Color.PrimaryDark, justifyContent:'center', alignItems: 'center', marginRight: 20}}
                             >
                                 <Text style={[mainStyles.Heading3,{color:"#FFF", textAlign:'center', fontSize: 15}]}>Add to Giftbox</Text>
                             </Button>
@@ -135,7 +129,7 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
                                         <Text style={[mainStyles.Heading3,{marginBottom:20}]}>Product Options</Text>
 
                                         <RadioForm
-                                        labelStyle={[mainStyles.TextRegular,{fontSize:15,fontWeight:'bold'}]}
+                                        labelStyle={[mainStyles.TextRegular,{fontSize:15}]}
                                         radio_props={this.state.radio_props}
                                         initial={0}
                                         onPress={(value) => {this.setState({

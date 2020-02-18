@@ -24,22 +24,22 @@ const mainStyles = StyleSheet.create({
         fontSize:20, fontFamily:'Montserrat-Light'
     },
     TextRegular: {
-        fontSize:14,fontFamily:'OpenSans-Regular'
+        fontSize:14,fontFamily:'Roboto-Regular'
     },
     TextMinor: {
-        fontSize: 13,color:'#999',fontFamily:'OpenSans-Regular'
+        fontSize: 13,color:'#999',fontFamily:'Roboto-Regular'
     },
     TextCaption: {
-        fontSize:13,fontFamily:'OpenSans-Regular',fontWeight:'bold',color:Color.primaryDark
+        fontSize:13,fontFamily:'Roboto-Regular',fontWeight:'bold',color:Color.PrimaryDark
     },
     IconText: {
-        fontSize:8, fontFamily:'Montserrat-Regular',fontWeight:'bold',color:Color.primaryDark
+        fontSize:8, fontFamily:'Montserrat-Regular',fontWeight:'bold',color:Color.PrimaryDark
     },
     ProductNameText: {
-        fontSize:13, fontFamily:'OpenSans-Regular'
+        fontSize:13, fontFamily:'Roboto-Regular'
     },
     ProductPriceText: {
-        fontSize:13, fontFamily:'OpenSans-Light',fontWeight:'bold',color:Color.YellowText
+        fontSize:13, fontFamily:'Roboto-Regular',fontWeight:'bold',color:Color.PrimaryDark
     }
 });
 
