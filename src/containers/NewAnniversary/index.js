@@ -76,7 +76,7 @@ class NewAnniversary extends Component {
             </View>
 
             <Button
-            style={{backgroundColor:Color.primaryDark,elevation:2,alignContent:'center',justifyContent:'center'}}
+            style={{backgroundColor:Color.PrimaryDark,elevation:2,alignContent:'center',justifyContent:'center'}}
             >
                 <Text style={[mainStyle.Heading2,{fontSize:18,color:'#fff',textAlign:'center'}]}>SAVE DATE</Text>
             </Button>

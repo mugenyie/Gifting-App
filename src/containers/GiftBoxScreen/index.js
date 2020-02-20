@@ -81,7 +81,7 @@ class GiftBoxScreen extends Component {
                                 </View>
                                 <View style={{flex:1,flexDirection:'row'}}>
                                     <Button transparent onPress={() => this.props.navigation.navigate("Home")} 
-                                    style={{borderColor:Color.primaryDark,borderWidth:0.5,borderRadius:2,paddingLeft:8,paddingRight:8,width:'40%',height:40}}>
+                                    style={{borderColor:Color.PrimaryDark,borderWidth:0.5,borderRadius:2,paddingLeft:8,paddingRight:8,width:'40%',height:40}}>
                                         <Text style={[mainStyles.Heading3,{textAlign:'center', fontSize: 15}]}>KEEP SHOPPING</Text>
                                     </Button>
 

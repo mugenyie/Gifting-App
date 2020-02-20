@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, SafeAreaView, SectionList, ScrollView, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Container, Header, Left, Body, Right, Button, Title} from 'native-base';
+import ButtonOutline from '../../components/ButtonOutline';
 
 import Color from '../../common/Color';
 import mainStyle from '../../common/mainStyles';
@@ -25,14 +26,14 @@ const DATA = [
     },
   ];
 
-  function Item({ title, day }) {
-    return (
-      <TouchableOpacity style={[styles.item,{flexDirection:'row',flex:1}]}>
-            <Text style={[mainStyle.Heading1Light,styles.title,{flex:0.8}]}>{title}</Text>
-            <Text style={[mainStyle.TextRegular,styles.day,{flex:0.2}]}>{day}</Text>
-      </TouchableOpacity>
-    );
-  }
+function Item({ title, day }) {
+return (
+    <TouchableOpacity style={[styles.item,{flexDirection:'row',flex:1}]}>
+        <Text style={[mainStyle.Heading1Light,styles.title,{flex:0.8}]}>{title}</Text>
+        <Text style={[mainStyle.TextRegular,styles.day,{flex:0.2}]}>{day}</Text>
+    </TouchableOpacity>
+);
+}
 // create a component
 class Anniversaries extends Component {
     _renderNoAnniversary = () => {
@@ -40,10 +41,7 @@ class Anniversaries extends Component {
             <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                 <Text style={mainStyle.Heading3}>No upcoming anniversaries</Text>
                 <Text style={[mainStyle.TextRegular,{textAlign:'center',marginTop:10}]}>Add new to get notified when the day comes</Text>
-                <Button onPress={() => this.props.navigation.navigate("NewAnniversary")} transparent style={{marginTop:32, width:120, height:40,justifyContent:"center",alignContent:"center", flexDirection:"row",borderColor:Color.primaryDark,borderWidth:0.5,borderRadius:2,padding:4}}>
-                    <Icon name='plus' size={18} color={Color.primaryDark}/>
-                    <Text style={[mainStyle.TextRegular,{paddingLeft:10}]}>Add</Text>
-                </Button>
+                <ButtonOutline marginTop={40} title="Add" iconName="pluscircle" onPress={() => this.props.navigation.navigate("NewAnniversary")} />
             </View>
         );
     }
@@ -77,7 +75,10 @@ class Anniversaries extends Component {
             <Container
             style={styles.container}
             >
-            {this._renderAnniversaries()}
+            {
+                //this._renderAnniversaries()
+                this._renderNoAnniversary()
+            }
             </Container>
         );
     }
@@ -89,19 +90,21 @@ const styles = StyleSheet.create({
         flex:1
     },
     item: {
-        backgroundColor: '#ccc',
+        backgroundColor: "#FFF",
         padding: 20,
         marginVertical: 8,
+        borderBottomWidth:0.5,
+        borderBottomColor:Color.LightRose
     },
     header: {
-        fontSize: 32,
+        fontSize: 28,
     },
     title: {
-        fontSize: 22,
+        fontSize: 18,
     },
     day: {
-        fontSize:38,
-        color:'#555'
+        fontSize:32,
+        color:Color.LightRose
     }
 });
 

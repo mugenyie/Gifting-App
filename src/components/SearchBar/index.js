@@ -12,7 +12,7 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <Header searchBar rounded style={{backgroundColor:Platform.OS == "android" ? Color.PrimaryDark:""}}>
+      <Header androidStatusBarColor={Color.PrimaryDark} searchBar rounded style={{backgroundColor:Platform.OS == "android" ? Color.LightRose:""}}>
           <Item>
               <Icon name="search"/>
               <Input placeholder="Search for gifts" />

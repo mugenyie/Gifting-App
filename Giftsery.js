@@ -8,8 +8,9 @@ import React, { Component } from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import Icon from 'react-native-vector-icons/AntDesign';
-
+import {TouchableOpacity} from 'react-native';
+import Icon2 from 'react-native-vector-icons/AntDesign';
+import {Icon} from 'native-base';
 import Loading from './src/containers/Loading';
 import PhoneAuthScreen from './src/containers/PhoneAuthScreen';
 import HomeScreen from './src/containers/HomeScreen';
@@ -48,7 +49,7 @@ const HomeIconWithBadge = props => {
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
   const { routeName } = navigation.state;
-  let IconComponent = Icon;
+  let IconComponent = Icon2;
   let iconName;
 
   if(routeName === 'Home'){
@@ -96,13 +97,10 @@ const TabNavigator = createBottomTabNavigator(
 
 const RootNavigator = createSwitchNavigator(
   {
-    // Loading,
-    // PhoneAuthScreen,
+    Loading,
+    PhoneAuthScreen,
     Main: {screen: TabNavigator}
-  },
-  // {
-  //   initialRouteName: 'Loading'
-  // }
+  }
 );
 
 const AppStackNavigator = createAppContainer(createStackNavigator({
@@ -144,9 +142,10 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
     },
     Anniversaries:{
       screen: Anniversaries,
-      navigationOptions: {
-        title:"Anniversaries"
-      }
+      navigationOptions:({navigation, navigate}) => ({
+        title:"Anniversaries",
+        headerRight: <TouchableOpacity onPress={() => {navigation.navigate("NewAnniversary")}} style={{padding:20}}><Icon name="add" /></TouchableOpacity>
+      })
     },
     OrderHistory:{
       screen: OrderHistory,
@@ -157,10 +156,13 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
     EditProfile: {
       screen: EditProfile,
       navigationOptions: {
-        header: null,
+        title:"Edit Profile"
       }
     },
     OrderSuccess:{
-      screen: OrderSuccess
+      screen: OrderSuccess,
+      navigationOptions: {
+        title:""
+      }
     }
   }));

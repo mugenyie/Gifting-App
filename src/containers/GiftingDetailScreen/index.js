@@ -33,7 +33,8 @@ class GiftingDetailScreen extends Component {
         fromName: "",
         recipientName: "",
         recipientContact: "",
-        recipientAddress: ""      
+        recipientAddress: "" ,
+        shippingCost:10000
     }
 
     async componentDidMount(){
@@ -158,7 +159,7 @@ class GiftingDetailScreen extends Component {
                     />
 
                     <Text style={styles.inputlabel}>
-                        <Text>Recipient's name</Text>
+                        <Text>Recipient's name *</Text>
                     </Text>
                     <TextInput
                     placeholder="Recipient's name"
@@ -170,7 +171,7 @@ class GiftingDetailScreen extends Component {
                     />
 
                     <Text style={styles.inputlabel}>
-                        <Text>Recipient's contact</Text>
+                        <Text>Recipient's contact *</Text>
                     </Text>
                     <TextInput
                     placeholder="Recipient's contact"
@@ -182,7 +183,7 @@ class GiftingDetailScreen extends Component {
                     />
 
                     <Text style={styles.inputlabel}>
-                        <Text>Recipient's delivery address</Text>
+                        <Text>Recipient's delivery address *</Text>
                     </Text>
                     <TextInput
                     placeholder="Recipient's address"
@@ -196,13 +197,14 @@ class GiftingDetailScreen extends Component {
                 </ScrollView>
             </Content>
 
-            <Footer style={{height:100,elevation:10,borderTopColor:'#CCC',borderTopWidth:0.2}}>
+            <Footer style={{height:120,elevation:10,borderTopColor:'#CCC',borderTopWidth:0.2}}>
                 <FooterTab style={{backgroundColor:'#FFF'}}>
-                    <View style={{flexDirection:'column',flex:1,marginLeft:10,marginRight:10,height:70}}>
+                    <View style={{flexDirection:'column',flex:1,marginLeft:10,marginRight:10,height:100}}>
                         <View style={{flex:1,flexDirection:'row', paddingTop:10,marginBottom:10}}>
                             <Text>
-                                <Text style={[mainStyles.Heading2Light,{fontSize:16}]}>Total: </Text>
-                                <Text style={[mainStyles.Heading2Light,{fontSize:16}]}>{priceFormat(this.state.amount)}</Text>
+                                <Text style={[mainStyles.Heading2Light,{fontSize:15}]}>Total: </Text>
+                                <Text style={[mainStyles.Heading2Light,{fontSize:15}]}>{priceFormat(this.state.amount+this.state.shippingCost)}</Text>
+                                <Text style={[mainStyles.Heading2Light,{fontSize:13,fontWeight:'bold'}]}>{"\n"}(Inclusive of {priceFormat(this.state.shippingCost)} Shipping Cost & Packaging) </Text>
                             </Text>
                         </View>
                         <View style={{flex:1,flexDirection:'row'}}>

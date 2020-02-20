@@ -66,7 +66,7 @@ class Product extends Component {
       _renderFooter  = (productDetail) =>(<Footer style={{height:80}}>
                         <FooterTab style={{backgroundColor:'#FFF',borderTopColor:"#CCC",borderTopWidth:0.3,elevation:4}}>
                             <Button transparent>
-      <Text style={[mainStyles.ProductPriceText,{fontSize:16, color:Color.primaryDark}]}>{priceFormat(productDetail.price)}</Text>
+      <Text style={[mainStyles.ProductPriceText,{fontSize:16, color:Color.PrimaryDark}]}>{priceFormat(productDetail.price)}</Text>
                             <Text style={[mainStyles.IconText,{fontSize:8,textAlignVertical:'center',letterSpacing:2}]}>Happy gifting <Icon1 color={Color.PrimaryDark} size={10} style={styles.footerIcon} name="gift" /></Text>
                             </Button>
                             <Button 

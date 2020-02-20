@@ -93,25 +93,9 @@ class EditProfile extends Component {
                     {
                         updateInProgress && 
                         <View style={styles.loading}>
-                            <ActivityIndicator style={styles.loading} size={width*0.18} color={Color.primaryDark} />
+                            <ActivityIndicator style={styles.loading} size={width*0.18} color={Color.PrimaryDark} />
                         </View>
                     }
-
-                <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
-                    <Left>
-                    <Button onPress={() => this.props.navigation.goBack()} transparent>
-                        <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
-                    </Button>
-                    </Left>
-                    <Body>
-                    <Title style={[{color:Color.primaryDark},mainStyles.Heading2]}>Edit Profile</Title>
-                    </Body>
-                    <Right>
-                    <Button transparent>
-                        
-                    </Button>
-                    </Right>
-                </Header>
 
                 <Content style={styles.container}>
 
@@ -138,7 +122,7 @@ class EditProfile extends Component {
                     />
 
                     <Button style={{
-                        backgroundColor:Color.primaryDark, 
+                        backgroundColor:Color.PrimaryDark, 
                         marginTop:40,
                         padding:8, alignItems:'center',justifyContent:'center'}} 
                         onPress={() => this.updateUser()}>

@@ -58,7 +58,7 @@ class ProfileScreen extends Component {
     render() {
         return (
             <Container style={{flex:1}}>
-                <Header style={{backgroundColor:"#fff",paddingLeft:20,paddingBottom:4,paddingTop:2,height:100}}>
+                <Header androidStatusBarColor={Color.PrimaryDark} style={{backgroundColor:"#fff",paddingLeft:20,paddingBottom:4,paddingTop:2,height:100}}>
                     <Left>
                         <Text style={{textAlign:"left"}}>
                             <Text style={mainStyles.Heading1}>{this.state.displayName}</Text>

@@ -12,7 +12,7 @@ export default class ButtonOutline extends Component {
       const {title, iconName, onPress, marginTop, buttonStyle} = this.props;
     return (
     <Button onPress={onPress} transparent style={[{padding:10, width:screenWidth*0.5,justifyContent:"space-evenly",alignContent:"center",borderColor:Color.PrimaryDark,borderWidth:1,borderRadius:4,marginTop:marginTop},buttonStyle]}>
-        <Icon name={iconName} size={20} color={Color.primaryDark}/>
+        <Icon name={iconName} size={20} color={Color.PrimaryDark}/>
         <Text style={[MainStyles.Heading1,{fontSize:14,textTransform:'uppercase',color:Color.PrimaryDark}]}>{title}</Text>
     </Button>
     );

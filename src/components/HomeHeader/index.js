@@ -25,7 +25,7 @@ class HomeHeader extends Component {
             style={{backgroundColor:Platform.OS=="android"?"#FFF":""}}>
                 <Left>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate("Anniversaries")}>
-                        <Icon color={Color.primaryDark} size={20} name="birthday-cake" />
+                        <Icon color={Color.PrimaryDark} size={20} name="birthday-cake" />
                     </TouchableOpacity>
                 </Left>
                 <Body>
@@ -37,7 +37,7 @@ class HomeHeader extends Component {
                 </Body>
                 <Right>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate("OrderHistory")}>
-                        <Icon3 name="list" size={22} color={Color.primaryDark}/>
+                        <Icon3 name="list" size={22} color={Color.PrimaryDark}/>
                     </TouchableOpacity> 
                 </Right>
             </Header>

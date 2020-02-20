@@ -16,11 +16,11 @@ class GiftStores extends Component {
                 <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
                     <Left>
                         <Button onPress={() => this.props.navigation.goBack()} transparent>
-                            <Icon name='arrowleft' size={22} color={Color.primaryDark}/>
+                            <Icon name='arrowleft' size={22} color={Color.PrimaryDark}/>
                         </Button>
                     </Left>
                     <Body>
-                    <Title style={[{color:Color.primaryDark},mainStyles.Heading2]}>Gift Stores</Title>
+                    <Title style={[{color:Color.PrimaryDark},mainStyles.Heading2]}>Gift Stores</Title>
                     </Body>
                     <Right>
                         

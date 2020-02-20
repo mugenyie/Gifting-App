@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Dimensions, Text } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import {Header} from 'native-base';
 
 import { GetUserData } from '../../services/UserAuthManager';
+import Color from '../../common/Color';
 
 const width = Dimensions.get('window').width;
 
@@ -39,6 +41,7 @@ class Loading extends Component {
       render() {
         return (
             <View style={styles.container}>
+                <Header transparent androidStatusBarColor={Color.PrimaryDark}/>
             <Animatable.View 
                 animation="pulse" 
                 easing="ease-out" 

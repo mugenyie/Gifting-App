@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title, Content} from 'native-base';
+import SimpleHeader from '../../components/SimpleHeader';
 
 import Color from '../../common/Color';
 import mainStyle from '../../common/mainStyles';
@@ -11,11 +12,7 @@ class SavedScreen extends Component {
     render() {
         return (
             <Container>
-            <Header style={{backgroundColor:"#fff",paddingLeft:20,paddingBottom:4,paddingTop:2,height:50}}>
-                <Body>
-                <Title style={[{color:Color.primaryDark},mainStyle.Heading2]}>Saved</Title>
-                </Body>
-            </Header>
+            <SimpleHeader {...this.props} headerTitle="Saved Items" />
             <Content />
             </Container>
         );

@@ -12,7 +12,7 @@ import {
   Image
 } from 'react-native'
 import { firebase } from '@react-native-firebase/auth';
-import {Button} from 'native-base';
+import {Button,Header} from 'native-base';
 import { StoreUserData } from '../../services/UserAuthManager';
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
@@ -270,7 +270,7 @@ class PhoneAuthScreen extends Component {
         />
 
         <View style={{paddingTop:20}}/>
-        <Button style={{backgroundColor:Color.primaryDark, padding:8, alignItems:'center',justifyContent:'center'}} onPress={() => this.updateUser()}>
+        <Button style={{backgroundColor:Color.PrimaryDark, padding:8, alignItems:'center',justifyContent:'center'}} onPress={() => this.updateUser()}>
           <Text style={[mainStyles.Heading3, {color:'#FFF'}]}>Update Details</Text>
         </Button>
         <View />
@@ -328,10 +328,12 @@ class PhoneAuthScreen extends Component {
         <ScrollView 
         showsVerticalScrollIndicator={false}
         style={[styles.container]}>
+
+        <Header transparent androidStatusBarColor={Color.PrimaryDark}/>
           {
             isSigninInProgress && 
             <View style={styles.loading}>
-                <ActivityIndicator style={styles.loading} size={width*0.18} color={Color.primaryDark} />
+                <ActivityIndicator style={styles.loading} size={width*0.18} color={Color.PrimaryDark} />
             </View>
           }
 
@@ -386,7 +388,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Color.primaryDark,
+    backgroundColor: Color.PrimaryDark,
     borderRadius: 4,
     elevation:8
   },
