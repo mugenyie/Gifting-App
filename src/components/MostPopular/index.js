@@ -37,7 +37,7 @@ class MostPopular extends Component {
         }else{
             return (
                 <View>
-                    <SectionTitle title="Most popular" subtitle="Swipe to view popular gift items." seeMore="View all"/>
+                    <SectionTitle title="Most popular" subtitle="Swipe to view popular gift items." />
                     <View style={{padding:10}}/>
                     <PopularGifts navigateToProduct={this.props.productNavigation} gifts={this.state.mostPopularProducts}/>
                 </View>

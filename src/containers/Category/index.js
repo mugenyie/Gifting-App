@@ -26,6 +26,7 @@ function Item({Item, onSelect}){
 class Category extends Component {
     state = {
         categoryDetail: null,
+        categoryName:'',
         categoryProducts: []
     }
     
@@ -33,6 +34,7 @@ class Category extends Component {
     componentDidMount(){
         let categoryId = this.props.navigation.getParam("categoryId");
         let vendorId = this.props.navigation.getParam("vendorId");
+        this.setState({categoryName:this.props.navigation.getParam("categoryName")})
 
         if(categoryId){
             CategoryAPI.GetDetail(categoryId)
@@ -69,7 +71,7 @@ class Category extends Component {
     render() {
         return (
             <Container>
-                <SimpleHeader {...this.props} headerTitle="Category"/>
+                <SimpleHeader {...this.props} headerTitle={this.state.categoryName}/>
                 <Content>
                     <FlatList 
                     numColumns={2}

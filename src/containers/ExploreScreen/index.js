@@ -62,6 +62,7 @@ class ExploreScreen extends Component {
                 data={this.state.listItems.sort((a, b) => a.displayOrder - b.displayOrder)}
                 renderItem={({ item }) => (
                   <ProductRowItem 
+                  {...this.props}
                   id={item.id}
                   imageURI={item.imageUrl}
                   name={item.name}

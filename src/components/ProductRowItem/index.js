@@ -6,7 +6,7 @@ import Color from '../../common/Color';
 
 class ProductRowItem extends Component {
   render() {
-    const {imageURI ,name, description} = this.props;
+    const {imageURI ,name, description, id} = this.props;
     return (
         <ListItem>
             <View style={{flex:0.5}}>
@@ -15,7 +15,7 @@ class ProductRowItem extends Component {
                 source={{uri:imageURI}}
                 />
             </View>
-            <TouchableOpacity style={{flex:1}}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate("Product",{productId:id})} style={{flex:1}}>
                 <View style={{flexDirection:'column'}}>
                     <Text style={[mainStyles.ProductNameText,{flexWrap:'wrap'}]}>{name}</Text>
                     <Text style={[mainStyles.TextRegular,{color:Color.Grey,flexWrap:'wrap'}]}>{description}</Text>

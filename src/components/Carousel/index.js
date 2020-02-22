@@ -6,7 +6,7 @@ import mainStyles from '../../common/mainStyles';
 
 function Item({categoryId, imageSource, caption, onSelect}){
   return(
-    <TouchableOpacity style={{marginRight:10}} onPress={() => onSelect(categoryId)} key={categoryId} activeOpacity={0.6}>
+    <TouchableOpacity style={{marginRight:10}} onPress={() => onSelect(categoryId,caption)} key={categoryId} activeOpacity={0.6}>
       <Card style={styles.imageContainer}>
         <ImageBackground
         style={{flex:1, width:'100%'}}
@@ -26,7 +26,7 @@ export default class Carousel extends Component {
 
   render() {
     const { categories, categoryNavigation } = this.props;
-    const onSelect = (categoryId) => categoryNavigation("Category",{categoryId: categoryId});
+    const onSelect = (categoryId, name) => categoryNavigation("Category",{categoryId: categoryId, categoryName: name});
 
     if (categories && categories.length) {
       return (

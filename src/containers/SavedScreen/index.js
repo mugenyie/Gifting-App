@@ -5,14 +5,18 @@ import { Container, Header, Left, Body, Right, Button, Title, Content} from 'nat
 import SimpleHeader from '../../components/SimpleHeader';
 
 import Color from '../../common/Color';
-import mainStyle from '../../common/mainStyles';
+import MainStyles from '../../common/mainStyles';
 
 // create a component
 class SavedScreen extends Component {
     render() {
         return (
             <Container>
-            <SimpleHeader {...this.props} headerTitle="Saved Items" />
+            <Header style={{backgroundColor:'#fff'}} androidStatusBarColor={Color.PrimaryDark}>
+                <Body>
+                    <Title style={[MainStyles.Heading1,{color:'#000',fontSize:18}]}>Saved Gifts</Title>
+                </Body>
+            </Header>
             <Content />
             </Container>
         );

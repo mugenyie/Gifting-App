@@ -6,13 +6,15 @@ import {
     StyleSheet,
     ScrollView,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
+    Platform
 } from "react-native";
 
 import Icon from 'react-native-vector-icons/AntDesign';
 import ProductListItem from '../ProductListItem';
 
 const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 const giftRibbon = require('../../../assets/gift_ribbon.png')
 
 class GiftBoxItems extends Component {
@@ -48,7 +50,7 @@ class GiftBoxItems extends Component {
                         <View 
                         style={{width:width*0.96,
                             height:10,backgroundColor:"#5a6c40",
-                            alignSelf:'center',marginTop:-30,borderTopLeftRadius:10,borderTopRightRadius:10
+                            alignSelf:'center',top:Platform.OS=='ios'? -height*0.03:-height*0.06,borderTopLeftRadius:10,borderTopRightRadius:10
                         }}
                         />
                     </View>

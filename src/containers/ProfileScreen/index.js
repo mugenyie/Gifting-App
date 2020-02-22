@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title, Content} from 'native-base';
 
 import Color from '../../common/Color';
@@ -58,13 +58,11 @@ class ProfileScreen extends Component {
     render() {
         return (
             <Container style={{flex:1}}>
-                <Header androidStatusBarColor={Color.PrimaryDark} style={{backgroundColor:"#fff",paddingLeft:20,paddingBottom:4,paddingTop:2,height:80}}>
-                    <Left>
-                        <Text style={mainStyles.Heading1}>{this.state.displayName}</Text>
-                    </Left>
-                    <Body>
-                    <Text style={mainStyles.Heading3Light}>Joined on {this.state.creationTime}</Text>
-                    </Body>
+                <Header androidStatusBarColor={Color.PrimaryDark} style={{backgroundColor:"#fff",paddingBottom:4,height:Platform.OS=='android'?60:80}}>
+                    <View style={{top:10,alignItems:'center'}}>
+                        <Text style={[mainStyles.Heading1,{fontSize:15}]}>{this.state.displayName}</Text>
+                        <Text style={[mainStyles.Heading3Light,{fontSize:14}]}>Joined on {this.props.creationTime}</Text>
+                    </View>
                 </Header>
 
                 <View style={styles.container}>

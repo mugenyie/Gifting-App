@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, ScrollView, TouchableOpacity, FlatList, Dimensions, SafeAreaView} from 'react-native';
+import {StyleSheet, View, ScrollView, TouchableOpacity, FlatList, Dimensions, SafeAreaView, Platform} from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -13,6 +13,7 @@ import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
 import {BlogItem} from '../../components/ServerLoader';
 import AnimatedHeaderScroll from '../../components/AnimatedHeaderScroll';
+import SimpleHeader from '../../components/SimpleHeader';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -185,32 +186,32 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
   }  
 </RadioForm>
 
-                                        <View
-                                        style={{
-                                            borderBottomColor: '#ddd',
-                                            borderBottomWidth: 0.5,
-                                            marginBottom:20,
-                                            marginTop:20,
-                                        }}
-                                        />
-                                        <Text style={[mainStyles.Heading3,{marginBottom:4}]}>Delivery Detail</Text>
-                                        <Text style={mainStyles.TextRegular}>
-                                        {productDetail.delivery}
-                                        </Text>
-                                        <View
-                                        style={{
-                                            borderBottomColor: '#ddd',
-                                            borderBottomWidth: 0.5,
-                                            marginBottom:20,
-                                            marginTop:20,
-                                        }}
-                                        />
-                                        
-                                        <Text style={[mainStyles.Heading3,{marginBottom:10}]}>You may also like</Text>
-                                    </View>
+    <View
+    style={{
+        borderBottomColor: '#ddd',
+        borderBottomWidth: 0.5,
+        marginBottom:20,
+        marginTop:20,
+    }}
+    />
+    <Text style={[mainStyles.Heading3,{marginBottom:4}]}>Delivery Detail</Text>
+    <Text style={mainStyles.TextRegular}>
+    {productDetail.delivery}
+    </Text>
+    <View
+    style={{
+        borderBottomColor: '#ddd',
+        borderBottomWidth: 0.5,
+        marginBottom:20,
+        marginTop:20,
+    }}
+    />
+    
+    <Text style={[mainStyles.Heading3,{marginBottom:10}]}>You may also like</Text>
+</View>
 
-                                    <ProductSlider {...this.props} products={productDetail.relatedProducts} />
-                                    <View style={{padding:10}}/>
+<ProductSlider {...this.props} products={productDetail.relatedProducts} />
+<View style={{padding:10}}/>
       </View>);
 
     render() {
@@ -218,9 +219,12 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
         
         if(productDetail == null){
             return (
-                <View style={{flex:1, padding:20}}>
-                    <BlogItem width={width} height={600} speed={2}/>
-                </View>
+                <Container>
+                    <SimpleHeader {...this.props} />
+                    <View style={{flex:1, justifyContent:'center',paddingLeft:width*0.08,marginTop:Platform.OS=='android'?100:-100}}>
+                        <BlogItem width={width} height={600} speed={2}/>
+                    </View>
+                </Container>
             );
         }else{
             return (
