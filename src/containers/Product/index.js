@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, ScrollView, TouchableOpacity, FlatList, Dimensions} from 'react-native';
+import {StyleSheet, View, ScrollView, TouchableOpacity, FlatList, Dimensions, SafeAreaView} from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -22,10 +22,19 @@ import ProductSlider from '../../components/ProductsSlider';
 // create a component
 class Product extends Component {
     state = {
+        valueIndex:0,
+        productLiked:false,
         productDetail: null,
         radio_props: []
     }
     
+    toggleSavedProduct = () => {
+        if(this.state.productLiked){
+            this.setState({productLiked:false}) 
+        }else{
+            this.setState({productLiked:true})
+        }
+    }
     
     componentDidMount(){
         let productId = this.props.navigation.getParam("productId");
@@ -50,7 +59,7 @@ class Product extends Component {
                 this.setState({radio_props:newOptionsList})
             }
 
-            this.setState({productDetail})
+            this.setState({productDetail, valueIndex: this.state.radio_props[0].value})
         })
         .catch(error => alert(error))
     }
@@ -88,10 +97,17 @@ class Product extends Component {
 
 _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewContent}>
                                     <View style={{paddingLeft:20,paddingRight:20, flexDirection: 'row'}}>
-                                        <View style={{flexDirection:'column'}}>
+                                        <View style={{flexDirection:'column',flex:0.9,marginRight:20}}>
                                             <Text style={[mainStyles.Heading2,{paddingBottom:4}]}>{productDetail.name}</Text>
                                             <Text style={[mainStyles.ProductPriceText,{fontSize:16, paddingBottom:4}]}>{priceFormat(productDetail.price)}</Text>
                                         </View>
+                                        <TouchableOpacity style={{flex:0.1}} onPress={() => this.toggleSavedProduct()}>
+                                            <Icon 
+                                            name={this.state.productLiked ? "ios-heart" : "ios-heart-empty"}
+                                            size={30} 
+                                            color="#000" 
+                                            />
+                                        </TouchableOpacity>
                                     </View>
                                     <View style={{marginLeft: 10, marginRight: 10}}>
 
@@ -127,18 +143,48 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
                                         }}
                                         />
                                         <Text style={[mainStyles.Heading3,{marginBottom:20}]}>Product Options</Text>
+<RadioForm>
+  {
+    this.state.radio_props.map((obj, i) => (
+      <RadioButton labelHorizontal={true} key={i} >
+        <RadioButtonInput
+          obj={obj}
+          index={i}
+          isSelected={this.state.valueIndex === this.state.radio_props[i].value}
+          onPress={(value) => {this.setState({
+            productDetail: {
+                ...productDetail,
+                price:value,
+            },
+            valueIndex:value
+        })}}
+          borderWidth={2}
+          buttonInnerColor={Color.PrimaryDark}
+          buttonOuterColor={Color.PrimaryDark}
+          buttonSize={10}
+          buttonOuterSize={20}
+          buttonStyle={{}}
+          buttonWrapStyle={{marginBottom:10}}
+        />
+        <RadioButtonLabel
+          obj={obj}
+          index={i}
+          labelHorizontal={true}
+          onPress={(value) => {this.setState({
+            productDetail: {
+                ...productDetail,
+                price:value,
+            },
+            valueIndex:value
+        })}}
+          labelStyle={[mainStyles.TextRegular,{fontSize:15}]}
+          labelWrapStyle={{marginBottom:10}}
+        />
+      </RadioButton>
+    ))
+  }  
+</RadioForm>
 
-                                        <RadioForm
-                                        labelStyle={[mainStyles.TextRegular,{fontSize:15}]}
-                                        radio_props={this.state.radio_props}
-                                        initial={0}
-                                        onPress={(value) => {this.setState({
-                                            productDetail: {
-                                                ...productDetail,
-                                                price:value,
-                                            }
-                                        })}}
-                                        />
                                         <View
                                         style={{
                                             borderBottomColor: '#ddd',
@@ -178,7 +224,6 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
             );
         }else{
             return (
-            
                 <View style={{flex:1, flexDirection: "column"}}>
                     <AnimatedHeaderScroll 
                         RenderHeader = {this._renderHeader()}
@@ -187,7 +232,6 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
                         TopImage = {productDetail.imageUrl}
                     />
                 </View>
-    
             );
         }
     }

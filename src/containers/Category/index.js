@@ -68,7 +68,6 @@ class Category extends Component {
 
     render() {
         return (
-            
             <Container>
                 <SimpleHeader {...this.props} headerTitle="Category"/>
                 <Content>

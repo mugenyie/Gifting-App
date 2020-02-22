@@ -27,10 +27,7 @@ class AnimatedHeaderScroll extends Component {
         super(props);
     
         this.state = {
-          scrollY: new Animated.Value(
-            // iOS has negative initial scroll value because content inset...
-            Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
-          )
+          scrollY: new Animated.Value(Platform.OS=='ios'?-HEADER_MAX_HEIGHT:0)
         };
       }
 
@@ -48,7 +45,7 @@ class AnimatedHeaderScroll extends Component {
         // it back to 0.
         const scrollY = Animated.add(
             this.state.scrollY,
-            Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,
+            0,
         );
         const headerTranslate = scrollY.interpolate({
             inputRange: [0, HEADER_SCROLL_DISTANCE],
@@ -163,7 +160,7 @@ const styles = StyleSheet.create({
       },
       bar: {
         backgroundColor: 'transparent',
-        marginTop: 20,
+        marginTop: Platform.OS == 'ios'?40:20,
         height: 20,
         alignItems: 'center',
         justifyContent: 'center',
@@ -177,7 +174,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
       },
       scrollViewContent: {
-        paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
+        paddingTop: HEADER_MAX_HEIGHT,
         marginTop: 10
       }
 });
