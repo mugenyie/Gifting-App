@@ -1,11 +1,17 @@
 import ApiClient from './ApiClient';
 
-const Url = "​/v1​/Vendors";
+var API = new ApiClient();
 
 const WishListAPI = {
-    Add: "",
-    Remove: "",
-    GetByCustomer: ""
+    Add: async (payload) => {
+        return API.post('/v1/WishList',payload);
+    },
+    Remove: async (payload) => {
+        return API.delete('/v1/WishList',payload);
+    },
+    GetByCustomer: async (customerId) =>{
+        return API.get(`/v1/WishList/${customerId}`)
+    }
 }
 
 //make this component available to the app

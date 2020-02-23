@@ -8,10 +8,13 @@ import SearchAPI from '../../services/SearchAPI';
 
 // create a component
 class ExploreScreen extends Component {
-    state = {
+    constructor(){
+      super();
+      this.state = {
         query: '',
         listItems: []
-      };
+      }
+    }
 
       async componentDidMount(){
         await SearchAPI.SearchByKeyWord('a')
@@ -58,6 +61,7 @@ class ExploreScreen extends Component {
 
             <Content>
               <FlatList
+              showsVerticalScrollIndicator={false}
                 contentContainerStyle={{padding:10}}
                 data={this.state.listItems.sort((a, b) => a.displayOrder - b.displayOrder)}
                 renderItem={({ item }) => (

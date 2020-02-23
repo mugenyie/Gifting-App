@@ -14,38 +14,49 @@ import mainStyles from '../../common/mainStyles';
 import {BlogItem} from '../../components/ServerLoader';
 import AnimatedHeaderScroll from '../../components/AnimatedHeaderScroll';
 import SimpleHeader from '../../components/SimpleHeader';
+import WhishlistAPI from '../../services/WishListAPI';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
 import ProductSlider from '../../components/ProductsSlider';
+import WishListAPI from '../../services/WishListAPI';
+
+async function saveProduct(payload){
+    await WishListAPI.Add(payload)
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
+}
+
+async function unSaveProduct(payload){
+    await WishListAPI.Remove(payload)
+    then(data => console.log(data))
+    .catch(err => console.log(err))
+}
 
 // create a component
 class Product extends Component {
-    state = {
-        valueIndex:0,
-        productLiked:false,
-        productDetail: null,
-        radio_props: []
-    }
-    
-    toggleSavedProduct = () => {
-        if(this.state.productLiked){
-            this.setState({productLiked:false}) 
-        }else{
-            this.setState({productLiked:true})
+    constructor(){
+        super();
+        this.state = {
+            valueIndex:0,
+            productLiked:false,
+            productDetail: null,
+            radio_props: []
         }
     }
     
-    componentDidMount(){
+    async componentDidMount(){
         let productId = this.props.navigation.getParam("productId");
+        let customerId =1;
 
-        ProductAPI.GetDetail(productId)
+        await ProductAPI.GetDetail(productId, customerId)
         .then(data => {
             const productDetail = data.body;
 
             this.setState({
                 radio_props: [{label: productDetail.name + ` - ${priceFormat(productDetail.price)}`, value: productDetail.price}],
+                productLiked: productDetail.isSaved
             });
 
             var optionsList = productDetail.productOptions;
@@ -63,6 +74,16 @@ class Product extends Component {
             this.setState({productDetail, valueIndex: this.state.radio_props[0].value})
         })
         .catch(error => alert(error))
+    }
+
+    toggleSavedProduct = (customerId, productId) => {
+        if(this.state.productLiked){
+            unSaveProduct({customerId,productId})
+            this.setState({productLiked:false}) 
+        }else{
+            saveProduct({customerId,productId})
+            this.setState({productLiked:true})
+        }
     }
 
       _renderHeader = () => (<View style={{flexDirection:'row',alignItems:'stretch', backgroundColor:"transparent"}}>
@@ -98,16 +119,17 @@ class Product extends Component {
 
 _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewContent}>
                                     <View style={{paddingLeft:20,paddingRight:20, flexDirection: 'row'}}>
-                                        <View style={{flexDirection:'column',flex:0.9,marginRight:20}}>
+                                        <View style={{flexDirection:'column',flex:0.8,marginRight:20}}>
                                             <Text style={[mainStyles.Heading2,{paddingBottom:4}]}>{productDetail.name}</Text>
                                             <Text style={[mainStyles.ProductPriceText,{fontSize:16, paddingBottom:4}]}>{priceFormat(productDetail.price)}</Text>
                                         </View>
-                                        <TouchableOpacity style={{flex:0.1}} onPress={() => this.toggleSavedProduct()}>
+                                        <TouchableOpacity style={{flex:0.2, alignItems:'center'}} onPress={() => this.toggleSavedProduct(1,productDetail.id)}>
                                             <Icon 
                                             name={this.state.productLiked ? "ios-heart" : "ios-heart-empty"}
                                             size={30} 
                                             color="#000" 
                                             />
+                                            <Text style={[mainStyles.TextRegular],{fontSize:13}}>{this.state.productLiked?"SAVED":"SAVE"}</Text>
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{marginLeft: 10, marginRight: 10}}>

@@ -79,7 +79,7 @@ class AnimatedHeaderScroll extends Component {
         return (
             <View style={{flex:1, flexDirection: "column"}}>
                 <Animated.ScrollView
-                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
                 style={styles.fill}
                 scrollEventThrottle={1}
                 onScroll={Animated.event(

@@ -11,8 +11,8 @@ const ProductAPI = {
     GetPopular: async () => {
         return await API.get(`/v1/Products/Popular`);
     },
-    GetDetail: async (productId) => {
-        return await API.get(`/v1/Products/${productId}`);
+    GetDetail: async (productId, customerId) => {
+        return await API.get(`/v1/Products/${productId}/${customerId}`);
     }
 }
 
