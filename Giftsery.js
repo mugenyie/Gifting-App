@@ -28,6 +28,7 @@ import Product from './src/containers/Product';
 import Category from './src/containers/Category';
 import GiftStores from './src/containers/GiftStores';
 import EditProfile from './src/containers/EditProfile';
+import EditAnniversary from './src/containers/Anniversaries/Edit';
 
 import GiftBoxIcon from './src/components/GiftBoxIcon';
 import Color from './src/common/Color';
@@ -126,6 +127,12 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       screen: NewAnniversary,
       navigationOptions: {
         title:"New Anniversary"
+      }
+    },
+    EditAnniversary:{
+      screen: EditAnniversary,
+      navigationOptions: {
+        title: "Edit Anniversary"
       }
     },
     GiftingDetail: {

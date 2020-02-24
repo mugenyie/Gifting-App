@@ -1,13 +1,20 @@
 import ApiClient from './ApiClient';
 
-
-const url = "​/v1​/Anniversary";
+var API = new ApiClient();
 
 const AnniversaryAPI = {
-    Create: "",
-    Update: "",
-    GetByCustomer: "",
-    Delete: "",
+    Create: async (anniversaryPayload) => {
+        return await API.post('/v1/Anniversary',anniversaryPayload);
+    },
+    Update: async (anniversaryPayload) => {
+        return await API.put('/v1/Anniversary',anniversaryPayload);
+    },
+    GetByCustomer: async (customerId) => {
+        return await API.get(`/v1/Anniversary/${customerId}`);
+    },
+    Delete: async (anniversaryId) => {
+        return await API.delete(`/v1/Anniversary/${anniversaryId}`);
+    },
     GetDetail: ""
 }
 

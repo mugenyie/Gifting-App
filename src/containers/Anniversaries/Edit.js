@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, TextInput, Picker} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Picker, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Container, Header, Left, Body, Right, Button, Title, Content, Form, Item, Input} from 'native-base';
 import AnniversaryAPI from '../../services/AnniversaryAPI';
@@ -12,19 +12,25 @@ import mainStyles from '../../common/mainStyles';
 const days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
 
 // create a component
-class NewAnniversary extends Component {
+class EditAnniversary extends Component {
 
     state= {
         ActivityInProgress:false,
+        AnniversaryId: 0,
         AnniversaryTitle: "",
         AnniversaryMonth: 0,
         AnniversaryDay: 0,
-        customerId:""
     }
 
     async componentDidMount(){
-        let customerId = 1;
-        this.setState({customerId});
+      let anniversary = this.props.navigation.getParam("anniversary");
+      
+      this.setState({
+        AnniversaryId: anniversary.id,
+        AnniversaryTitle: anniversary.title,
+        AnniversaryMonth: anniversary.month,
+        AnniversaryDay: anniversary.day
+      })
     }
 
     RenderDays = day => {
@@ -33,7 +39,21 @@ class NewAnniversary extends Component {
         );
     }
 
-    addNewAnniversary = (title, customerId, month, day) => {
+    deleteAnniversary = (anniversaryId) => {
+      this.setState({ActivityInProgress:true})
+
+      AnniversaryAPI.Delete(anniversaryId)
+      .then(data => {
+        alert("Delete succesful");
+        this.props.navigation.navigate("Anniversaries");
+      })
+      .catch(err => {
+        alert(err);
+        this.setState({ActivityInProgress:false})
+      })
+    }
+
+    updateAnniversary = (anniversaryId, title, month, day) => {
         try{
 
             this.setState({ActivityInProgress:true})
@@ -48,14 +68,15 @@ class NewAnniversary extends Component {
                 throw "Please select anniversary day"
             }
             
-            AnniversaryAPI.Create({
-                title,
-                customerId,
-                month,
-                day
+            AnniversaryAPI.Update({
+              anniversaryId,
+              title,
+              month,
+              day
             })
             .then(data => {
-                this.props.navigation.navigate("Anniversaries");
+              alert("Update succesful");
+              this.props.navigation.navigate("Anniversaries");
             })
             .catch(err => {throw err})
         }catch(err){
@@ -65,7 +86,7 @@ class NewAnniversary extends Component {
     }
 
     render() {
-        const {AnniversaryDay, AnniversaryMonth, AnniversaryTitle, customerId, ActivityInProgress} = this.state;
+        const {AnniversaryDay, AnniversaryMonth, AnniversaryTitle, AnniversaryId, ActivityInProgress} = this.state;
         return (
             <Container>
             <Content style={{padding:20}}>
@@ -120,12 +141,20 @@ class NewAnniversary extends Component {
                 </View>
             </View>
 
-            <Button
-            onPress={() => this.addNewAnniversary(AnniversaryTitle, customerId, AnniversaryMonth, AnniversaryDay)}
-            style={{backgroundColor:Color.PrimaryDark,elevation:2,alignContent:'center',justifyContent:'center'}}
-            >
-                <Text style={[mainStyle.Heading2,{fontSize:18,color:'#fff',textAlign:'center'}]}>SAVE DATE</Text>
-            </Button>
+            <View style={{flexDirection:'row',justifyContent:'space-around'}}>
+              <Button 
+              onPress={() => this.deleteAnniversary(AnniversaryId)}
+              style={{flex:0.45, borderWidth:1, borderColor:Color.PrimaryDark, borderRadius:4,alignContent:'center',justifyContent:'center'}} 
+              transparent>
+                <Text style={[mainStyle.Heading2,{fontSize:18,color:'#000',textAlign:'center'}]}>DELETE</Text>
+              </Button>
+              <Button
+              onPress={() => this.updateAnniversary(AnniversaryId, AnniversaryTitle, AnniversaryMonth, AnniversaryDay)}
+              style={{flex:0.45,backgroundColor:Color.PrimaryDark,elevation:2,alignContent:'center',justifyContent:'center'}}
+              >
+                  <Text style={[mainStyle.Heading2,{fontSize:18,color:'#fff',textAlign:'center'}]}>UPDATE</Text>
+              </Button>
+            </View>
 
             </Content>
             </Container>
@@ -141,4 +170,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default NewAnniversary;
+export default EditAnniversary;
