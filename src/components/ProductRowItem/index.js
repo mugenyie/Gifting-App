@@ -11,7 +11,7 @@ class ProductRowItem extends Component {
         <ListItem>
             <View style={{flex:0.5}}>
                 <Image 
-                style={{width:60,height:60,borderRadius:5,borderWidth:0.3,borderColor:Color.LightRose}}
+                style={mainStyles.Thumbnail}
                 source={{uri:imageURI}}
                 />
             </View>

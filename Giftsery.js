@@ -24,6 +24,7 @@ import OrderSuccess from './src/containers/OrderSuccess';
 import GiftingDetailScreen from './src/containers/GiftingDetailScreen';
 import Anniversaries from './src/containers/Anniversaries';
 import OrderHistory from './src/containers/OrderHistory';
+import OrderDetail from './src/containers/OrderDetail';
 import Product from './src/containers/Product';
 import Category from './src/containers/Category';
 import GiftStores from './src/containers/GiftStores';
@@ -89,7 +90,7 @@ const TabNavigator = createBottomTabNavigator(
     }),
     tabBarOptions: {
       showLabel: true,
-      labelStyle:{textTransform:'uppercase',fontFamily:'Roboto-Regular',fontWeight:'bold',fontSize:10},
+      labelStyle:{textTransform:'uppercase',fontFamily:'OpenSans-Regular',fontWeight:'bold',fontSize:10},
       activeTintColor: Color.PrimaryDark,
       inactiveTintColor: Color.Grey
     },
@@ -158,6 +159,12 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       screen: OrderHistory,
       navigationOptions: {
         title:"Order History"
+      }
+    },
+    OrderDetail:{
+      screen: OrderDetail,
+      navigationOptions: {
+        title:"Order Detail"
       }
     },
     EditProfile: {

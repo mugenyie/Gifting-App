@@ -126,7 +126,7 @@ class GiftingDetailScreen extends Component {
                         </Text>
                     </Text>
                     <TextInput
-                    style={{borderWidth:1,borderColor:"#CCC", borderRadius:4,fontSize:16,
+                    style={{borderWidth:1,borderColor:"#CCC",height:100, borderRadius:4,fontSize:16,
                     color:'#555'}}
                     multiline={true}
                     numberOfLines={6}
@@ -138,7 +138,7 @@ class GiftingDetailScreen extends Component {
 
                     <Text style={[styles.inputlabel,{marginBottom:5,fontSize:20}]}>Any Additional Instruction</Text>
                     <TextInput
-                    style={{borderWidth:1,borderColor:"#CCC", borderRadius:4,fontSize:16,
+                    style={{borderWidth:1,borderColor:"#CCC", borderRadius:4,height:100, fontSize:16,
                     color:'#555'}}
                     multiline={true}
                     numberOfLines={2}
