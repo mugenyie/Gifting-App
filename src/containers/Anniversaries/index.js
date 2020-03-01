@@ -5,6 +5,9 @@ import { Container, Header, Left, Body, Right, Button, Title} from 'native-base'
 import ButtonOutline from '../../components/ButtonOutline';
 import AnniversaryAPI from '../../services/AnniversaryAPI';
 import ActivityLoader from '../../components/ActivityLoader';
+import {GetUserData} from '../../services/UserAuthManager';
+
+import {NavigationEvents} from 'react-navigation';
 
 import Color from '../../common/Color';
 import mainStyle from '../../common/mainStyles';
@@ -30,8 +33,25 @@ class Anniversaries extends Component {
     }
 
     async componentDidMount(){
+        await this.fetchAnniverssaries();
+    }
+
+    fetchAnniverssaries = async () => {
         this.setState({ActivityInProgress:true});
-        let customerId = 1;
+
+        let customerId;
+        
+        await GetUserData()
+        .then(userInfo => {
+            if(userInfo){
+                customerId = userInfo.customerId
+            }else{
+                // Lock out the user
+            }
+        })
+        .catch(error => {
+            alert(error);
+        });
 
         await AnniversaryAPI.GetByCustomer(customerId)
         .then(data => {
@@ -74,7 +94,7 @@ class Anniversaries extends Component {
                 id={item.id} month={item.month}
                 title={item.title} day={item.day} navigation={this.props.navigation} />}
                 renderSectionHeader={({ section: { month } }) => (
-                    <Text style={[styles.header,mainStyle.Heading1]}>{month}</Text>
+                    <Text style={[mainStyle.Heading1,styles.header]}>{month}</Text>
                 )}
                 keyExtractor={(item) => item.id.toString()}
                 />
@@ -88,7 +108,10 @@ class Anniversaries extends Component {
             <Container
             style={styles.container}
             >
-                <ActivityLoader display={ActivityInProgress} />
+            <NavigationEvents
+            onDidFocus={() => this.fetchAnniverssaries()}
+            />
+            <ActivityLoader display={ActivityInProgress} />
             {
                 AnniversaryData.length == 0 ? this._renderNoAnniversary() : this._renderAnniversaries(AnniversaryData)
             }
@@ -110,13 +133,13 @@ const styles = StyleSheet.create({
         borderBottomColor:Color.LightRose
     },
     header: {
-        fontSize: 28,
+        fontSize: 20,
     },
     title: {
         fontSize: 18,
     },
     day: {
-        fontSize:32,
+        fontSize:19,
         color:Color.LightRose
     }
 });

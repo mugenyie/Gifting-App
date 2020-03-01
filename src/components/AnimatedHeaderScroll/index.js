@@ -38,7 +38,7 @@ class AnimatedHeaderScroll extends Component {
         if(TopText != null){
             TopTextView = <Text 
             style={[mainStyles.Heading1, 
-                {top:HEADER_MAX_HEIGHT*0.45,backgroundColor:Color.WhiteOpacity,width:screenWidth*0.5, height:40, textAlign:'center', textAlignVertical:'center'}]}>{TopText}</Text>;
+                {top:HEADER_MAX_HEIGHT*0.4,backgroundColor:Color.WhiteOpacity,width:screenWidth*0.5, height:40, textAlign:'center', textAlignVertical:'center'}]}>{TopText}</Text>;
         }
 
         // Because of content inset the scroll value will be negative on iOS so bring

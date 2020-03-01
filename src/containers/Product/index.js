@@ -7,6 +7,7 @@ import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import { Container, Header, Left, Body, Right, Button, Title, Text, Footer, FooterTab } from 'native-base';
 
+import {GetUserData} from '../../services/UserAuthManager';
 import {priceFormat} from '../../helpers';
 import ProductAPI from '../../services/ProductAPI';
 import Color from '../../common/Color';
@@ -23,6 +24,7 @@ import ProductSlider from '../../components/ProductsSlider';
 import WishListAPI from '../../services/WishListAPI';
 
 async function saveProduct(payload){
+    console.log(payload)
     await WishListAPI.Add(payload)
     .then(data => console.log(data))
     .catch(err => console.log(err))
@@ -42,13 +44,27 @@ class Product extends Component {
             valueIndex:0,
             productLiked:false,
             productDetail: null,
-            radio_props: []
+            radio_props: [],
+            customerId: 0
         }
     }
     
     async componentDidMount(){
         let productId = this.props.navigation.getParam("productId");
-        let customerId =1;
+        let customerId;
+        
+        await GetUserData()
+        .then(userInfo => {
+            if(userInfo){
+                customerId = userInfo.customerId,
+                this.setState({customerId: userInfo.customerId})
+            }else{
+                // Lock out the user
+            }
+        })
+        .catch(error => {
+            alert(error);
+        })
 
         await ProductAPI.GetDetail(productId, customerId)
         .then(data => {
@@ -123,7 +139,7 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
                                             <Text style={[mainStyles.Heading2,{paddingBottom:4}]}>{productDetail.name}</Text>
                                             <Text style={[mainStyles.ProductPriceText,{fontSize:16, paddingBottom:4}]}>{priceFormat(productDetail.price)}</Text>
                                         </View>
-                                        <TouchableOpacity style={{flex:0.2, alignItems:'center'}} onPress={() => this.toggleSavedProduct(1,productDetail.id)}>
+                                        <TouchableOpacity style={{flex:0.2, alignItems:'center'}} onPress={() => this.toggleSavedProduct(this.state.customerId,productDetail.id)}>
                                             <Icon 
                                             name={this.state.productLiked ? "ios-heart" : "ios-heart-empty"}
                                             size={30} 
@@ -243,7 +259,7 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
             return (
                 <Container>
                     <SimpleHeader {...this.props} />
-                    <View style={{flex:1, justifyContent:'center',paddingLeft:width*0.08,marginTop:Platform.OS=='android'?100:-100}}>
+                    <View style={{flex:1, justifyContent:'center',paddingLeft:width*0.08,marginTop:height*0.1}}>
                         <BlogItem width={width} height={600} speed={2}/>
                     </View>
                 </Container>

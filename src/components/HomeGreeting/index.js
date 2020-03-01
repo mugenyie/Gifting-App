@@ -16,7 +16,7 @@ class HomeGreeting extends Component {
                     <Text style={[mainStyles.Heading2,{letterSpacing:3}]}>{this.props.customerName}</Text>
                 </Text>
                 <Text style={[mainStyles.Heading2Light, {fontSize:14,letterSpacing:1, paddingTop:5}]}>
-                    Happy gifting <Icon name="smile-wink" size={15} color={"#5a6c40"}/>
+                    Happy gifting <Icon name="smile-wink" size={18} color={Color.PrimaryDark}/>
                 </Text>
             </View>
         );

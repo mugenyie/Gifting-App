@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ActivityIndicator, Dimensions } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title, Content} from 'native-base';
+import ActivityLoader from '../../components/ActivityLoader';
 import { firebase } from '@react-native-firebase/auth';
 
+import AccountAPI from '../../services/AccountAPI';
 import { GetUserData, StoreUserData } from '../../services/UserAuthManager';
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
@@ -14,10 +16,17 @@ const width = Dimensions.get('window').width;
 // create a component
 class EditProfile extends Component {
 
-    state = {
+    constructor(){
+      super();
+      this.state = {
+        phoneNumber: "",
+        gender: 0,
+        birthMonth: 0,
+        birthDay: 0,
         displayName: "",
         email: "",
         updateInProgress: false
+      }
     }
 
     async componentDidMount(){
@@ -25,8 +34,12 @@ class EditProfile extends Component {
         .then(userInfo => {
             if(userInfo){
                 this.setState({ 
-                    displayName: userInfo.displayName, 
-                    email: userInfo.email
+                  phoneNumber: userInfo.phoneNumber,
+                  gender: userInfo.gender,
+                  birthMonth: userInfo.birthMonth,
+                  birthDay: userInfo.birthDay,
+                  displayName: userInfo.displayName,
+                  email: userInfo.email,
                 })
             }else{
                 // Lock out the user
@@ -37,18 +50,18 @@ class EditProfile extends Component {
         });
     }
 
-    validateName = () => {
+  validateName = () => {
     let name = this.state.displayName;
     if(name.length < 1){
         return false;
     }
     return true;
-    }
+  }
 
-    validateEmail = () => {
+  validateEmail = () => {
     var regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regexp.test(String(this.state.email).toLowerCase());
-    }
+  }
     
   updateUserRecord = async () => {
     if(this.validateName()){
@@ -67,17 +80,24 @@ class EditProfile extends Component {
   updateUser = () => {
     this.setState({updateInProgress:true});
     this.updateUserRecord().then(() => {
-      alert("Update succesful");
-      //update user storage
-      StoreUserData({
-        email: this.state.email,
-        displayName: this.state.displayName
+
+      AccountAPI.Update({
+        "phoneNumber": this.state.phoneNumber,
+        "displayName": this.state.displayName,
+        "email": this.state.email,
+        "gender": this.state.gender,
+        "birthMonth": this.state.birthMonth,
+        "birthDay": this.state.birthDay
+      }).then(data => {
+        StoreUserData(data.body)
+        .then(() => {
+          alert("Update succesful");
+          this.setState({updateInProgress:false});
+        }).catch(error => {
+          alert(error)
+        })
       })
-      .then(() => {
-        this.setState({updateInProgress:false});
-      }).catch(error => {
-        
-      })
+      
     }).catch(error => {
       alert(error);
       this.setState({updateInProgress:false});
@@ -90,14 +110,9 @@ class EditProfile extends Component {
         return (
             <Container>
 
-                    {
-                        updateInProgress && 
-                        <View style={styles.loading}>
-                            <ActivityIndicator style={styles.loading} size={width*0.18} color={Color.PrimaryDark} />
-                        </View>
-                    }
-
                 <Content style={styles.container}>
+
+                    <ActivityLoader display={updateInProgress} />
 
                     <Text style={[mainStyles.TextRegular,{fontSize:15}]}>Display name</Text>
                     <TextInput

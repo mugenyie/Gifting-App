@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, TextInput, Picker} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Picker, KeyboardAvoidingView, TouchableWithoutFeedback,Keyboard} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Container, Header, Left, Body, Right, Button, Title, Content, Form, Item, Input} from 'native-base';
 import AnniversaryAPI from '../../services/AnniversaryAPI';
 import ActivityLoader from '../../components/ActivityLoader';
+import {GetUserData} from '../../services/UserAuthManager';
 
 import Color from '../../common/Color';
 import mainStyle from '../../common/mainStyles';
@@ -23,8 +24,17 @@ class NewAnniversary extends Component {
     }
 
     async componentDidMount(){
-        let customerId = 1;
-        this.setState({customerId});
+        await GetUserData()
+        .then(userInfo => {
+            if(userInfo){
+                this.setState({customerId:userInfo.customerId})
+            }else{
+                // Lock out the user
+            }
+        })
+        .catch(error => {
+            alert(error);
+        })
     }
 
     RenderDays = day => {
@@ -67,27 +77,29 @@ class NewAnniversary extends Component {
     render() {
         const {AnniversaryDay, AnniversaryMonth, AnniversaryTitle, customerId, ActivityInProgress} = this.state;
         return (
-            <Container>
-            <Content style={{padding:20}}>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : null}
+                style={{ flex: 1 }}
+            >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 
+            <Content style={{padding:20}}>
             <Text style={[styles.inputlabel,mainStyle.Heading1,{marginBottom:5,fontSize:20}]}>Title</Text>
             <TextInput
-            numberOfLines={2}
             multiline
             underlineColorAndroid="transparent"
-            style={[mainStyles.Heading1Light,{borderRadius:8,fontSize:20,color:'#000',elevation:1}]}
+            style={[mainStyles.Heading1Light,{borderRadius:4,height:40, fontSize:20,color:'#000',borderBottomColor:Color.PrimaryDark, borderBottomWidth:0.3}]}
             value={AnniversaryTitle}
             onChangeText={AnniversaryTitle => {
                 this.setState({ AnniversaryTitle })
             }}/>
 
             <ActivityLoader display={ActivityInProgress} />
-
-            <View style={{flex:1,flexDirection:'row', marginTop:20, marginBottom:40}}>
-                <View style={{flex:0.5,borderBottomWidth:1,borderBottomColor:'#ccc', marginRight:10}}>
+            <View style={{flex:1,flexDirection:'row'}}>
+                <View style={{flex:0.5, paddingRight:10}}>
                     <Picker
                     selectedValue={AnniversaryMonth}
-                    style={{height: 50}}
+                    style={{marginBottom:40}}
                     onValueChange={(AnniversaryMonth) =>
                         this.setState({AnniversaryMonth})
                     }>
@@ -107,10 +119,10 @@ class NewAnniversary extends Component {
                     </Picker> 
                 </View>  
 
-                <View style={{flex:0.5,borderBottomWidth:1,borderBottomColor:'#ccc'}}>
+                <View style={{flex:0.5}}>
                     <Picker
                     selectedValue={AnniversaryDay}
-                    style={{height: 50}}
+                    style={{marginBottom:40}}
                     onValueChange={(AnniversaryDay) =>
                         this.setState({AnniversaryDay})
                     }>
@@ -126,9 +138,10 @@ class NewAnniversary extends Component {
             >
                 <Text style={[mainStyle.Heading2,{fontSize:18,color:'#fff',textAlign:'center'}]}>SAVE DATE</Text>
             </Button>
-
             </Content>
-            </Container>
+
+            </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
         );
     }
 }

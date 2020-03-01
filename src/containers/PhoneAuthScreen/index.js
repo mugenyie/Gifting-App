@@ -8,35 +8,150 @@ import {
   TextInput,
   ScrollView,
   ActivityIndicator,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
   Dimensions,
-  Image
+  Image,
+  Platform,
+  Item, Picker
 } from 'react-native'
 import { firebase } from '@react-native-firebase/auth';
-import {Button,Header} from 'native-base';
+import { Container, Header, Left, Body,Button, Right, Title, Content, ListItem,Icon} from 'native-base';
+import {cleanPhone} from '../../helpers';
+import AccountAPI from '../../services/AccountAPI';
 import { StoreUserData } from '../../services/UserAuthManager';
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
+import ActivityLoader from '../../components/ActivityLoader';
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 const SplashIconWidth = width * 0.2;
 const LogoIcon = require('../../../assets/icon.png')
 
+
 class PhoneAuthScreen extends Component {
-  state = {
-    phone: '+256',
-    email: '',
-    isSigninInProgress: false,
-    displayName: '',
-    confirmResult: null,
-    verificationCode: '',
-    userId: '',
-    isLoggedIn: false,
-    profileComplete: false
+  constructor(){
+    super();
+
+    this.state = {
+      phone: '+256',
+      email: '',
+      isSigninInProgress: false,
+      displayName: '',
+      gender:0,
+      confirmResult: null,
+      verificationCode: '',
+      userId: '',
+      firebaseAuth: false,
+      profileComplete: false
+    }
   }
   
 
   async componentDidMount(){
-    await this.checkIsLoggedIn();
+    this.setState({isSigninInProgress:true});
+    
+    await this.getOAuthLoggIn();
+    let phone = cleanPhone(this.state.phone);
+
+    if(phone.length > 5){
+      await AccountAPI.GetByPhonenumber(phone)
+      .then(data => {
+        console.log(data)
+        if(data.statusCode == 404){
+
+          this.checkProfileComplete();
+
+          if(this.state.profileComplete == true){
+            console.log('create profile')
+            AccountAPI.Create({
+              "phoneNumber": phone,
+              "displayName": this.state.displayName,
+              "email": this.state.email,
+              "gender": this.state.gender,
+            })
+            .then(data => this.goToHome(data.body))
+            .catch(err => alert(err))
+          }
+          return;
+        }
+        if(data.body.customerId){
+          this.goToHome(data.body);
+          return;
+        }else{
+          alert("Error signing in");
+        }
+      })
+      .catch(error => alert(error))
+    }else{
+      this.setState({firebaseAuth: false})
+      this.setState({isSigninInProgress:false});
+    }
+  }
+
+  componentWillUnmount() {
+    this.setState({isSigninInProgress:false});
+  }
+
+  goToHome = (data) => {
+    StoreUserData(data)
+    .then(() => this.props.navigation.navigate('Home'))
+    .catch(err => alert(err))
+  }
+
+  getOAuthLoggIn = async () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user){
+        this.setState({
+          firebaseAuth: true, 
+          phone: user.phoneNumber,
+          userId: user.uid,
+          email: user.email, 
+          displayName: user.displayName
+        });
+      }
+    })
+  }
+
+  checkProfileComplete = () => {
+    if(this.state.phone && this.state.displayName && this.state.email){
+      this.setState({profileComplete:true});
+    }else{
+      this.setState({profileComplete:false});
+    }
+  }
+
+  createUser = () => {
+    this.setState({isSigninInProgress:true});
+    this.updateUserRecord()
+    .then(() => {
+      this.setState({profileComplete:true});
+      let phone = cleanPhone(this.state.phone);
+      AccountAPI.Create({
+        "phoneNumber": phone,
+        "displayName": this.state.displayName,
+        "email": this.state.email,
+        "gender": this.state.gender,
+      })
+      .then(data => this.goToHome(data.body))
+      .catch(err => {throw err})
+    })
+    .catch(err => alert(err))
+  }
+
+  updateUserRecord = async () => {
+    if(this.validateName()){
+      await firebase.auth().currentUser.updateProfile({displayName: this.state.displayName});
+    }else{
+      throw("Name cannot empty")
+    }
+
+    if(this.validateEmail()){
+      await firebase.auth().currentUser.updateEmail(this.state.email);
+    }else{
+      throw("Invalid Email")
+    }
   }
 
   validatePhoneNumber = () => {
@@ -61,7 +176,7 @@ class PhoneAuthScreen extends Component {
     this.setState({isSigninInProgress:true});
     firebase.auth().signOut()
     .then( () =>{
-      this.setState({ confirmResult: null, verificationCode: '', isLoggedIn:false });
+      this.setState({ confirmResult: null, verificationCode: '', firebaseAuth:false });
       this.setState({isSigninInProgress:false});
     })
     .catch(error => {
@@ -69,92 +184,6 @@ class PhoneAuthScreen extends Component {
       this.setState({isSigninInProgress:false});
     })
     
-  }
-
-  updateUser = () => {
-    this.setState({isSigninInProgress:true});
-    this.updateUserRecord().then(() => {
-      alert("Update succesful");
-      this.setState({profileComplete:true});
-      //update user storage
-      StoreUserData({
-        phone: this.state.phone,
-        email: this.state.email,
-        displayName: this.state.displayName,
-        userId: this.state.userId,
-        profileComplete: this.state.profileComplete,
-      })
-      .then(() => {
-        this.setState({isSigninInProgress:false});
-        this.props.navigation.navigate("Home");
-      }).catch(error => {
-        
-      })
-    }).catch(error => {
-      alert(error);
-      this.setState({isSigninInProgress:false});
-    })
-  }
-
-  updateUserRecord = async () => {
-    if(this.validateName()){
-      await firebase.auth().currentUser.updateProfile({displayName: this.state.displayName});
-    }else{
-      throw("Name cannot empty")
-    }
-
-    if(this.validateEmail()){
-      await firebase.auth().currentUser.updateEmail(this.state.email);
-    }else{
-      throw("Invalid Email")
-    }
-  }
-
-  checkProfileComplete = () => {
-    if(this.state.phone && this.state.displayName && this.state.email){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  checkIsLoggedIn = async () => {
-    this.setState({isSigninInProgress:true});
-    firebase.auth().onAuthStateChanged(async (user) => {
-      if (user && user.uid) {
-        this.setState({
-          isLoggedIn: true, 
-          phone: user.phoneNumber,
-          userId: user.uid,
-          email: user.email, 
-          displayName: user.displayName
-        });
-        console.log(user);
-        this.setState({profileComplete:this.checkProfileComplete()});
-
-        //update user storage
-        await StoreUserData({
-          phone: this.state.phone,
-          email: this.state.email,
-          displayName: this.state.displayName,
-          userId: this.state.userId,
-          profileComplete: this.state.profileComplete,
-          creationTime: user.metadata.creationTime,
-          lastSignInTime: user.metadata.lastSignInTime
-        });
-        
-        if(this.state.profileComplete){
-          this.props.navigation.navigate("Home");
-        }
-
-        this.setState({isSigninInProgress:false});
-
-      }else{
-        this.setState({isLoggedIn: false})
-        this.setState({isSigninInProgress:false});
-        console.log("Logged Out");
-      }
-    });
   }
 
   handleSendCode = () => {
@@ -193,12 +222,21 @@ class PhoneAuthScreen extends Component {
         .confirm(verificationCode)
         .then(user => {
           this.setState({
-            isLoggedIn: true, 
+            firebaseAuth: true,
             phone: user.phoneNumber,
             userId: user.uid,
             email: user.email, 
             displayName: user.displayName
           });
+          //get user, if not exists show
+          AccountAPI.GetByPhonenumber(user.phoneNumber.substring(1))
+          .then(data => {
+            if(data.body.customerId){
+              StoreUserData(data.body);
+              this.props.navigation.navigate("Home");
+            }
+          })
+          .catch(err => alert(err))
           this.setState({isSigninInProgress:false});
         })
         .catch(error => {
@@ -236,14 +274,14 @@ class PhoneAuthScreen extends Component {
     )
   }
 
-  renderLoggedInView = () => {
+  _renderRegisterView = () => {
     return (
       <View style={{marginLeft:10,marginRight:10}}>
         <Text style={[mainStyles.Heading2Light,{textAlign:'center'}]}>
           Your account is almost set up, a few more details to get you started
         </Text>
 
-        <Text style={[mainStyles.Heading4,{fontSize:14,paddingTop:20,marginBottom:40}]}> 
+        <Text style={[mainStyles.Heading4,{fontSize:14,paddingTop:20,marginBottom:20}]}> 
           <Text style={{fontWeight:'bold'}}>N.B</Text> Your Email will be used to send transactional receipts
         </Text>
 
@@ -268,14 +306,22 @@ class PhoneAuthScreen extends Component {
             this.setState({ displayName })
           }}
         />
-
-        <View style={{paddingTop:20}}/>
-        <Button style={{backgroundColor:Color.PrimaryDark, padding:8, alignItems:'center',justifyContent:'center'}} onPress={() => this.updateUser()}>
-          <Text style={[mainStyles.Heading3, {color:'#FFF'}]}>Update Details</Text>
-        </Button>
-        <View />
-        <Button style={{justifyContent:'center',marginTop:'40%', borderRadius:2,borderColor:"#ccc",borderWidth:0.3}} onPress={() => this.handleSignOut()} transparent>
-          <Text style={[mainStyles.Heading4,{paddingTop:30}]}>LogOut</Text>
+        
+        <Picker
+          note
+          mode="dropdown"
+          style={{width:undefined}}
+          selectedValue={this.state.gender}
+          onValueChange={value => this.setState({gender:value})}
+        >
+          <Picker.Item label="Select Gender" value={0} />
+          <Picker.Item label="Male" value={1} />
+          <Picker.Item label="Female" value={2} />
+          <Picker.Item label="Prefer Not to Say" value={3} />
+        </Picker>
+        
+        <Button style={{backgroundColor:Color.PrimaryDark, padding:8,marginTop:10, alignItems:'center',justifyContent:'center'}} onPress={() => this.createUser()}>
+          <Text style={[mainStyles.Heading3, {color:'#FFF'}]}>Submit Details</Text>
         </Button>
       </View>
     )
@@ -283,7 +329,7 @@ class PhoneAuthScreen extends Component {
 
   renderUnConfirmedView = () => {
     return(
-      <View style={styles.page}>
+      <View>
         <Text style={[mainStyles.Heading2Light,{fontSize:18,marginBottom:20}]}>
           {this.state.confirmResult ? 
           <Text>A one <Text style={{fontWeight:'bold'}}>One Time Password</Text> has be sent to your phone number for verification</Text>
@@ -320,40 +366,43 @@ class PhoneAuthScreen extends Component {
   }
 
   render() {
-    const {isLoggedIn, isSigninInProgress, confirmResult} = this.state;
+    const {firebaseAuth, isSigninInProgress, confirmResult} = this.state;
 
-    const bodyRendered = isLoggedIn == true ? this.renderLoggedInView() : this.renderUnConfirmedView();
+    const bodyRendered = firebaseAuth ? this._renderRegisterView() : this.renderUnConfirmedView();
 
     return (
-        <ScrollView 
-        showsVerticalScrollIndicator={false}
-        style={[styles.container]}>
-
-        <Header transparent androidStatusBarColor={Color.PrimaryDark}/>
-          {
-            isSigninInProgress && 
-            <View style={styles.loading}>
-                <ActivityIndicator style={styles.loading} size={width*0.18} color={Color.PrimaryDark} />
-            </View>
-          }
-
-          {
-            !confirmResult && !isLoggedIn &&
-            <View style={{marginBottom:80}}>
-              <Image 
-              style={{width:SplashIconWidth,height:SplashIconWidth,marginBottom:28}}
-              resizeMode='contain'
-              source={LogoIcon}
-              />
+        <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : null}
+                style={{ flex: 1 }}
+            >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <Container>
+              {
+                Platform.OS == 'android' ? <Header transparent androidStatusBarColor={Color.PrimaryDark}/> : <View />
+              }
               
-              <Text style={[mainStyles.TextRegular,{fontSize:width*0.08}]}>Welcome to Giftsery.</Text>
-              <Text style={[mainStyles.Heading4,{fontSize:width*0.06,marginTop:10}]}>A new gifting experience !</Text>  
-            </View>
-          }
-          
-          {bodyRendered}
-
-        </ScrollView>
+              <Content style={{paddingLeft:20,paddingRight:20,paddingTop:height*0.1}}>
+                
+                <ActivityLoader display={isSigninInProgress}/>
+                {
+                  !confirmResult && !firebaseAuth &&
+                  <View style={{paddingBottom:80}}>
+                    <Image 
+                    style={{width:SplashIconWidth,height:SplashIconWidth,marginBottom:28}}
+                    resizeMode='contain'
+                    source={LogoIcon}
+                    />
+                    
+                    <Text style={[mainStyles.TextRegular,{fontSize:width*0.08}]}>Welcome to Giftsery.</Text>
+                    <Text style={[mainStyles.Heading4,{fontSize:width*0.06,marginTop:10}]}>A new gifting experience !</Text>  
+                  </View>
+                }
+                
+                {bodyRendered}
+              </Content>
+            </Container>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     )
   }
 }

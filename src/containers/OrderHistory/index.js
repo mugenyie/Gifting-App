@@ -1,12 +1,14 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import {NavigationEvents} from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Container, Header, Left, Body, Right, Button, Title, Content, ListItem} from 'native-base';
 import ButtonOutline from '../../components/ButtonOutline';
 import OrdersAPI from '../../services/OrdersAPI';
 import ActivityLoader from '../../components/ActivityLoader';
 import {priceFormat} from '../../helpers';
+import {GetUserData} from '../../services/UserAuthManager';
 
 import Color from '../../common/Color';
 import MainStyles from '../../common/mainStyles';
@@ -22,8 +24,25 @@ class OrderHistory extends Component {
     }
 
     async componentDidMount(){
-        let customerId = 1;
-        this.setState({ActivityInProgress: true})
+        await this.fetchOrders();
+    }
+
+    fetchOrders = async () => {
+        this.setState({ActivityInProgress:true})
+        let customerId;
+
+        await GetUserData()
+        .then(userInfo => {
+            if(userInfo){
+                customerId = userInfo.customerId
+            }else{
+                // Lock out the user
+            }
+        })
+        .catch(error => {
+            alert(error);
+        })
+        
         await OrdersAPI.OrderHistory(customerId)
         .then(data => {
             console.log(data.body)
@@ -80,6 +99,9 @@ class OrderHistory extends Component {
         const {OrdersHistory, ActivityInProgress} = this.state;
         return (
             <Container>
+                <NavigationEvents
+                onDidFocus={() => this.fetchOrders()}
+                />
                 <ActivityLoader display={ActivityInProgress} />
                 {
                     OrdersHistory.length > 0 ? this._renderOrders(OrdersHistory) : this._renderNoItems()

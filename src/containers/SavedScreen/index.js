@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title, Content} from 'native-base';
+import {NavigationEvents} from 'react-navigation'
 
+import {GetUserData} from '../../services/UserAuthManager';
 import ProductListItem from '../../components/ProductListItem';
 import WhishlistAPI from '../../services/WishListAPI';
 import Color from '../../common/Color';
@@ -22,12 +24,43 @@ function Item({Item, onSelect}){
 class SavedScreen extends Component {
 
     state ={
-        savedProducts: []
+        savedProducts: [],
+        customerId: 0
     }
 
     async componentDidMount(){
-        let customerId = 1;
-        await WhishlistAPI.GetByCustomer(customerId)
+        let customerId;
+        
+        await GetUserData()
+        .then(userInfo => {
+            if(userInfo){
+                 this.setState({customerId:userInfo.customerId}) 
+            }else{
+                // Lock out the user
+            }
+        })
+        .catch(error => {
+            alert(error);
+        })
+        
+        await this.fetchItems(customerId);
+    }
+
+    fetchItems = async () => {
+
+        await GetUserData()
+        .then(userInfo => {
+            if(userInfo){
+                 this.setState({customerId:userInfo.customerId}) 
+            }else{
+                // Lock out the user
+            }
+        })
+        .catch(error => {
+            alert(error);
+        })
+
+        await WhishlistAPI.GetByCustomer(this.state.customerId)
         .then(data =>{
             this.setState({savedProducts:data.body})
             console.log(data.body);
@@ -38,12 +71,14 @@ class SavedScreen extends Component {
     render() {
         return (
             <Container>
+            <NavigationEvents
+            onDidFocus={() => this.fetchItems()}
+            />
             <Header style={{backgroundColor:'#fff'}} androidStatusBarColor={Color.PrimaryDark}>
                 <Body>
                     <Title style={[MainStyles.Heading1,{color:'#000',fontSize:18}]}>Saved Gifts</Title>
                 </Body>
             </Header>
-            <Content>
             <Content>
                 <FlatList 
                 numColumns={2}
@@ -57,7 +92,6 @@ class SavedScreen extends Component {
                 )}
                 keyExtractor={(item) => item.id.toString()}
                 />
-            </Content>
             </Content>
             </Container>
         );

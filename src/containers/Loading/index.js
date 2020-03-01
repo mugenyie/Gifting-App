@@ -1,8 +1,8 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Dimensions, Text } from 'react-native';
+import { Container, Header, Left, Body,Button, Right, Title, Content, ListItem,Icon} from 'native-base';
 import * as Animatable from 'react-native-animatable';
-import {Header} from 'native-base';
 
 import { GetUserData } from '../../services/UserAuthManager';
 import Color from '../../common/Color';
@@ -26,33 +26,33 @@ class Loading extends Component {
     
     _checkLoginStatus = async () =>{
         await GetUserData()
-        .then(userDate => {
-            if(userDate.profileComplete){
+        .then(userData => {
+            if(userData){
                 this.props.navigation.navigate("Home")
             }else{
                 this.props.navigation.navigate("PhoneAuthScreen")
             }
         })
         .catch(error =>{
-            this.props.navigation.navigate("PhoneAuthScreen")
+            alert(error)
         })
     }
 
       render() {
         return (
-            <View style={styles.container}>
+            <Container style={styles.container}>
                 <Header transparent androidStatusBarColor={Color.PrimaryDark}/>
-            <Animatable.View 
-                animation="pulse" 
-                easing="ease-out" 
-                iterationCount="infinite">
-                <Image 
-                style={{width:SplashIconWidth,height:SplashIconWidth}}
-                resizeMode='contain'
-                source={Logo}
-                />
-            </Animatable.View>
-            </View>
+                <Animatable.View 
+                    animation="pulse" 
+                    easing="ease-out" 
+                    iterationCount="infinite">
+                    <Image 
+                    style={{width:SplashIconWidth,height:SplashIconWidth}}
+                    resizeMode='contain'
+                    source={Logo}
+                    />
+                </Animatable.View>
+            </Container>
         );
     }
 }

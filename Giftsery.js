@@ -10,7 +10,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import {TouchableOpacity} from 'react-native';
 import Icon2 from 'react-native-vector-icons/AntDesign';
-import {Icon} from 'native-base';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Loading from './src/containers/Loading';
 import PhoneAuthScreen from './src/containers/PhoneAuthScreen';
 import HomeScreen from './src/containers/HomeScreen';
@@ -90,7 +90,7 @@ const TabNavigator = createBottomTabNavigator(
     }),
     tabBarOptions: {
       showLabel: true,
-      labelStyle:{textTransform:'uppercase',fontFamily:'OpenSans-Regular',fontWeight:'bold',fontSize:10},
+      labelStyle:{textTransform:'uppercase',fontFamily:'Roboto-Regular',fontWeight:'bold',fontSize:10},
       activeTintColor: Color.PrimaryDark,
       inactiveTintColor: Color.Grey
     },
@@ -99,8 +99,8 @@ const TabNavigator = createBottomTabNavigator(
 
 const RootNavigator = createSwitchNavigator(
   {
-    // Loading,
-    // PhoneAuthScreen,
+    Loading,
+    PhoneAuthScreen,
     Main: {screen: TabNavigator}
   }
 );
@@ -152,7 +152,7 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       screen: Anniversaries,
       navigationOptions:({navigation, navigate}) => ({
         title:"Anniversaries",
-        headerRight: <TouchableOpacity onPress={() => {navigation.navigate("NewAnniversary")}} style={{padding:20}}><Icon name="add" /></TouchableOpacity>
+        headerRight: <TouchableOpacity onPress={() => {navigation.navigate("NewAnniversary")}} style={{paddingRight:10}}><Icon name="ios-add-circle-outline" color="#000" size={32}/></TouchableOpacity>
       })
     },
     OrderHistory:{

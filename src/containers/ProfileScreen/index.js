@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title, Content} from 'native-base';
+import {NavigationEvents} from 'react-navigation';
 
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
@@ -23,18 +24,19 @@ class ProfileScreen extends Component {
     }
 
     async componentDidMount(){
+        await this.fetchProfile()
+    }
+
+    fetchProfile = async () => {
         await GetUserData()
         .then(userInfo => {
             if(userInfo){
-
-                //var time2 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                var time3 = new Date(userInfo.creationTime);
-                var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+                var time3 = new Date(userInfo.createdOn);
                 this.setState({ 
                     displayName: userInfo.displayName, 
                     email: userInfo.email, 
                     phone: userInfo.phone, 
-                    creationTime: months[time3.getMonth()] +" "+ time3.getDay() + ", "+ time3.getFullYear()
+                    creationTime: time3.toDateString()
                 })
             }else{
                 // Lock out the user
@@ -43,7 +45,6 @@ class ProfileScreen extends Component {
         .catch(error => {
             alert(error);
         });
-        
     }
 
     SignOut = () => {
@@ -58,10 +59,13 @@ class ProfileScreen extends Component {
     render() {
         return (
             <Container style={{flex:1}}>
+                <NavigationEvents
+                onDidFocus={() => this.fetchProfile()}
+                />
                 <Header androidStatusBarColor={Color.PrimaryDark} style={{backgroundColor:"#fff",paddingBottom:4,height:Platform.OS=='android'?60:80}}>
-                    <View style={{top:10,alignItems:'center'}}>
-                        <Text style={[mainStyles.Heading1,{fontSize:15}]}>{this.state.displayName}</Text>
-                        <Text style={[mainStyles.Heading3Light,{fontSize:14}]}>Joined on {this.props.creationTime}</Text>
+                    <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                        <Text style={[mainStyles.Heading1,{fontSize:18}]}>{this.state.displayName}</Text>
+                        <Text style={[mainStyles.Heading1Light,{fontSize:13}]}> Joined on {this.state.creationTime}</Text>
                     </View>
                 </Header>
 

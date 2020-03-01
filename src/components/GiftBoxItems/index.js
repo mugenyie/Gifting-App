@@ -50,7 +50,7 @@ class GiftBoxItems extends Component {
                         <View 
                         style={{width:width*0.96,
                             height:10,backgroundColor:"#5a6c40",
-                            alignSelf:'center',top:Platform.OS=='ios'? -height*0.03:-height*0.06,borderTopLeftRadius:10,borderTopRightRadius:10
+                            alignSelf:'center',marginTop:-width*0.075,borderTopLeftRadius:10,borderTopRightRadius:10
                         }}
                         />
                     </View>
