@@ -63,7 +63,7 @@ class PhoneAuthScreen extends Component {
 
           this.checkProfileComplete();
 
-          if(this.state.profileComplete == true){
+          if(this.state.profileComplete){
             console.log('create profile')
             AccountAPI.Create({
               "phoneNumber": phone,
@@ -439,7 +439,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: Color.PrimaryDark,
     borderRadius: 4,
-    elevation:8
+    elevation:1
   },
   themeButtonTitle: {
     color: '#fff'
@@ -448,18 +448,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     marginTop: 50
-  },
-  loading: {
-    flex:1,
-    elevation:1,
-    backgroundColor:'rgba(255,255,255, 0.5)',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center'
   }
 })
 

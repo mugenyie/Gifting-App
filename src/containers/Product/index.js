@@ -51,13 +51,13 @@ class Product extends Component {
     
     async componentDidMount(){
         let productId = this.props.navigation.getParam("productId");
-        let customerId;
         
         await GetUserData()
         .then(userInfo => {
             if(userInfo){
-                customerId = userInfo.customerId,
-                this.setState({customerId: userInfo.customerId})
+                console.log(userInfo)
+                this.setState({customerId: userInfo.customerId});
+                this.fetchProduct(productId, this.state.customerId);
             }else{
                 // Lock out the user
             }
@@ -65,7 +65,9 @@ class Product extends Component {
         .catch(error => {
             alert(error);
         })
+    }
 
+    fetchProduct = async (productId, customerId) => {
         await ProductAPI.GetDetail(productId, customerId)
         .then(data => {
             const productDetail = data.body;

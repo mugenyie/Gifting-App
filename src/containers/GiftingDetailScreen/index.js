@@ -226,17 +226,17 @@ class GiftingDetailScreen extends Component {
                             recipientAddress = {this.state.recipientAddress}
                             ActivityIndicatorColor={Color.PrimaryDark}
                             onCancel={this.onCancel}
-                            onSuccess={() => this.createOrder({
+                            onSuccess={data => this.createOrder({
                                 productIds: this.state.productIds,
                                 customerId: this.state.customerId,
                                 amountPaid: this.state.amount,
                                 giftMessage: this.state.giftMessage,
                                 additionalInstruction: this.state.additionalInstruction,
-                                senderName: this.state.fromName,
+                                senderName: this.state.displayName,
                                 recipientName: this.state.recipientName,
                                 recipientContact: this.state.recipientContact,
                                 recipientDeliveryAddress: this.state.recipientAddress,
-                                orderMetaData: ""
+                                orderMetaData: JSON.stringify(data)
                             })}
                             onError={() => { alert('something went wrong') }}
                             btnStyles={{backgroundColor:Color.PrimaryDark,width:'100%', height:45,borderRadius:4}}

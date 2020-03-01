@@ -140,10 +140,6 @@ class OrderDetail extends Component {
 
                         <ItemDetail title="Recipient" body={recipientName} />
 
-                        <ItemDetail title="Sender" body={senderName} />
-
-                        <ItemDetail title="Recipient" body={recipientName} />
-
                         <ItemDetail title="Recipient Contact" body={recipientContact} />
 
                         <ItemDetail title="Recipient Address" body={recipientDeliveryAddress} />

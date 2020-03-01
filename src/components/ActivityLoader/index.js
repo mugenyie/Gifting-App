@@ -21,7 +21,7 @@ class ActivityLoader extends Component {
 const styles = StyleSheet.create({
     loading: {
         flex:1,
-        elevation:1,
+        elevation:2,
         backgroundColor:'rgba(255,255,255, 0.5)',
         position: 'absolute',
         left: 0,

@@ -11,9 +11,10 @@ export default class SimpleHeader extends Component {
     return (
         <Header androidStatusBarColor={Color.PrimaryDark} style={{backgroundColor:'#fff'}}>
             <Left>
-                <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+                <Button style={{paddingLeft:10}} onPress={() => this.props.navigation.goBack()} transparent>
                     <Icon name='arrow-back' />
-                </TouchableOpacity>
+                    <Text style={{paddingLeft:10}}>Back</Text>
+                </Button>
             </Left>
             <Body>
                 <Title style={[MainStyles.Heading1,{color:'#000',fontSize:18}]}>{headerTitle}</Title>
