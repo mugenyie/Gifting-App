@@ -40,6 +40,9 @@ const mainStyles = StyleSheet.create({
     },
     ProductPriceText: {
         fontSize:13, fontFamily:'Roboto-Regular',fontWeight:'bold',color:Color.PrimaryDark
+    },
+    Thumbnail: {
+        width:60,height:60,borderRadius:5,borderWidth:0.3,borderColor:Color.LightRose
     }
 });
 

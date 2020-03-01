@@ -5,7 +5,8 @@ const giftBoxItems = (state =[], action) => {
         case 'REMOVE_FROM_CART':
             return state.filter(boxItem => boxItem.id !== action.payload.id)
         case 'CLEAR_CART':
-            return null
+            state.length = 0
+            return state
     }
 
     return state;

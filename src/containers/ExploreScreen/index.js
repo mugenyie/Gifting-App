@@ -47,8 +47,7 @@ class ExploreScreen extends Component {
             <Header androidStatusBarColor={Color.PrimaryDark} searchBar rounded style={{backgroundColor:Platform.OS == "android" ? Color.LightRose:""}}>
                 <Item>
                     <Icon name="search"/>
-                    <Input 
-                    autoFocus={true}
+                    <Input
                     value={this.state.query}
                     onChangeText={query => this.getQueryItem(query)}
                     placeholder="Search for gifts" />

@@ -10,7 +10,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import {TouchableOpacity} from 'react-native';
 import Icon2 from 'react-native-vector-icons/AntDesign';
-import {Icon} from 'native-base';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Loading from './src/containers/Loading';
 import PhoneAuthScreen from './src/containers/PhoneAuthScreen';
 import HomeScreen from './src/containers/HomeScreen';
@@ -24,6 +24,7 @@ import OrderSuccess from './src/containers/OrderSuccess';
 import GiftingDetailScreen from './src/containers/GiftingDetailScreen';
 import Anniversaries from './src/containers/Anniversaries';
 import OrderHistory from './src/containers/OrderHistory';
+import OrderDetail from './src/containers/OrderDetail';
 import Product from './src/containers/Product';
 import Category from './src/containers/Category';
 import GiftStores from './src/containers/GiftStores';
@@ -98,8 +99,8 @@ const TabNavigator = createBottomTabNavigator(
 
 const RootNavigator = createSwitchNavigator(
   {
-    // Loading,
-    // PhoneAuthScreen,
+    Loading,
+    PhoneAuthScreen,
     Main: {screen: TabNavigator}
   }
 );
@@ -151,13 +152,19 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       screen: Anniversaries,
       navigationOptions:({navigation, navigate}) => ({
         title:"Anniversaries",
-        headerRight: <TouchableOpacity onPress={() => {navigation.navigate("NewAnniversary")}} style={{padding:20}}><Icon name="add" /></TouchableOpacity>
+        headerRight: <TouchableOpacity onPress={() => {navigation.navigate("NewAnniversary")}} style={{paddingRight:10}}><Icon name="ios-add-circle-outline" color="#000" size={32}/></TouchableOpacity>
       })
     },
     OrderHistory:{
       screen: OrderHistory,
       navigationOptions: {
         title:"Order History"
+      }
+    },
+    OrderDetail:{
+      screen: OrderDetail,
+      navigationOptions: {
+        title:"Order Detail"
       }
     },
     EditProfile: {

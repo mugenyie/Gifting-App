@@ -6,8 +6,12 @@ const OrdersAPI = {
     Create: async (orderPayload) => {
         return await API.post('/v1/Orders',orderPayload);
     },
-    OrderHistory: "",
-    GetDetail: ""
+    OrderHistory: async (customerId) => {
+        return await API.get(`/v1/Orders/OrderHistory/${customerId}`);
+    },
+    GetDetail: async (orderId) => {
+        return await API.get(`/v1/Orders/${orderId}`);
+    }
 }
 
 //make this component available to the app

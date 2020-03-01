@@ -18,30 +18,33 @@ import mainStyles from '../../common/mainStyles';
 // create a component
 class GiftingDetailScreen extends Component {
     
-    state = {
-        ravePublicKey: "",
-        amount: 0,
-        productIds:[],
-        user: null,
-        displayName: "",
-        email: "",
-        phone: "",
-        giftBox: null,
-        giftBoxMeta: "",
-        additionalInstruction: "",
-        giftMessage: "",
-        fromName: "",
-        recipientName: "",
-        recipientContact: "",
-        recipientAddress: "" ,
-        shippingCost:10000
+    constructor(){
+        super();
+        this.state = {
+            ravePublicKey: "",
+            amount: 0,
+            customerId: 0,
+            productIds:[],
+            displayName: "",
+            email: "",
+            phone: "",
+            giftBox: null,
+            giftBoxMeta: "",
+            additionalInstruction: "",
+            giftMessage: "",
+            fromName: "",
+            recipientName: "",
+            recipientContact: "",
+            recipientAddress: "" ,
+            shippingCost:10000
+        }
     }
 
     async componentDidMount(){
         await GetUserData()
         .then(userInfo => {
             if(userInfo){
-                this.setState({ user: userInfo, displayName: userInfo.displayName, email: userInfo.email, phone: userInfo.phone })
+                this.setState({ customerId : userInfo.customerId, displayName: userInfo.displayName, email: userInfo.email, phone: userInfo.phone })
             }else{
                 // Lock out the user
             }
@@ -59,7 +62,7 @@ class GiftingDetailScreen extends Component {
             giftBox: this.props.giftBoxItems,
             giftBoxMeta: "-"+this._getProductIds(this.props.giftBoxItems).toString()+"-",
             productIds: this._getProductIds(this.props.giftBoxItems),
-            amount: this._sumTotal(this.props.giftBoxItems)
+            amount: this._sumTotal(this.props.giftBoxItems) + this.state.shippingCost
         })
     }
 
@@ -126,7 +129,7 @@ class GiftingDetailScreen extends Component {
                         </Text>
                     </Text>
                     <TextInput
-                    style={{borderWidth:1,borderColor:"#CCC", borderRadius:4,fontSize:16,
+                    style={{borderWidth:1,borderColor:"#CCC",height:100, borderRadius:4,fontSize:16,
                     color:'#555'}}
                     multiline={true}
                     numberOfLines={6}
@@ -138,7 +141,7 @@ class GiftingDetailScreen extends Component {
 
                     <Text style={[styles.inputlabel,{marginBottom:5,fontSize:20}]}>Any Additional Instruction</Text>
                     <TextInput
-                    style={{borderWidth:1,borderColor:"#CCC", borderRadius:4,fontSize:16,
+                    style={{borderWidth:1,borderColor:"#CCC", borderRadius:4,height:100, fontSize:16,
                     color:'#555'}}
                     multiline={true}
                     numberOfLines={2}
@@ -203,7 +206,7 @@ class GiftingDetailScreen extends Component {
                         <View style={{flex:1,flexDirection:'row', paddingTop:10,marginBottom:10}}>
                             <Text>
                                 <Text style={[mainStyles.Heading2Light,{fontSize:15}]}>Total: </Text>
-                                <Text style={[mainStyles.Heading2Light,{fontSize:15}]}>{priceFormat(this.state.amount+this.state.shippingCost)}</Text>
+                                <Text style={[mainStyles.Heading2Light,{fontSize:15}]}>{priceFormat(this.state.amount)}</Text>
                                 <Text style={[mainStyles.Heading2Light,{fontSize:13,fontWeight:'bold'}]}>{"\n"}(Inclusive of {priceFormat(this.state.shippingCost)} Shipping Cost & Packaging) </Text>
                             </Text>
                         </View>
@@ -225,7 +228,7 @@ class GiftingDetailScreen extends Component {
                             onCancel={this.onCancel}
                             onSuccess={() => this.createOrder({
                                 productIds: this.state.productIds,
-                                customerId: 1,
+                                customerId: this.state.customerId,
                                 amountPaid: this.state.amount,
                                 giftMessage: this.state.giftMessage,
                                 additionalInstruction: this.state.additionalInstruction,

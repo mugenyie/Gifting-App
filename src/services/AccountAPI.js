@@ -1,31 +1,19 @@
 import ApiClient from './ApiClient';
 
-const Url = "​/v1​/Account";
+var API = new ApiClient();
 
 const AccountAPI = {
-    GetByPhonenumber: async (phonenumber) => {
-        const _url = Url+"/phonenumber";
-        return await ApiClient.get(_url);
+    GetByPhonenumber: async (phoneNumber) => {
+        return await API.get(`/v1/Account/${phoneNumber}`);
     },
 
     Create: async (registerObject) => {
-        try{
-
-            return await ApiClient.post(_url, registerObject);
-        }catch(err){
-            return {error: err};
-        }
+        return await API.post(`/v1/Account`,registerObject);
     },
 
     Update: async (updateObject) => {
-        try{
-
-            return await ApiClient.put(_url, updateObject);
-        }catch(err){
-            return {error: err};
-        }
+        return await API.put(`/v1/Account`,updateObject)
     },
 }
 
-//make this component available to the app
 export default AccountAPI;
