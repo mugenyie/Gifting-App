@@ -1,46 +1,75 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, ScrollView} from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
-import { Container, Header, Left, Body, Right, Button, Title, Text } from 'native-base';
-
-import GiftStoresSlider from '../../components/GiftStoresSlider';
-import Color from '../../common/Color';
+import {StyleSheet, View, ScrollView, FlatList, ImageBackground, TouchableOpacity, Dimensions} from 'react-native';
+import { Container, Header, Left, Body, Right, Button, Title, Text, Content, Icon, Card } from 'native-base';
 import mainStyles from '../../common/mainStyles';
-import SectionTitle from '../../components/SectionTitle';
+const width = Dimensions.get('window').width;
+
+const imageWidth = (width * 0.45);
+import VendorAPI from '../../services/VendorAPI';
 
 // create a component
 class GiftStores extends Component {
+    constructor(){
+        super();
+        this.state={
+            vendors: []
+        }
+    }
+
+    async componentDidMount(){
+        await VendorAPI.GetAll()
+        .then(data => {
+            this.setState({vendors:data.body})
+        })
+        .catch(err => alert(err))
+    }
+
+    _renderItem = (item) => 
+    {
+        return(
+            <Card key={item.id} style={styles.imageContainer}>
+                <ImageBackground 
+                style={[{flex:1,justifyContent:'center',alignItems:'center'}]}
+                imageStyle={styles.storeBackgroundImage}
+                resizeMode="cover" resizeMethod="scale" source={{uri:item.imageUrl}}>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("Category", {vendorId:item.id, vendorName:item.name})} activeOpacity={0.8} style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                        <View style={{justifyContent:'center',backgroundColor:"#fff",width:100,padding:10,alignContent:'center',opacity:0.8,alignSelf:"center"}}>
+                            <Text style={[mainStyles.Heading3,{textAlign:'center',color:"#000"}]}>{item.name}</Text>
+                        </View>
+                    </TouchableOpacity>
+                </ImageBackground>
+            </Card>
+        );
+    }
+
     render() {
+        const {vendors} = this.state;
         return (
-            <ScrollView style={{flex:1}}>
-                <Header style={{backgroundColor:"#fff",paddingTop:2,paddingBottom:4,height:50}}>
-                    <Left>
-                        <Button onPress={() => this.props.navigation.goBack()} transparent>
-                            <Icon name='arrowleft' size={22} color={Color.PrimaryDark}/>
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Title style={[{color:Color.PrimaryDark},mainStyles.Heading2]}>Gift Stores</Title>
-                    </Body>
-                    <Right>
-                        
-                    </Right>
-                </Header>
-                <View style={{padding:10}}/>
-                <SectionTitle title={"Recommendations for you"}/>
-                <GiftStoresSlider stores = {featuredVendors}/>
-                <Text style={[mainStyles.Heading2,{paddingTop: 10, paddingBottom: 4, paddingLeft:10}]}>Stores you follow</Text>
-                <View>
-                    <Text style={[mainStyles.TextRegular, {textAlign:'center', padding:50}]}>Follow stores to see them here</Text>
-                </View>
-            </ScrollView>
+            <Container>
+                <Content>
+                    <FlatList 
+                        numColumns={2}
+                        contentContainerStyle={{padding:10}}
+                        data={this.state.vendors.sort((a, b) => a.displayOrder - b.displayOrder)}
+                        renderItem = {({item}) => this._renderItem(item)}
+                        keyExtractor={(item) => item.id.toString()}
+                    />
+                </Content>
+            </Container>
         );
     }
 }
 
 // define your styles
 const styles = StyleSheet.create({
-
+    imageContainer: {
+        width:imageWidth,
+        height:200,
+        borderRadius:10, 
+        marginRight:10, 
+        flexDirection: 'column', 
+        elevation: 2,
+      }
 });
 
 //make this component available to the app

@@ -1,14 +1,13 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Title, Content} from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Title, Content, Icon} from 'native-base';
 import {NavigationEvents} from 'react-navigation';
 
 import Color from '../../common/Color';
 import mainStyles from '../../common/mainStyles';
 
 import { SignOutUser, GetUserData } from '../../services/UserAuthManager';
-import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/Entypo';
 import Icon3 from 'react-native-vector-icons/AntDesign';
 import Config from '../../common/Config';
@@ -78,7 +77,7 @@ class ProfileScreen extends Component {
                                 <Text style={styles.titleText}>Personal information</Text>
                             </View>
                             <View style={styles.rightIcon} >
-                                <Icon style={styles.titleIcon} name="md-person" size={25}/>
+                                <Icon name="person"/>
                             </View>
                         </TouchableOpacity>
 
@@ -89,18 +88,19 @@ class ProfileScreen extends Component {
                                 <Text style={styles.titleText}>Orders</Text>
                             </View>
                             <View style={styles.rightIcon} >
-                                <Icon2 style={styles.titleIcon} name="list" size={25}/>
+                                <Icon name="list"/>
                             </View>
                         </TouchableOpacity>
 
                         <View style={styles.titleSeparator}/>
 
-                        <TouchableOpacity onPress={() => this.SignOut()}>
-                            <Text style={[mainStyles.Heading3Light,{fontSize:18, color:'#5e5e5e'}]}>
-                                <Text>Log out</Text>
-                            </Text>
-                        </TouchableOpacity>
+                        <Button style={{width:80}} transparent onPress={() => this.SignOut()}>
+                            <Text style={[mainStyles.Heading2Light, {fontSize:18}]}>Log out</Text>
+                            <Icon name="log-out" />
+                        </Button>
                     </View>
+
+                    
 
                     <View style={{justifyContent:'center',alignItems:'center', flex:0.1}}>
                         <Text style={[mainStyles.Heading4,{fontSize:14}]}>VERSION {Config.VERSION}</Text>

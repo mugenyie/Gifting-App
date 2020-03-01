@@ -8,9 +8,7 @@ import React, { Component } from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import {TouchableOpacity} from 'react-native';
 import Icon2 from 'react-native-vector-icons/AntDesign';
-import Icon from 'react-native-vector-icons/Ionicons';
 import Loading from './src/containers/Loading';
 import PhoneAuthScreen from './src/containers/PhoneAuthScreen';
 import HomeScreen from './src/containers/HomeScreen';
@@ -34,6 +32,7 @@ import EditAnniversary from './src/containers/Anniversaries/Edit';
 import GiftBoxIcon from './src/components/GiftBoxIcon';
 import Color from './src/common/Color';
 import NewAnniversary from './src/containers/NewAnniversary';
+import { Button, Icon } from 'native-base';
 
 
 class Giftsery extends Component {
@@ -145,14 +144,14 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
     GiftStores: {
       screen: GiftStores,
       navigationOptions: {
-        header: null,
+        title:"Gifting Stores"
       }
     },
     Anniversaries:{
       screen: Anniversaries,
       navigationOptions:({navigation, navigate}) => ({
         title:"Anniversaries",
-        headerRight: <TouchableOpacity onPress={() => {navigation.navigate("NewAnniversary")}} style={{paddingRight:10}}><Icon name="ios-add-circle-outline" color="#000" size={32}/></TouchableOpacity>
+        headerRight: <Button transparent onPress={() => {navigation.navigate("NewAnniversary")}}><Icon name="ios-add-circle-outline"/></Button>
       })
     },
     OrderHistory:{

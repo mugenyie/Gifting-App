@@ -1,11 +1,10 @@
 //import liraries
 import {Image, Text, Dimensions, TouchableOpacity, Platform} from 'react-native';
 import React, { Component } from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/AntDesign';
 import Icon3 from 'react-native-vector-icons/Entypo';
 import Icon4 from 'react-native-vector-icons/Feather';
-import { Header, Left, Body, Right, Button, Title, Badge, View } from 'native-base';
+import { Header, Left, Body, Right, Button, Title, Badge, View, Icon } from 'native-base';
 
 import IconWithBadge from '../IconWithBadge';
 import Color from '../../common/Color';
@@ -24,21 +23,21 @@ class HomeHeader extends Component {
             iosBarStyle="dark-content" 
             style={{backgroundColor:Platform.OS=="android"?"#FFF":""}}>
                 <Left>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate("Anniversaries")}>
-                        <Icon color={Color.PrimaryDark} size={20} name="birthday-cake" />
-                    </TouchableOpacity>
+                    <Button onPress={() => this.props.navigation.navigate("Anniversaries")} transparent>
+                        <Icon name="ribbon"/>
+                    </Button>
                 </Left>
                 <Body>
                     <Image 
                     source = {fullLogo}
                     resizeMode = 'contain'
-                    style = {{width:screenWidth*0.25,right:Platform.OS=="android"?-60:0}}
+                    style = {{width:screenWidth*0.26,right:Platform.OS=="android"?-screenWidth*0.6:0}}
                     />
                 </Body>
                 <Right>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate("OrderHistory")}>
-                        <Icon3 name="list" size={22} color={Color.PrimaryDark}/>
-                    </TouchableOpacity> 
+                    <Button onPress={() => this.props.navigation.navigate("OrderHistory")} transparent>
+                        <Icon name="list"/>
+                    </Button> 
                 </Right>
             </Header>
         );

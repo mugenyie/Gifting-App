@@ -83,7 +83,9 @@ class OrderDetail extends Component {
 
     _renderOrderItem = (item) => {
         return(
-            <TouchableOpacity style={{borderBottomColor:Color.LightRose,borderBottomWidth:0.3,flexDirection:'row',paddingBottom:10,paddingTop:10}}>
+            <TouchableOpacity 
+            onPress={() => this.props.navigation.navigate("Product",{productId:item.id})}
+            style={{borderBottomColor:Color.LightRose,borderBottomWidth:0.3,flexDirection:'row',paddingBottom:10,paddingTop:10}}>
                 <View style={{flex:0.8,paddingRight:10}}>
                     <Text style={[mainStyles.Heading1,{fontSize:13}]}>{item.name}</Text>
                     <Text style={mainStyles.ProductPriceText}>{priceFormat(item.price)}</Text>

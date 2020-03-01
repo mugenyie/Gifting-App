@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import {StyleSheet, View, ScrollView, TouchableOpacity, FlatList, Dimensions, SafeAreaView, Platform} from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {connect} from 'react-redux';
-import Icon from 'react-native-vector-icons/Ionicons';
 import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
-import { Container, Header, Left, Body, Right, Button, Title, Text, Footer, FooterTab } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Title, Text, Footer, FooterTab, Icon } from 'native-base';
 
 import {GetUserData} from '../../services/UserAuthManager';
 import {priceFormat} from '../../helpers';
@@ -104,13 +103,14 @@ class Product extends Component {
         }
     }
 
-      _renderHeader = () => (<View style={{flexDirection:'row',alignItems:'stretch', backgroundColor:"transparent"}}>
-                            <Left style={{paddingLeft:10}}>
-                                <Button onPress={() => this.props.navigation.goBack()} style={styles.headerIcon}>
-                                    <Icon1 name='arrowleft' size={22}/>
-                                </Button>
-                            </Left>
-                        </View>);
+      _renderHeader = () => (
+      <View style={{flexDirection:'row',alignItems:'stretch',paddingBottom:10}}>
+            <Left>
+                <Button onPress={() => this.props.navigation.goBack()} transparent>
+                    <Icon name='arrow-back'/>
+                </Button>
+            </Left>
+        </View>);
     
       _renderFooter  = (productDetail) =>(<Footer style={{height:80}}>
                         <FooterTab style={{backgroundColor:'#FFF',borderTopColor:"#CCC",borderTopWidth:0.3,elevation:4}}>
@@ -284,12 +284,11 @@ _renderScrollViewContent  = (productDetail) => (<View style={styles.scrollViewCo
 // define your styles
 const styles = StyleSheet.create({
     headerIcon: {
-        elevation:0, 
         justifyContent:'center',
         backgroundColor:"rgba(255,255,255, 0.4)",
-        width: 32, 
-        height: 32, 
-        borderRadius: 32 / 2
+        width: 40, 
+        height: 40, 
+        borderRadius: 40 / 2
     }
 });
 

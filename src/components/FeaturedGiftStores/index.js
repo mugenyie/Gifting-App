@@ -38,7 +38,7 @@ class FeaturedGiftStores extends Component {
         }else{
             return (
                 <View>
-                    <SectionTitle title="Gift stores" subtitle="Selected gift stores." seeMore="View all"/>
+                    <SectionTitle {...this.props} title="Gift stores" subtitle="Selected gift stores." seeMore={true}/>
                     <View style={{padding:10}} />
                     <GiftStoresSlider {...this.props} stores = {this.state.featuredVendors}/>
                 </View>

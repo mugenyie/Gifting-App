@@ -17,7 +17,7 @@ export default class SimpleHeader extends Component {
                 </Button>
             </Left>
             <Body>
-                <Title style={[MainStyles.Heading1,{color:'#000',fontSize:18}]}>{headerTitle}</Title>
+                <Title>{headerTitle}</Title>
             </Body>
             <Right />
         </Header>

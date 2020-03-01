@@ -26,15 +26,14 @@ function Item({Item, onSelect}){
 class Category extends Component {
     state = {
         categoryDetail: null,
-        categoryName:'',
-        categoryProducts: []
+        categoryProducts: [],
+        headerTitle: ''
     }
     
     
     componentDidMount(){
         let categoryId = this.props.navigation.getParam("categoryId");
         let vendorId = this.props.navigation.getParam("vendorId");
-        this.setState({categoryName:this.props.navigation.getParam("categoryName")})
 
         if(categoryId){
             CategoryAPI.GetDetail(categoryId)
@@ -47,7 +46,7 @@ class Category extends Component {
                 topImage = categoryDetail.imageUrl;
                 topText = categoryDetail.name;
 
-                this.setState({categoryDetail, categoryProducts});
+                this.setState({categoryDetail, categoryProducts, headerTitle : this.props.navigation.getParam("categoryName")});
             })
             .catch(error => alert(error))
         }else{
@@ -61,7 +60,7 @@ class Category extends Component {
                 topImage = categoryDetail.imageUrl;
                 topText = categoryDetail.name;
 
-                this.setState({categoryDetail, categoryProducts});
+                this.setState({categoryDetail, categoryProducts, headerTitle:data.body.name});
             })
             .catch(error => alert(error))
         }
@@ -71,7 +70,7 @@ class Category extends Component {
     render() {
         return (
             <Container>
-                <SimpleHeader {...this.props} headerTitle={this.state.categoryName}/>
+                <SimpleHeader {...this.props} headerTitle={this.state.headerTitle}/>
                 <Content>
                     <FlatList 
                     numColumns={2}
