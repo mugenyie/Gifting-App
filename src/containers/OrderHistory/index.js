@@ -23,10 +23,6 @@ class OrderHistory extends Component {
         }
     }
 
-    async componentDidMount(){
-        await this.fetchOrders();
-    }
-
     fetchOrders = async () => {
         this.setState({ActivityInProgress:true})
         let customerId;

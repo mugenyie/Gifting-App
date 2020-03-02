@@ -32,11 +32,7 @@ class Anniversaries extends Component {
         }
     }
 
-    async componentDidMount(){
-        await this.fetchAnniverssaries();
-    }
-
-    fetchAnniverssaries = async () => {
+    fetchAnniversaries = async () => {
         this.setState({ActivityInProgress:true});
 
         let customerId;
@@ -109,7 +105,7 @@ class Anniversaries extends Component {
             style={styles.container}
             >
             <NavigationEvents
-            onDidFocus={() => this.fetchAnniverssaries()}
+            onDidFocus={() => this.fetchAnniversaries()}
             />
             <ActivityLoader display={ActivityInProgress} />
             {

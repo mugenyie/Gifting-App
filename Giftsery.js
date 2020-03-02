@@ -33,7 +33,8 @@ import GiftBoxIcon from './src/components/GiftBoxIcon';
 import Color from './src/common/Color';
 import NewAnniversary from './src/containers/NewAnniversary';
 import { Button, Icon } from 'native-base';
-
+import { Platform, Text, View, StyleSheet } from 'react-native';
+import MainStyles from './src/common/mainStyles';
 
 class Giftsery extends Component {
     render() {
@@ -47,6 +48,21 @@ export default Giftsery;
 const HomeIconWithBadge = props => {
   return <GiftBoxIcon {...props}/>;
 };
+
+const HeaderRight = (navigation) => {
+  return (
+    <Button onPress={() => navigation.goBack()} transparent>
+        <Icon style={{color:Color.LightRose,fontSize:28}} name='arrow-back' />
+        {Platform.OS == 'ios'?(<Text style={[MainStyles.TextRegular,{color:Color.LightRose,fontSize:18}]}>Back</Text>):(<View />)}
+    </Button>
+  )
+}
+
+const titleStyle = {
+  fontSize:18,
+  fontFamily:'Montserrat-Regular',
+  fontWeight:'400'
+}
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
   const { routeName } = navigation.state;
@@ -89,7 +105,7 @@ const TabNavigator = createBottomTabNavigator(
     }),
     tabBarOptions: {
       showLabel: true,
-      labelStyle:{textTransform:'uppercase',fontFamily:'Roboto-Regular',fontWeight:'bold',fontSize:10},
+      labelStyle:{textTransform:'uppercase',fontFamily:'Montserrat-Light',fontWeight:'bold',fontSize:10},
       activeTintColor: Color.PrimaryDark,
       inactiveTintColor: Color.Grey
     },
@@ -125,52 +141,68 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
     },
     NewAnniversary: {
       screen: NewAnniversary,
-      navigationOptions: {
-        title:"New Anniversary"
-      }
+      navigationOptions: ({navigation}) => ({
+        headerTitleStyle:titleStyle,
+        title:"New Anniversary",
+        headerLeft: HeaderRight(navigation)
+      })
     },
     EditAnniversary:{
       screen: EditAnniversary,
-      navigationOptions: {
-        title: "Edit Anniversary"
-      }
+      navigationOptions: ({navigation}) => ({
+        headerTitleStyle:titleStyle,
+        title:"Edit Anniversary",
+        headerLeft: HeaderRight(navigation)
+      })
     },
     GiftingDetail: {
       screen: GiftingDetailScreen,
-      navigationOptions: {
-        title:"Gifting Detail"
-      }
+      navigationOptions: ({navigation}) => ({
+        headerTitleStyle:titleStyle,
+        title:"Gifting Detail",
+        headerLeft: HeaderRight(navigation)
+      })
     },
     GiftStores: {
       screen: GiftStores,
-      navigationOptions: {
-        title:"Gifting Stores"
-      }
+      navigationOptions: ({navigation}) => ({
+        headerTitleStyle:titleStyle,
+        title:"Gift Stores",
+        headerLeft: HeaderRight(navigation)
+      })
     },
     Anniversaries:{
       screen: Anniversaries,
-      navigationOptions:({navigation, navigate}) => ({
+      navigationOptions:({navigation}) => ({
+        headerTitleStyle:titleStyle,
         title:"Anniversaries",
-        headerRight: <Button transparent onPress={() => {navigation.navigate("NewAnniversary")}}><Icon name="ios-add-circle-outline"/></Button>
+        headerLeft: HeaderRight(navigation),
+        headerRight: <Button transparent onPress={() => {navigation.navigate("NewAnniversary")}}><Icon style={{color:Color.LightRose, fontSize:25}} name="ios-add-circle-outline"/></Button>
       })
     },
     OrderHistory:{
       screen: OrderHistory,
-      navigationOptions: {
-        title:"Order History"
-      }
+      navigationOptions: ({navigation}) => ({
+        headerTitleStyle:titleStyle,
+        title:"Orders History",
+        headerLeft: HeaderRight(navigation)
+      })
     },
     OrderDetail:{
       screen: OrderDetail,
-      navigationOptions: {
-        title:"Order Detail"
-      }
+      navigationOptions: ({navigation}) => ({
+        headerTitleStyle:titleStyle,
+        title:"Order Detail",
+        headerLeft: HeaderRight(navigation)
+      })
     },
     EditProfile: {
       screen: EditProfile,
-      navigationOptions: {
-        title:"Edit Profile"
-      }
+      navigationOptions: ({navigation}) => ({
+        headerTitleStyle:titleStyle,
+        title:"Edit Profile",
+        headerLeft: HeaderRight(navigation)
+      })
     },
     OrderSuccess:{
       screen: OrderSuccess,

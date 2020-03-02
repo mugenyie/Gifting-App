@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import mainStyles from '../../common/mainStyles';
 import { Button, Icon} from 'native-base';
+import Color from '../../common/Color';
 
 // create a component
 class SectionTitle extends Component {
@@ -15,7 +16,7 @@ class SectionTitle extends Component {
         if(seeMore){
             moreButton = <Button onPress={() => this.props.navigation.navigate("GiftStores")} transparent style={{marginLeft:'auto'}}>
                             <Text>See All</Text>
-                            <Icon name="arrow-round-forward" />
+                            <Icon style={{color:Color.LightRose}} name="arrow-round-forward" />
                         </Button>;
         }
         if(subtitle){

@@ -104,10 +104,10 @@ class Product extends Component {
     }
 
       _renderHeader = () => (
-      <View style={{flexDirection:'row',alignItems:'stretch',paddingBottom:10}}>
+      <View style={[{flexDirection:'row',alignItems:'stretch'},Platform.OS=='ios'? {paddingBottom:10}:{}]}>
             <Left>
                 <Button onPress={() => this.props.navigation.goBack()} transparent>
-                    <Icon name='arrow-back'/>
+                    <Icon style={{color:Color.LightRose}} name='arrow-back'/>
                 </Button>
             </Left>
         </View>);

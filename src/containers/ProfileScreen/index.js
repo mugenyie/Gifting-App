@@ -77,18 +77,38 @@ class ProfileScreen extends Component {
                                 <Text style={styles.titleText}>Personal information</Text>
                             </View>
                             <View style={styles.rightIcon} >
-                                <Icon name="person"/>
+                                <Icon style={{color:Color.LightRose}} name="person"/>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={styles.titleSeparatorSpace}/>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate("OrderHistory")} style={styles.profileHeader}>
+                            <View style={styles.leftHeader}>
+                                <Text style={styles.titleText}>Orders</Text>
+                            </View>
+                            <View style={styles.rightIcon}>
+                                <Icon style={{color:Color.LightRose}} name="list"/>
                             </View>
                         </TouchableOpacity>
 
                         <View style={styles.titleSeparator}/>
 
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate("OrderHistory")} style={styles.profileHeader}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate("h")} style={styles.profileHeader}>
                             <View style={styles.leftHeader}>
-                                <Text style={styles.titleText}>Orders</Text>
+                                <Text style={styles.titleText}>About Giftsery</Text>
                             </View>
-                            <View style={styles.rightIcon} >
-                                <Icon name="list"/>
+                            <View style={styles.rightIcon}>
+                                <Icon style={{color:Color.LightRose}} name="information-circle"/>
+                            </View>
+                        </TouchableOpacity>
+
+                        <View style={styles.titleSeparatorSpace}/>
+
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate("j")} style={styles.profileHeader}>
+                            <View style={styles.leftHeader}>
+                                <Text style={styles.titleText}>Help Center</Text>
+                            </View>
+                            <View style={styles.rightIcon}>
+                                <Icon style={{color:Color.LightRose}} name="help-circle-outline"/>
                             </View>
                         </TouchableOpacity>
 
@@ -96,7 +116,7 @@ class ProfileScreen extends Component {
 
                         <Button style={{width:80}} transparent onPress={() => this.SignOut()}>
                             <Text style={[mainStyles.Heading2Light, {fontSize:18}]}>Log out</Text>
-                            <Icon name="log-out" />
+                            <Icon style={{color:Color.LightRose,fontSize:18}} name="log-out" />
                         </Button>
                     </View>
 
@@ -139,11 +159,14 @@ const styles = StyleSheet.create({
         flex: 0.1
     },
     titleSeparator: {
-        borderWidth: 0.3,
-        borderColor:'#CCC',
+        borderBottomWidth: 0.3,
+        borderBottomColor:Color.Grey,
         width:'96%',
         marginTop:30,
         marginBottom:30
+    },
+    titleSeparatorSpace: {
+        marginBottom:20
     }
 });
 

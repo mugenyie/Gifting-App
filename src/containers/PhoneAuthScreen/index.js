@@ -44,14 +44,23 @@ class PhoneAuthScreen extends Component {
       verificationCode: '',
       userId: '',
       firebaseAuth: false,
-      profileComplete: false
+      profileComplete: false,
+      userAccountCreated: false
     }
   }
   
 
   async componentDidMount(){
+    await this.handleSignIn();
+  }
+
+  componentWillUnmount() {
+    this.setState({isSigninInProgress:false});
+  }
+
+  handleSignIn = async () => {
     this.setState({isSigninInProgress:true});
-    
+
     await this.getOAuthLoggIn();
     let phone = cleanPhone(this.state.phone);
 
@@ -64,7 +73,6 @@ class PhoneAuthScreen extends Component {
           this.checkProfileComplete();
 
           if(this.state.profileComplete){
-            console.log('create profile')
             AccountAPI.Create({
               "phoneNumber": phone,
               "displayName": this.state.displayName,
@@ -88,10 +96,6 @@ class PhoneAuthScreen extends Component {
       this.setState({firebaseAuth: false})
       this.setState({isSigninInProgress:false});
     }
-  }
-
-  componentWillUnmount() {
-    this.setState({isSigninInProgress:false});
   }
 
   goToHome = (data) => {
@@ -232,17 +236,17 @@ class PhoneAuthScreen extends Component {
           AccountAPI.GetByPhonenumber(user.phoneNumber.substring(1))
           .then(data => {
             if(data.body.customerId){
-              StoreUserData(data.body);
-              this.props.navigation.navigate("Home");
+              this.goToHome(data.body);
+              return;
+            }else{
+              alert("Error signing in");
             }
           })
           .catch(err => alert(err))
-          this.setState({isSigninInProgress:false});
         })
         .catch(error => {
           alert(error.message)
           this.setState({isSigninInProgress:false});
-          console.log(error)
         })
     } else {
       alert('Please enter a 6 digit OTP code.');
@@ -366,15 +370,15 @@ class PhoneAuthScreen extends Component {
   }
 
   render() {
-    const {firebaseAuth, isSigninInProgress, confirmResult} = this.state;
+    const {firebaseAuth, isSigninInProgress, confirmResult, userAccountCreated} = this.state;
 
     const bodyRendered = firebaseAuth ? this._renderRegisterView() : this.renderUnConfirmedView();
 
     return (
         <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : null}
-                style={{ flex: 1 }}
-            >
+          behavior={Platform.OS === "ios" ? "padding" : null}
+          style={{ flex: 1 }}
+        >
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <Container>
               {
