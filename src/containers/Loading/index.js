@@ -6,14 +6,15 @@ import * as Animatable from 'react-native-animatable';
 
 import { GetUserData } from '../../services/UserAuthManager';
 import Color from '../../common/Color';
+import mainStyles from '../../common/mainStyles';
 
 const width = Dimensions.get('window').width;
 
-const SplashIconWidth = width * 0.18;
+const SplashIconWidth = width * 0.15;
 
-const Logo = require('../../../assets/icon.png');
 const SPLASH_SECONDS = 3000;
 
+const Logo = require('../../../assets/header_image_white_broad.png');
 
 // create a component
 class Loading extends Component {
@@ -41,19 +42,13 @@ class Loading extends Component {
       render() {
         return (
             <Container style={styles.container}>
-                <Header transparent androidStatusBarColor={Color.PrimaryDark}/>
-                <Animatable.View 
-                    animation="pulse" 
-                    easing="ease-out" 
-                    iterationCount="infinite">
-                    <Image 
-                    style={{width:SplashIconWidth,height:SplashIconWidth}}
-                    resizeMode='contain'
-                    source={Logo}
-                    />
-                </Animatable.View>
+                <Image 
+                style={{height:SplashIconWidth}}
+                resizeMode='contain'
+                source={Logo}
+                />
             </Container>
-        );
+        )
     }
 }
 
@@ -63,7 +58,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FFFFFF'
+        backgroundColor: Color.PrimaryDark
     },
 });
 

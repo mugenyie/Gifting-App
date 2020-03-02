@@ -16,8 +16,8 @@ import mainStyle from '../../common/mainStyles';
 function Item({id, title, day, month, navigation}) {
     return (
         <TouchableOpacity onPress={() => navigation.navigate("EditAnniversary", {anniversary: {id, title, day, month}})} style={[styles.item,{flexDirection:'row',flex:1}]}>
-            <Text style={[mainStyle.Heading1Light,styles.title,{flex:0.8}]}>{title}</Text>
-            <Text style={[mainStyle.TextRegular,styles.day,{flex:0.2}]}>{day}</Text>
+            <Text style={[mainStyle.Heading1Light,styles.title,{width:'90%'}]}>{title}</Text>
+            <Text style={[mainStyle.TextRegular,styles.day,{width:'10%'}]}>{day}</Text>
         </TouchableOpacity>
     );
 }

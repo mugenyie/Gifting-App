@@ -27,7 +27,7 @@ import ActivityLoader from '../../components/ActivityLoader';
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 const SplashIconWidth = width * 0.2;
-const LogoIcon = require('../../../assets/icon.png')
+const LogoIcon = require('../../../assets/icon_light_rose.png')
 
 
 class PhoneAuthScreen extends Component {
@@ -220,11 +220,13 @@ class PhoneAuthScreen extends Component {
   handleVerifyCode = () => {
     // Request for OTP verification
     this.setState({isSigninInProgress:true});
+    
     const { confirmResult, verificationCode } = this.state
+
     if (verificationCode.length == 6) {
       confirmResult
         .confirm(verificationCode)
-        .then(user => {
+        .then(async user => {
           this.setState({
             firebaseAuth: true,
             phone: user.phoneNumber,
@@ -233,16 +235,16 @@ class PhoneAuthScreen extends Component {
             displayName: user.displayName
           });
           //get user, if not exists show
-          AccountAPI.GetByPhonenumber(user.phoneNumber.substring(1))
+          await AccountAPI.GetByPhonenumber(user.phoneNumber.substring(1))
           .then(data => {
             if(data.body.customerId){
               this.goToHome(data.body);
               return;
             }else{
-              alert("Error signing in");
+              
             }
           })
-          .catch(err => alert(err))
+          .catch(err => {throw err})
         })
         .catch(error => {
           alert(error.message)
@@ -385,7 +387,7 @@ class PhoneAuthScreen extends Component {
                 Platform.OS == 'android' ? <Header transparent androidStatusBarColor={Color.PrimaryDark}/> : <View />
               }
               
-              <Content style={{paddingLeft:20,paddingRight:20,paddingTop:height*0.1}}>
+              <Content style={{paddingLeft:20,paddingRight:20,paddingTop:Platform.OS == 'android' ? height*0.05 : height*0.15}}>
                 
                 <ActivityLoader display={isSigninInProgress}/>
                 {

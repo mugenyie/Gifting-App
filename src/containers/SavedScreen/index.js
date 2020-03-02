@@ -76,7 +76,7 @@ class SavedScreen extends Component {
             />
             <Header style={{backgroundColor:'#fff'}} androidStatusBarColor={Color.PrimaryDark}>
                 <Body>
-                    <Title style={[MainStyles.Heading1,{color:'#000',fontSize:18}]}>Saved Gifts</Title>
+                    <Title style={{fontSize:18,fontFamily:'Montserrat-Regular',fontWeight:'400'}}>Saved Gifts</Title>
                 </Body>
             </Header>
             <Content>

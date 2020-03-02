@@ -49,11 +49,11 @@ const HomeIconWithBadge = props => {
   return <GiftBoxIcon {...props}/>;
 };
 
-const HeaderRight = (navigation) => {
+const HeaderLeft = (navigation) => {
   return (
     <Button onPress={() => navigation.goBack()} transparent>
         <Icon style={{color:Color.LightRose,fontSize:28}} name='arrow-back' />
-        {Platform.OS == 'ios'?(<Text style={[MainStyles.TextRegular,{color:Color.LightRose,fontSize:18}]}>Back</Text>):(<View />)}
+        {Platform.OS == 'ios'?(<Text style={[MainStyles.TextRegular,{color:Color.LightRose,fontSize:18,top:-1}]}>Back</Text>):(<View />)}
     </Button>
   )
 }
@@ -144,7 +144,7 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       navigationOptions: ({navigation}) => ({
         headerTitleStyle:titleStyle,
         title:"New Anniversary",
-        headerLeft: HeaderRight(navigation)
+        headerLeft: HeaderLeft(navigation)
       })
     },
     EditAnniversary:{
@@ -152,7 +152,7 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       navigationOptions: ({navigation}) => ({
         headerTitleStyle:titleStyle,
         title:"Edit Anniversary",
-        headerLeft: HeaderRight(navigation)
+        headerLeft: HeaderLeft(navigation)
       })
     },
     GiftingDetail: {
@@ -160,7 +160,7 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       navigationOptions: ({navigation}) => ({
         headerTitleStyle:titleStyle,
         title:"Gifting Detail",
-        headerLeft: HeaderRight(navigation)
+        headerLeft: HeaderLeft(navigation)
       })
     },
     GiftStores: {
@@ -168,7 +168,7 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       navigationOptions: ({navigation}) => ({
         headerTitleStyle:titleStyle,
         title:"Gift Stores",
-        headerLeft: HeaderRight(navigation)
+        headerLeft: HeaderLeft(navigation)
       })
     },
     Anniversaries:{
@@ -176,8 +176,8 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       navigationOptions:({navigation}) => ({
         headerTitleStyle:titleStyle,
         title:"Anniversaries",
-        headerLeft: HeaderRight(navigation),
-        headerRight: <Button transparent onPress={() => {navigation.navigate("NewAnniversary")}}><Icon style={{color:Color.LightRose, fontSize:25}} name="ios-add-circle-outline"/></Button>
+        headerLeft: HeaderLeft(navigation),
+        HeaderLeft: <Button transparent onPress={() => {navigation.navigate("NewAnniversary")}}><Icon style={{color:Color.LightRose, fontSize:25}} name="ios-add-circle-outline"/></Button>
       })
     },
     OrderHistory:{
@@ -185,7 +185,7 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       navigationOptions: ({navigation}) => ({
         headerTitleStyle:titleStyle,
         title:"Orders History",
-        headerLeft: HeaderRight(navigation)
+        headerLeft: HeaderLeft(navigation)
       })
     },
     OrderDetail:{
@@ -193,7 +193,7 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       navigationOptions: ({navigation}) => ({
         headerTitleStyle:titleStyle,
         title:"Order Detail",
-        headerLeft: HeaderRight(navigation)
+        headerLeft: HeaderLeft(navigation)
       })
     },
     EditProfile: {
@@ -201,7 +201,7 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       navigationOptions: ({navigation}) => ({
         headerTitleStyle:titleStyle,
         title:"Edit Profile",
-        headerLeft: HeaderRight(navigation)
+        headerLeft: HeaderLeft(navigation)
       })
     },
     OrderSuccess:{

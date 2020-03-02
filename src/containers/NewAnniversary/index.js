@@ -86,6 +86,7 @@ class NewAnniversary extends Component {
             <Content style={{padding:20}}>
             <Text style={[styles.inputlabel,mainStyle.Heading1,{marginBottom:5,fontSize:20}]}>Title</Text>
             <TextInput
+            placeholder="Anniversary Title"
             underlineColorAndroid="transparent"
             style={[mainStyles.Heading1Light,{borderRadius:4,height:40, fontSize:20,color:'#000',borderBottomColor:Color.PrimaryDark, borderBottomWidth:0.3}]}
             value={AnniversaryTitle}
