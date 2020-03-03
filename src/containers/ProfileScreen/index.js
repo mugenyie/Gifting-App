@@ -92,7 +92,7 @@ class ProfileScreen extends Component {
 
                         <View style={styles.titleSeparator}/>
 
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate("h")} style={styles.profileHeader}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate("AboutUs")} style={styles.profileHeader}>
                             <View style={styles.leftHeader}>
                                 <Text style={styles.titleText}>About Giftsery</Text>
                             </View>
@@ -103,7 +103,7 @@ class ProfileScreen extends Component {
 
                         <View style={styles.titleSeparatorSpace}/>
 
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate("j")} style={styles.profileHeader}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate("HelpCenter")} style={styles.profileHeader}>
                             <View style={styles.leftHeader}>
                                 <Text style={styles.titleText}>Help Center</Text>
                             </View>

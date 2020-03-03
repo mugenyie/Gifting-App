@@ -28,6 +28,8 @@ import Category from './src/containers/Category';
 import GiftStores from './src/containers/GiftStores';
 import EditProfile from './src/containers/EditProfile';
 import EditAnniversary from './src/containers/Anniversaries/Edit';
+import AboutUs from './src/containers/AboutUs';
+import HelpCenter from './src/containers/HelpCenter';
 
 import GiftBoxIcon from './src/components/GiftBoxIcon';
 import Color from './src/common/Color';
@@ -201,6 +203,22 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
       navigationOptions: ({navigation}) => ({
         headerTitleStyle:titleStyle,
         title:"Edit Profile",
+        headerLeft: HeaderLeft(navigation)
+      })
+    },
+    AboutUs: {
+      screen: AboutUs,
+      navigationOptions: ({navigation}) => ({
+        headerTitleStyle:titleStyle,
+        title:"About Giftsery",
+        headerLeft: HeaderLeft(navigation)
+      })
+    },
+    HelpCenter: {
+      screen: HelpCenter,
+      navigationOptions: ({navigation}) => ({
+        headerTitleStyle:titleStyle,
+        title:"Help Center",
         headerLeft: HeaderLeft(navigation)
       })
     },
