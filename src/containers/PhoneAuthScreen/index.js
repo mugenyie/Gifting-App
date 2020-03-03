@@ -29,6 +29,13 @@ const width = Dimensions.get('window').width;
 const SplashIconWidth = width * 0.2;
 const LogoIcon = require('../../../assets/icon_light_rose.png')
 
+const unsubscribe =  firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    // Stop the login flow / Navigate to next page
+  }else{
+
+  }
+});
 
 class PhoneAuthScreen extends Component {
   constructor(){
@@ -54,10 +61,28 @@ class PhoneAuthScreen extends Component {
     await this.handleSignIn();
   }
 
-  componentWillUnmount() {
-    this.setState({isSigninInProgress:false});
+  componentDidUpdate(){
+    firebase.auth().onAuthStateChanged(async user => {
+      if (user) {
+        await AccountAPI.GetByPhonenumber(cleanPhone(user.phoneNumber))
+        .then(data => {
+          if(data.body.customerId){
+            this.goToHome(data.body);
+          }else{
+            
+          }
+        })
+        .catch(err => alert(err))
+      }else{
+    
+      }
+    })
   }
 
+  componentWillUnmount() {
+    unsubscribe();
+  }
+  
   handleSignIn = async () => {
     this.setState({isSigninInProgress:true});
 
@@ -235,7 +260,7 @@ class PhoneAuthScreen extends Component {
             displayName: user.displayName
           });
           //get user, if not exists show
-          await AccountAPI.GetByPhonenumber(user.phoneNumber.substring(1))
+          await AccountAPI.GetByPhonenumber(cleanPhone(user.phoneNumber))
           .then(data => {
             if(data.body.customerId){
               this.goToHome(data.body);
