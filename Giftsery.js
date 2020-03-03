@@ -177,7 +177,7 @@ const AppStackNavigator = createAppContainer(createStackNavigator({
         headerTitleStyle:titleStyle,
         title:"Anniversaries",
         headerLeft: HeaderLeft(navigation),
-        HeaderLeft: <Button transparent onPress={() => {navigation.navigate("NewAnniversary")}}><Icon style={{color:Color.LightRose, fontSize:25}} name="ios-add-circle-outline"/></Button>
+        headerRight: <Button transparent onPress={() => {navigation.navigate("NewAnniversary")}}><Icon style={{color:Color.LightRose, fontSize:25}} name="ios-add-circle-outline"/></Button>
       })
     },
     OrderHistory:{

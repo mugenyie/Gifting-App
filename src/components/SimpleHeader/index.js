@@ -17,7 +17,7 @@ export default class SimpleHeader extends Component {
                 </Button>
             </Left>
             <Body>
-                <Title style={{fontSize:18,fontFamily:'Montserrat-Regular',fontWeight:'400'}}>{headerTitle}</Title>
+                <Title style={{fontSize:18,fontFamily:'Montserrat-Regular',fontWeight:'400',color:'#000'}}>{headerTitle}</Title>
             </Body>
             <Right />
         </Header>
