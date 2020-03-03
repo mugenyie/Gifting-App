@@ -13,7 +13,7 @@ class AboutUs extends Component {
         try {
           const result = await Share.share({
               title:'Download Giftsery APP',
-              message:`Share gifts with loved ones on Giftsery ${Platform.OS == 'ios' ? iosLink : androidLink}`,
+              message:`Share gifts with loved ones on Giftsery \nAndroid: ${androidLink} \nIPhone: ${iosLink}`,
           });
     
           if (result.action === Share.sharedAction) {

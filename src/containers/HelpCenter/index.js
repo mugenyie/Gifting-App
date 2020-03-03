@@ -19,7 +19,7 @@ class HelpCenter extends Component {
     }
 
     _pressWhatsApp=()=>{
-        const url='whatsapp://send?abid=+256777415239&text=Giftsery%2C%20Support:%2C%20'
+        const url='https://wa.me/256777415239'
         Linking.openURL(url)
     }
 
