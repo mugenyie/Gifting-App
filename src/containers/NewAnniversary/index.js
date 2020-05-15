@@ -27,7 +27,7 @@ class NewAnniversary extends Component {
         await GetUserData()
         .then(userInfo => {
             if(userInfo){
-                this.setState({customerId:userInfo.customerId})
+                this.setState({customerId:userInfo.id})
             }else{
                 // Lock out the user
             }

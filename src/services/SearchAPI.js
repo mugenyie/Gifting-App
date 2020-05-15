@@ -4,7 +4,7 @@ var API = new ApiClient();
 
 const SearchAPI = {
     SearchByKeyWord: async (query) => {
-        return API.get(`/v1/Search/${query}`);
+        return API.get(`/v1/Products?q=${query}`);
     }
 }
 

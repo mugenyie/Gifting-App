@@ -8,9 +8,6 @@ const VendorAPI = {
     },
     GetFeatured: async () => {
         return await API.get(`/v1/Vendors/Featured`);
-    },
-    GetDetail: async (vendorId) => {
-        return await API.get(`/v1/Vendors/${vendorId}`);
     }
 }
 

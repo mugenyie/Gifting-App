@@ -19,7 +19,7 @@ class GiftStoresSlider extends Component {
                 <ImageBackground 
                 style={[{flex:1,justifyContent:'center',alignItems:'center'}]}
                 imageStyle={styles.storeBackgroundImage}
-                resizeMode="cover" resizeMethod="scale" source={{uri:item.imageUrl}}>
+                resizeMode="cover" resizeMethod="scale" source={{uri:item.displayImage}}>
                     <TouchableOpacity onPress={()=>onSelect("Category", {vendorId:item.id, vendorName:item.name})} activeOpacity={0.8} style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                         <View style={{justifyContent:'center',backgroundColor:"#fff",width:100,padding:10,alignContent:'center',opacity:0.8,alignSelf:"center"}}>
                             <Text style={[mainStyles.Heading3,{textAlign:'center',color:"#000"}]}>{item.name}</Text>

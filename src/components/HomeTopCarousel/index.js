@@ -15,8 +15,9 @@ export default class HomeTopCarousel extends Component {
   componentDidMount(){
     CategoryAPI.GetFeatured()
     .then(data => {
+      console.log(data.body);
       const featuredCategories = data.body;
-      this.setState({featuredCategories})
+      this.setState({featuredCategories});
     })
     .catch(error => alert(error))
   }

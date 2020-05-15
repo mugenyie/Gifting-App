@@ -27,7 +27,6 @@ class ProductListItem extends Component {
                     source={product.imageSource}
                     >
                     </ImageBackground>
-               
                 </Card>
                 <View style={{paddingTop:4}}>
                     <Text style={[mainStyles.ProductNameText]}>{product.name}</Text>

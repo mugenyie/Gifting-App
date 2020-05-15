@@ -7,13 +7,9 @@ const AccountAPI = {
         return await API.get(`/v1/Account/${phoneNumber}`);
     },
 
-    Create: async (registerObject) => {
-        return await API.post(`/v1/Account`,registerObject);
-    },
-
-    Update: async (updateObject) => {
-        return await API.put(`/v1/Account`,updateObject)
-    },
+    Save: async (userObject) => {
+        return await API.post(`/v1/Account`,userObject);
+    }
 }
 
 export default AccountAPI;

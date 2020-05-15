@@ -3,8 +3,7 @@ import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import { Container, Header, Left, Body, Right, Button, Title, Text, Icon, Content } from 'native-base';
 
-import CategoryAPI from '../../services/CategoryAPI';
-import VendorAPI from '../../services/VendorAPI';
+import ProductsAPI from '../../services/ProductAPI';
 import Color from '../../common/Color';
 import SimpleHeader from '../../components/SimpleHeader';
 import ProductListItem from '../../components/ProductListItem';
@@ -16,7 +15,7 @@ function Item({Item, onSelect}){
     return(
         <ProductListItem 
         productNavigation={onSelect}
-        product={{id:Item.id,name:Item.name,imageSource:{uri:Item.imageUrl},price:Item.price}} 
+        product={{id:Item.id,name:Item.name,imageSource:{uri:Item.displayImage},price:Item.price}} 
         />
     );
   }
@@ -25,9 +24,10 @@ function Item({Item, onSelect}){
 // create a component
 class Category extends Component {
     state = {
-        categoryDetail: null,
-        categoryProducts: [],
-        headerTitle: ''
+        topImage: '',
+        topText: '',
+        topDescription: '',
+        categoryProducts: []
     }
     
     
@@ -35,32 +35,26 @@ class Category extends Component {
         let categoryId = this.props.navigation.getParam("categoryId");
         let vendorId = this.props.navigation.getParam("vendorId");
 
+        this.setState({
+            topImage: this.props.navigation.getParam("displayImage"),
+            topText: this.props.navigation.getParam("name"),
+            topDescription: this.props.navigation.getParam("description")
+        })
+
         if(categoryId){
-            CategoryAPI.GetDetail(categoryId)
+            ProductsAPI.GetByCategory(categoryId)
             .then(data => {
+                let categoryProducts = data.body;
 
-                const categoryDetail = data.body;
-
-                const categoryProducts = categoryDetail.products;
-                console.log(categoryProducts);
-                topImage = categoryDetail.imageUrl;
-                topText = categoryDetail.name;
-
-                this.setState({categoryDetail, categoryProducts, headerTitle : this.props.navigation.getParam("categoryName")});
+                this.setState({categoryProducts});
             })
             .catch(error => alert(error))
         }else{
-            VendorAPI.GetDetail(vendorId)
+            ProductsAPI.GetByVendor(vendorId)
             .then(data => {
+                const categoryProducts = data.body;
 
-                const categoryDetail = data.body;
-
-                const categoryProducts = categoryDetail.products;
-                console.log(categoryProducts);
-                topImage = categoryDetail.imageUrl;
-                topText = categoryDetail.name;
-
-                this.setState({categoryDetail, categoryProducts, headerTitle:data.body.name});
+                this.setState({categoryProducts});
             })
             .catch(error => alert(error))
         }
@@ -70,7 +64,7 @@ class Category extends Component {
     render() {
         return (
             <Container>
-                <SimpleHeader {...this.props} headerTitle={this.state.headerTitle}/>
+                <SimpleHeader {...this.props} headerTitle={this.state.name}/>
                 <Content>
                     <FlatList 
                     numColumns={2}

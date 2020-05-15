@@ -35,19 +35,19 @@ class Anniversaries extends Component {
     fetchAnniversaries = async () => {
         this.setState({ActivityInProgress:true});
 
-        let customerId;
+        let customerId=1;
         
-        await GetUserData()
-        .then(userInfo => {
-            if(userInfo){
-                customerId = userInfo.customerId
-            }else{
-                // Lock out the user
-            }
-        })
-        .catch(error => {
-            alert(error);
-        });
+        // await GetUserData()
+        // .then(userInfo => {
+        //     if(userInfo){
+        //         customerId = userInfo.id
+        //     }else{
+        //         // Lock out the user
+        //     }
+        // })
+        // .catch(error => {
+        //     alert(error);
+        // });
 
         await AnniversaryAPI.GetByCustomer(customerId)
         .then(data => {

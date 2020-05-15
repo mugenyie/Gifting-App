@@ -8,9 +8,6 @@ const CategoryAPI = {
     },
     GetFeatured: async () => {
         return await API.get(`/v1/Category/Featured`);
-    },
-    GetDetail: async (categoryId) => {
-        return await API.get(`/v1/Category/${categoryId}`);
     }
 }
 

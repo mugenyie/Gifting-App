@@ -3,14 +3,8 @@ import ApiClient from './ApiClient';
 var API = new ApiClient();
 
 const WishListAPI = {
-    Add: async (payload) => {
-        return API.post('/v1/WishList',payload);
-    },
-    Remove: async (payload) => {
-        return API.delete('/v1/WishList',payload);
-    },
-    GetByCustomer: async (customerId) =>{
-        return API.get(`/v1/WishList/${customerId}`)
+    Save: async (payload) => {
+        return API.post('/v1/SavedProduct',payload);
     }
 }
 

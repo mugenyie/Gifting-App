@@ -15,7 +15,9 @@ const AnniversaryAPI = {
     Delete: async (anniversaryId) => {
         return await API.delete(`/v1/Anniversary/${anniversaryId}`);
     },
-    GetDetail: ""
+    GetDetail: async (anniversaryId) => {
+        return await API.delete(`/v1/Anniversary/Detail/${anniversaryId}`);
+    }
 }
 
 //make this component available to the app

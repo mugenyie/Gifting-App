@@ -116,8 +116,8 @@ const TabNavigator = createBottomTabNavigator(
 
 const RootNavigator = createSwitchNavigator(
   {
-    Loading,
-    PhoneAuthScreen,
+    // Loading,
+    // PhoneAuthScreen,
     Main: {screen: TabNavigator}
   }
 );

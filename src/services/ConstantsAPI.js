@@ -5,7 +5,7 @@ var API = new ApiClient();
 
 const ConstantsAPI = {
     GetConstant: async (constantName) => {
-        return await API.get(`/v1/Configuration/${constantName}`);
+        return await API.get(`/v1/Configuration?constant=${constantName}`);
     }
 }
 

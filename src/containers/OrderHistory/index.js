@@ -25,19 +25,19 @@ class OrderHistory extends Component {
 
     fetchOrders = async () => {
         this.setState({ActivityInProgress:true})
-        let customerId;
+        let customerId = 1;
 
-        await GetUserData()
-        .then(userInfo => {
-            if(userInfo){
-                customerId = userInfo.customerId
-            }else{
-                // Lock out the user
-            }
-        })
-        .catch(error => {
-            alert(error);
-        })
+        // await GetUserData()
+        // .then(userInfo => {
+        //     if(userInfo){
+        //         customerId = userInfo.id
+        //     }else{
+        //         // Lock out the user
+        //     }
+        // })
+        // .catch(error => {
+        //     alert(error);
+        // })
         
         await OrdersAPI.OrderHistory(customerId)
         .then(data => {
@@ -85,7 +85,7 @@ class OrderHistory extends Component {
             showsVerticalScrollIndicator={false}
             data={OrdersHistory}
             renderItem = {({item}) => this._renderOrderItem(item)}
-            keyExtractor={(item) => item.orderId.toString()}
+            keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={{paddingLeft:10}}
             />
         )

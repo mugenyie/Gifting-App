@@ -15,7 +15,7 @@ function Item({Item, onSelect}){
     return(
         <ProductListItem 
         productNavigation={onSelect}
-        product={{id:Item.id,name:Item.name,imageSource:{uri:Item.imageUrl},price:Item.price}} 
+        product={{id:Item.id,name:Item.name,imageSource:{uri:Item.displayImage},price:Item.price}} 
         />
     );
   }
@@ -30,6 +30,7 @@ class DealsForYou extends Component {
         ProductAPI.GetFeatured()
         .then(data => {
             const featuredProducts = data.body;
+            console.log(featuredProducts);
             this.setState({featuredProducts})
         })
         .catch(error => alert(error))

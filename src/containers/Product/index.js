@@ -14,7 +14,6 @@ import mainStyles from '../../common/mainStyles';
 import {BlogItem} from '../../components/ServerLoader';
 import AnimatedHeaderScroll from '../../components/AnimatedHeaderScroll';
 import SimpleHeader from '../../components/SimpleHeader';
-import WhishlistAPI from '../../services/WishListAPI';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -50,27 +49,27 @@ class Product extends Component {
     
     async componentDidMount(){
         let productId = this.props.navigation.getParam("productId");
-        
-        await GetUserData()
-        .then(userInfo => {
-            if(userInfo){
-                console.log(userInfo)
-                this.setState({customerId: userInfo.customerId});
-                this.fetchProduct(productId, this.state.customerId);
-            }else{
-                // Lock out the user
-            }
-        })
-        .catch(error => {
-            alert(error);
-        })
+        this.fetchProduct(productId, 1);
+        // await GetUserData()
+        // .then(userInfo => {
+        //     if(userInfo){
+        //         console.log(userInfo)
+        //         this.setState({customerId: userInfo.customerId});
+        //         this.fetchProduct(productId, this.state.customerId);
+        //     }else{
+        //         // Lock out the user
+        //     }
+        // })
+        // .catch(error => {
+        //     alert(error);
+        // })
     }
 
     fetchProduct = async (productId, customerId) => {
         await ProductAPI.GetDetail(productId, customerId)
         .then(data => {
             const productDetail = data.body;
-
+            console.log(productDetail);
             this.setState({
                 radio_props: [{label: productDetail.name + ` - ${priceFormat(productDetail.price)}`, value: productDetail.price}],
                 productLiked: productDetail.isSaved

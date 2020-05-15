@@ -17,7 +17,7 @@ class ProductSlider extends Component {
             renderItem={({ item }) => (
                 <ProductListItem 
                 productNavigation={this.props.navigation.push}
-                product={{id:item.id,name:item.name,imageSource:{uri:item.imageUrl},price:item.price}} 
+                product={{id:item.id,name:item.name,imageSource:{uri:item.displayImage},price:item.price}} 
                 />
             )}
             keyExtractor={(item) => item.id.toString()}

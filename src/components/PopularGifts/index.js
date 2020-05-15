@@ -48,7 +48,7 @@ class PopularGifts extends Component {
                     renderItem={({item}) => (
                         <Item 
                         index={item.id}
-                        imageSource={item.imageUrl}
+                        imageSource={item.displayImage}
                         productName={item.name}
                         productPrice={item.price}
                         onSelect={onSelect}
